@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "okr-tracker",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", "/Users/varunadityasingh/Desktop/Weekly OKR Updates", "-p", "8090", "-c-1"],
+      "port": 8090
+    }
+  ]
+}
