@@ -27,7 +27,7 @@
     background: var(--bg);
     color: var(--text);
     padding: 32px;
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
   }
 
@@ -221,6 +221,32 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* ── Actual cell with WoW delta ── */
+  .actual-value { font-weight: 600; }
+  .wow-delta {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .wow-delta.positive { color: var(--green); }
+  .wow-delta.negative { color: var(--red); }
+  .wow-delta.flat { color: var(--text-secondary); }
+
+  /* ── Sparkline ── */
+  .sparkline-cell {
+    text-align: center;
+  }
+  .sparkline {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .sparkline-empty {
+    color: var(--gray);
+    font-size: 12px;
+  }
+
   /* ── Status Pill ── */
   .status-pill {
     display: inline-block;
@@ -239,6 +265,53 @@
     background: #f8fafc;
     font-weight: 700;
     border-top: 2px solid var(--border);
+  }
+
+  /* ── Drivers Card ── */
+  .drivers-card {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .drivers-card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .drivers-card .subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .driver-item {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .driver-item:last-child { border-bottom: none; }
+  .driver-team-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 260px;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .driver-text {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .driver-text.muted {
+    font-style: italic;
+    opacity: 0.7;
   }
 
   /* ── Initiatives Breakdown ── */
@@ -341,14 +414,15 @@
   <table>
     <thead>
       <tr>
-        <th style="width:18%">Partner Team</th>
-        <th style="width:20%">Primary Metric</th>
+        <th style="width:16%">Partner Team</th>
+        <th style="width:18%">Primary Metric</th>
         <th class="right">SWAG</th>
         <th class="right">Weight</th>
         <th class="right">Baseline</th>
         <th class="right">Target</th>
-        <th class="right">Actual</th>
-        <th class="center" style="width:15%">OKR Progress</th>
+        <th class="right">Actual (Δ WoW)</th>
+        <th class="center">Trend</th>
+        <th class="center" style="width:14%">OKR Progress</th>
         <th class="center">Status</th>
         <th class="right">Contribution</th>
       </tr>
@@ -365,10 +439,17 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td class="right" id="totalContribution"></td>
       </tr>
     </tfoot>
   </table>
+</div>
+
+<div class="drivers-card">
+  <h2>This Week's Drivers</h2>
+  <div class="subtitle">What moved the metrics this week</div>
+  <div id="driversList"></div>
 </div>
 
 <div class="initiatives-card">
@@ -387,6 +468,7 @@
 <script>
 // ════════════════════════════════════════════════════════════════
 //  DATA CONFIG — Update this section weekly
+//  Each week: append a new entry to `history` and update `currentDriver`.
 // ════════════════════════════════════════════════════════════════
 
 const QUARTER = {
@@ -405,9 +487,13 @@ const TEAMS = [
     metric: "Discovery to add-to-cart ratio",
     baseline: 0.9,
     target: 1.8,
-    actual: 1.2,          // ← UPDATE WEEKLY (percentage value, e.g. 1.1)
     format: "percent",
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
+    history: [
+      { date: "2026-04-10", value: 1.2 },
+      { date: "2026-04-16", value: 1.2 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "No new rec experiments shipped this week, metric flat.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -420,9 +506,13 @@ const TEAMS = [
     metric: "Share of visitors with meaningful SA conversation",
     baseline: 0.4,
     target: 1.0,
-    actual: 0.26,         // ← UPDATE WEEKLY (percentage value, e.g. 0.55)
     format: "percent",
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
+    history: [
+      { date: "2026-04-10", value: 0.25 },
+      { date: "2026-04-16", value: 0.26 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: null,
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -435,8 +525,9 @@ const TEAMS = [
     baseline: null,       // ← UPDATE when A/B test baseline is available
     target: null,         // ← Will be baseline + 7
     targetDelta: 7,       // +7 percentage points
-    actual: null,         // ← UPDATE WEEKLY
     format: "points",
+    history: [],          // ← No data yet; append when baseline lands
+    currentDriver: "A/B test v2 inconclusive — waiting on conclusive results before locking baseline.",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
@@ -452,6 +543,8 @@ const TEAMS = [
     actual: "auto",       // Auto-computed from quarter elapsed
     format: "percentLinear",
     isInternal: true,
+    history: [],          // Auto-tracked, no manual history
+    currentDriver: "Tracking linearly with quarter; eval infra + PromptLayer migration in flight.",
     initiatives: [
       { name: "Support V3 release — eval infra for MLAs", swag: 30, squad: "MLE" },
       { name: "Support new architecture (Evoli V3)", swag: 25, squad: "MLE" },
@@ -463,6 +556,16 @@ const TEAMS = [
     ]
   }
 ];
+
+// Hydrate `actual` from latest history entry so downstream code is unchanged.
+TEAMS.forEach(team => {
+  if (team.isInternal) return; // Internal uses "auto"
+  if (team.history && team.history.length > 0) {
+    team.actual = team.history[team.history.length - 1].value;
+  } else {
+    team.actual = null;
+  }
+});
 
 // ════════════════════════════════════════════════════════════════
 //  CALCULATION ENGINE
@@ -494,16 +597,35 @@ function computeOKRProgress(team) {
   return ((team.actual - team.baseline) / denominator) * 100;
 }
 
+function getWoWDelta(team) {
+  if (team.isInternal) return null;
+  if (!team.history || team.history.length < 2) return null;
+  const last = team.history[team.history.length - 1].value;
+  const prev = team.history[team.history.length - 2].value;
+  return last - prev;
+}
+
 function formatValue(value, format) {
   if (value === null || value === undefined) return '<span class="tbd">TBD</span>';
   if (value === "auto") return "Auto";
   switch (format) {
     case "dollar": return "$" + Number(value).toFixed(2);
-    case "percent": return Number(value).toFixed(1) + "%";
+    case "percent": return Number(value).toFixed(2) + "%";
     case "points": return Number(value).toFixed(1) + "%";
     case "percentLinear": return Number(value).toFixed(1) + "%";
     default: return String(value);
   }
+}
+
+function formatDelta(delta, format) {
+  if (delta === null || delta === undefined) return null;
+  const sign = delta > 0 ? "+" : (delta < 0 ? "" : "±");
+  const abs = Math.abs(delta);
+  let num;
+  if (format === "percent") num = abs.toFixed(2) + "pt";
+  else if (format === "points" || format === "percentLinear") num = abs.toFixed(1) + "pt";
+  else num = abs.toFixed(2);
+  return sign + (delta === 0 ? num : (delta > 0 ? num : "-" + num));
 }
 
 function getStatusInfo(progress, team) {
@@ -519,6 +641,51 @@ function getStatusInfo(progress, team) {
   if (paceRatio >= 0.5) return { label: "At Risk", cls: "yellow" };
   if (progress < 0) return { label: "Regressing", cls: "red" };
   return { label: "Off Track", cls: "red" };
+}
+
+// ════════════════════════════════════════════════════════════════
+//  SPARKLINE RENDERING
+// ════════════════════════════════════════════════════════════════
+
+function renderSparkline(team, color) {
+  const w = 70, h = 22, pad = 2;
+
+  // Internal: synthesize linear progression sparkline
+  if (team.isInternal) {
+    const weekNow = getCurrentWeek();
+    const pts = [];
+    for (let i = 1; i <= Math.max(weekNow, 2); i++) {
+      pts.push(i / QUARTER.weeks);
+    }
+    return sparkSvg(pts, color, w, h, pad);
+  }
+
+  if (!team.history || team.history.length < 2) {
+    return '<span class="sparkline-empty">—</span>';
+  }
+  const values = team.history.map(h => h.value);
+  return sparkSvg(values, color, w, h, pad);
+}
+
+function sparkSvg(values, color, w, h, pad) {
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = (max - min) || 1;
+  const innerW = w - pad * 2;
+  const innerH = h - pad * 2;
+  const points = values.map((v, i) => {
+    const x = pad + (values.length === 1 ? innerW / 2 : (i / (values.length - 1)) * innerW);
+    const y = pad + innerH - ((v - min) / range) * innerH;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  const lastIdx = values.length - 1;
+  const [lx, ly] = points[lastIdx].split(",");
+  return `
+    <svg class="sparkline" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+      <polyline points="${points.join(" ")}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="${lx}" cy="${ly}" r="2" fill="${color}"/>
+    </svg>
+  `;
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -559,6 +726,16 @@ function render() {
       actualDisplay = formatValue(team.actual, team.format);
     }
 
+    // WoW delta
+    const delta = getWoWDelta(team);
+    let deltaHtml = "";
+    if (delta !== null) {
+      const cls = delta > 0 ? "positive" : (delta < 0 ? "negative" : "flat");
+      deltaHtml = `<span class="wow-delta ${cls}">${formatDelta(delta, team.format)} WoW</span>`;
+    } else if (!team.isInternal && team.history && team.history.length === 1) {
+      deltaHtml = `<span class="wow-delta flat">first reading</span>`;
+    }
+
     // Baseline display for Coaching (with delta)
     let baselineDisplay = formatValue(team.baseline, team.format);
     let targetDisplay;
@@ -590,7 +767,11 @@ function render() {
       <td class="right mono">${(weight * 100).toFixed(1)}%</td>
       <td class="right mono">${baselineDisplay}</td>
       <td class="right mono">${targetDisplay}</td>
-      <td class="right mono">${actualDisplay}</td>
+      <td class="right mono">
+        <span class="actual-value">${actualDisplay}</span>
+        ${deltaHtml}
+      </td>
+      <td class="sparkline-cell">${renderSparkline(team, team.color)}</td>
       <td>
         <div class="progress-cell">
           <div class="mini-bar">
@@ -627,6 +808,25 @@ function render() {
   const bar = document.getElementById("completionBar");
   bar.style.width = Math.min(totalContribution, 100) + "%";
   bar.style.background = completionColor;
+
+  // Drivers card
+  const driversDiv = document.getElementById("driversList");
+  driversDiv.innerHTML = "";
+  TEAMS.forEach(team => {
+    const item = document.createElement("div");
+    item.className = "driver-item";
+    const hasDriver = team.currentDriver && team.currentDriver.trim().length > 0;
+    item.innerHTML = `
+      <div class="driver-team-label">
+        <span class="team-dot" style="background:${team.color}"></span>
+        ${team.name}
+      </div>
+      <div class="driver-text ${hasDriver ? '' : 'muted'}">
+        ${hasDriver ? team.currentDriver : 'No commentary this week.'}
+      </div>
+    `;
+    driversDiv.appendChild(item);
+  });
 
   // Initiatives breakdown
   const initDiv = document.getElementById("initiativesList");
