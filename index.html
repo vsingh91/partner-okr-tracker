@@ -491,9 +491,10 @@ const TEAMS = [
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
     history: [
       { date: "2026-04-10", value: 1.2 },
-      { date: "2026-04-16", value: 1.2 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-04-16", value: 1.2 },
+      { date: "2026-04-23", value: 1.1 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "No new rec experiments shipped this week, metric flat.",
+    currentDriver: null,
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -510,7 +511,8 @@ const TEAMS = [
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
     history: [
       { date: "2026-04-10", value: 0.25 },
-      { date: "2026-04-16", value: 0.26 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-04-16", value: 0.26 },
+      { date: "2026-04-23", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
     ],
     currentDriver: null,
     initiatives: [
@@ -527,7 +529,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "A/B test v2 inconclusive — waiting on conclusive results before locking baseline.",
+    currentDriver: "A/B test still inconclusive — one bucket had a bug that invalidated prior data. Post-fix, waiting to gather enough data before locking baseline. Buckets: 0 = knowledge rec only (control), 1 = intent guidance + knowledge rec, 2 = intent guidance only (falls back to rec if no intent found).",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
