@@ -492,9 +492,10 @@ const TEAMS = [
     history: [
       { date: "2026-04-10", value: 1.2 },
       { date: "2026-04-16", value: 1.2 },
-      { date: "2026-04-23", value: 1.1 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-04-23", value: 1.1 },
+      { date: "2026-04-26", value: 1.2 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: null,
+    currentDriver: "Bounced back to 1.2% after last week's dip to 1.1%. No new rec experiments shipped — movement is within typical week-to-week variance. Metadata-aware pipeline and post-release rec improvements remain the main planned levers.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -512,9 +513,10 @@ const TEAMS = [
     history: [
       { date: "2026-04-10", value: 0.25 },
       { date: "2026-04-16", value: 0.26 },
-      { date: "2026-04-23", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-04-23", value: 0.25 },
+      { date: "2026-04-29", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: null,
+    currentDriver: "Flat at 0.25% — no organic movement expected without a new lever. Betting SPQ (Smart Product Question) improvements will lift this once shipped.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -529,7 +531,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "A/B test still inconclusive — one bucket had a bug that invalidated prior data. Post-fix, waiting to gather enough data before locking baseline. Buckets: 0 = knowledge rec only (control), 1 = intent guidance + knowledge rec, 2 = intent guidance only (falls back to rec if no intent found).",
+    currentDriver: "Intent knowledge framework experiment still inconclusive in V2. Running on 20 merchants; only 4 have stat-sig results, ranging from -4pts to +5pts (also -1, +1) on success rate. Felipe: not learning much from V2, not over-indexing on it. Success-rate metric paused until V3 experimentation finishes; focus shifting to V3 integration + offline eval (Ava). Despite inconclusive data, Max's call is to keep moving forward with the framework for the UX, focus, and onboarding benefits.",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
