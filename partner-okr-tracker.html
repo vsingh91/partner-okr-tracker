@@ -382,6 +382,7 @@
   <h1>Q2 2026 — Partner OKR Completion Tracker</h1>
   <div class="okr-statement">OKR: Deliver on ≥80% of partner team objectives, weighted by ML investment (SWAG allocation)</div>
   <div class="week-badge" id="weekBadge"></div>
+  <div class="week-badge" id="lastUpdatedBadge" style="margin-left:8px;"></div>
 </header>
 
 <div class="summary-row">
@@ -479,6 +480,9 @@ const QUARTER = {
   completionTarget: 0.80
 };
 
+// ← UPDATE THIS each time you refresh the data
+const LAST_UPDATED = "2026-05-07";
+
 const TEAMS = [
   {
     name: "Sales Orch: Discovery→Cart",
@@ -493,9 +497,10 @@ const TEAMS = [
       { date: "2026-04-10", value: 1.2 },
       { date: "2026-04-16", value: 1.2 },
       { date: "2026-04-23", value: 1.1 },
-      { date: "2026-04-26", value: 1.2 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-04-26", value: 1.2 },
+      { date: "2026-05-03", value: 1.0 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Bounced back to 1.2% after last week's dip to 1.1%. No new rec experiments shipped — movement is within typical week-to-week variance. Metadata-aware pipeline and post-release rec improvements remain the main planned levers.",
+    currentDriver: "Dipped to 1.0% (down 0.2pt WoW) — second sub-baseline reading in three weeks. No new rec experiments shipped this week, so the drop is within week-to-week variance, but trend is concerning. Metadata-aware pipeline and post-release rec improvements remain the main planned levers.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -516,7 +521,7 @@ const TEAMS = [
       { date: "2026-04-23", value: 0.25 },
       { date: "2026-04-29", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Flat at 0.25% — no organic movement expected without a new lever. Betting SPQ (Suggested Product Questions) improvements will lift this once shipped.",
+    currentDriver: "Chart not loading this week — data source/dashboard issue, no fresh reading available. Last known value 0.25% (week of Apr 29). Betting SPQ (Suggested Product Questions) improvements will lift this once shipped.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -531,7 +536,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "Intent knowledge framework experiment still inconclusive in V2. Running on 20 merchants; only 4 have stat-sig results, ranging from -4pts to +5pts (also -1, +1) on success rate. Felipe: not learning much from V2, not over-indexing on it. Success-rate metric paused until V3 experimentation finishes; focus shifting to V3 integration + offline eval (Ava). Despite inconclusive data, Max's call is to keep moving forward with the framework for the UX, focus, and onboarding benefits.",
+    currentDriver: "Inconclusive results on V2 A/B test, but plan is to continue with the Skill migration, set up Skills analytics, and enable Skills on V3. Running on 20 merchants; only 4 have stat-sig results, ranging from -4pts to +5pts (also -1, +1) on success rate. Felipe: not learning much from V2, not over-indexing on it. Success-rate metric paused until V3 experimentation finishes; focus shifting to V3 integration + offline eval. Despite inconclusive data, Max's call is to keep moving forward with the framework for the UX, focus, and onboarding benefits.",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
@@ -858,8 +863,11 @@ function render() {
   });
 
   // Footer
-  document.getElementById("lastUpdated").textContent =
-    `Last updated: ${new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}`;
+  const lastUpdatedDate = new Date(LAST_UPDATED + "T00:00:00");
+  const lastUpdatedStr = lastUpdatedDate.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  document.getElementById("lastUpdated").textContent = `Last updated: ${lastUpdatedStr}`;
+  document.getElementById("lastUpdatedBadge").textContent =
+    `Last updated: ${lastUpdatedDate.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}`;
 }
 
 render();
