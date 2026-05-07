@@ -389,6 +389,7 @@
   <div class="summary-card">
     <div class="label">Weighted Completion Rate</div>
     <div class="value" id="completionRate" style="color: var(--accent);">—</div>
+    <div id="completionDelta" class="wow-delta flat" style="margin-top:4px;"></div>
     <div class="sub">Target: 80%</div>
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="completionBar" style="width:0%; background: var(--accent);"></div>
@@ -606,6 +607,26 @@ function computeOKRProgress(team) {
   return ((team.actual - team.baseline) / denominator) * 100;
 }
 
+// Progress as of the previous reading (or 1 week earlier for the linear-internal team).
+// Used to compute a WoW delta on the weighted completion rate.
+function computePriorOKRProgress(team) {
+  if (team.isInternal && team.actual === "auto") {
+    const total = QUARTER.end - QUARTER.start;
+    const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const elapsed = Math.max(0, Math.min(oneWeekAgo - QUARTER.start, total));
+    return (elapsed / total) * 100;
+  }
+  if (team.baseline === null || team.target === null) return null;
+  if (!team.history || team.history.length < 2) {
+    // No prior reading — treat as unchanged so it doesn't move the delta.
+    return computeOKRProgress(team);
+  }
+  const prior = team.history[team.history.length - 2].value;
+  const denom = team.target - team.baseline;
+  if (denom === 0) return 0;
+  return ((prior - team.baseline) / denom) * 100;
+}
+
 function getWoWDelta(team) {
   if (team.isInternal) return null;
   if (!team.history || team.history.length < 2) return null;
@@ -719,12 +740,15 @@ function render() {
   const tbody = document.getElementById("tableBody");
   tbody.innerHTML = "";
   let totalContribution = 0;
+  let priorTotalContribution = 0;
 
   TEAMS.forEach(team => {
     const weight = team.swag / totalSwag;
     const progress = computeOKRProgress(team);
     const contribution = progress !== null ? weight * progress : 0;
     totalContribution += contribution;
+    const priorProgress = computePriorOKRProgress(team);
+    priorTotalContribution += priorProgress !== null ? weight * priorProgress : 0;
     const status = getStatusInfo(progress, team);
 
     // Compute actual display value for Internal
@@ -817,6 +841,23 @@ function render() {
   const bar = document.getElementById("completionBar");
   bar.style.width = Math.min(totalContribution, 100) + "%";
   bar.style.background = completionColor;
+
+  // WoW delta on weighted completion rate
+  const completionDeltaEl = document.getElementById("completionDelta");
+  if (completionDeltaEl) {
+    const deltaPp = totalContribution - priorTotalContribution;
+    const absPp = Math.abs(deltaPp);
+    if (absPp < 0.05) {
+      completionDeltaEl.className = "wow-delta flat";
+      completionDeltaEl.textContent = "No change vs last week";
+    } else if (deltaPp > 0) {
+      completionDeltaEl.className = "wow-delta positive";
+      completionDeltaEl.textContent = `▲ ${absPp.toFixed(1)}pp vs last week`;
+    } else {
+      completionDeltaEl.className = "wow-delta negative";
+      completionDeltaEl.textContent = `▼ ${absPp.toFixed(1)}pp vs last week`;
+    }
+  }
 
   // Drivers card
   const driversDiv = document.getElementById("driversList");
