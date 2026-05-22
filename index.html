@@ -499,9 +499,11 @@ const TEAMS = [
       { date: "2026-04-16", value: 1.2 },
       { date: "2026-04-23", value: 1.1 },
       { date: "2026-04-26", value: 1.2 },
-      { date: "2026-05-03", value: 1.0 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-05-07", value: 1.0 },
+      { date: "2026-05-14", value: 1.0 },
+      { date: "2026-05-21", value: 1.0 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Dipped to 1.0% (down 0.2pt WoW) — second sub-baseline reading in three weeks. No new rec experiments shipped this week, so the drop is within week-to-week variance, but trend is concerning. Metadata-aware pipeline and post-release rec improvements remain the main planned levers.",
+    currentDriver: "Slipped to 1.0% three weeks running (down from 1.2% in late April). No new rec experiments shipped in the interim — sustained dip rather than week-to-week noise. Metadata-aware pipeline and post-release rec improvements remain the main planned levers to reverse this.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -520,9 +522,12 @@ const TEAMS = [
       { date: "2026-04-10", value: 0.25 },
       { date: "2026-04-16", value: 0.26 },
       { date: "2026-04-23", value: 0.25 },
-      { date: "2026-04-29", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-04-29", value: 0.25 },
+      { date: "2026-05-07", value: 0.25 },
+      { date: "2026-05-14", value: 0.24 },
+      { date: "2026-05-21", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Chart not loading this week — data source/dashboard issue, no fresh reading available. Last known value 0.25% (week of Apr 29). Betting SPQ (Suggested Product Questions) improvements will lift this once shipped.",
+    currentDriver: "Slow drift down — 0.25% → 0.24% → 0.23% over the last three weeks. No new lever live; SPQ (Suggested Product Questions) improvements remain the bet to reverse this once shipped.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
