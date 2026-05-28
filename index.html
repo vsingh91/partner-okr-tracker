@@ -482,7 +482,7 @@ const QUARTER = {
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-05-21";
+const LAST_UPDATED = "2026-05-28";
 
 const TEAMS = [
   {
@@ -501,9 +501,10 @@ const TEAMS = [
       { date: "2026-04-26", value: 1.2 },
       { date: "2026-05-07", value: 1.0 },
       { date: "2026-05-14", value: 1.0 },
-      { date: "2026-05-21", value: 1.0 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-05-21", value: 1.0 },
+      { date: "2026-05-28", value: 1.2 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Slipped to 1.0% three weeks running (down from 1.2% in late April). No new rec experiments shipped in the interim — sustained dip rather than week-to-week noise. Metadata-aware pipeline and post-release rec improvements remain the main planned levers to reverse this.",
+    currentDriver: "Recovered to 1.2% this week (+0.2pt WoW), back to late-April levels after three weeks flat at 1.0%. No new rec experiment shipped, so reading this as variance rather than a step-change. SA offline eval is being stood up (4 judges + 8 scenarios finalizing by May 30, dry run May 30, full launch June 2); metadata-aware pipeline and post-release rec improvements remain the planned levers.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -525,9 +526,10 @@ const TEAMS = [
       { date: "2026-04-29", value: 0.25 },
       { date: "2026-05-07", value: 0.25 },
       { date: "2026-05-14", value: 0.24 },
-      { date: "2026-05-21", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-05-21", value: 0.23 },
+      { date: "2026-05-28", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Slow drift down — 0.25% → 0.24% → 0.23% over the last three weeks. No new lever live; SPQ (Suggested Product Questions) improvements remain the bet to reverse this once shipped.",
+    currentDriver: "Flat at 0.23% (±0 WoW), holding at the low end after the recent drift down from 0.25%. No new lever live; SPQ (Suggested Product Questions) improvements remain the bet to reverse this once shipped. SA offline eval prep underway, with Beta 3 SA launch targeted for June 15.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -542,7 +544,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "Inconclusive results on V2 A/B test, but plan is to continue with the Skill migration, set up Skills analytics, and enable Skills on V3. Running on 20 merchants; only 4 have stat-sig results, ranging from -4pts to +5pts (also -1, +1) on success rate. Felipe: not learning much from V2, not over-indexing on it. Success-rate metric paused until V3 experimentation finishes; focus shifting to V3 integration + offline eval. Despite inconclusive data, Max's call is to keep moving forward with the framework for the UX, focus, and onboarding benefits.",
+    currentDriver: "Default-agent prompt A/B test (Mohamed's refactored version) launched on chat May 27; mail pending Artemis testing. Overall results look positive, with one regression on the faithful-reasoning judge for email. Dashboard delayed to end of week, and offline eval shows ~20% macro variance between runs, so the team is favoring online monitoring for the final read. Skills v3 eval (Ghiwa) flagged two issues: the default prompt over-relies on get_knowledge, and predefined skills don't align well with customer requests. C&T confirmed to get a dedicated MLA in Q3 (Dhafer); the +7pt success-rate uplift from Knowledge Opportunities was cited as a recent win.",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
@@ -559,7 +561,7 @@ const TEAMS = [
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "Tracking linearly with quarter; eval infra + PromptLayer migration in flight.",
+    currentDriver: "V3 Beta 1 validated: success rate +13.6% vs V2, latency p75 −54% (vs −40% target), feedback quality stable. Beta 2 (actions focus): +44% success on action tickets (24%→34%), +9% global; technical success rate 99.83%. GA rollout June 8 (700 clients on V3 Support); Beta 3 SA launch June 15. Cost per execution ~26¢ (up from 15¢ due to untracked chat prompt costs) — three parallel cost workstreams in flight, default-agent cache hit ~80%. Eval infra + PromptLayer migration continue.",
     initiatives: [
       { name: "Support V3 release — eval infra for MLAs", swag: 30, squad: "MLE" },
       { name: "Support new architecture (Evoli V3)", swag: 25, squad: "MLE" },
