@@ -482,7 +482,7 @@ const QUARTER = {
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-05-28";
+const LAST_UPDATED = "2026-06-04";
 
 const TEAMS = [
   {
@@ -502,9 +502,10 @@ const TEAMS = [
       { date: "2026-05-07", value: 1.0 },
       { date: "2026-05-14", value: 1.0 },
       { date: "2026-05-21", value: 1.0 },
-      { date: "2026-05-28", value: 1.2 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-05-28", value: 1.2 },
+      { date: "2026-06-04", value: 1.1 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Recovered to 1.2% this week (+0.2pt WoW), back to late-April levels after three weeks flat at 1.0%. No new rec experiment shipped, so reading this as variance rather than a step-change. SA offline eval is being stood up (4 judges + 8 scenarios finalizing by May 30, dry run May 30, full launch June 2); metadata-aware pipeline and post-release rec improvements remain the planned levers.",
+    currentDriver: "Dipped to 1.1% (-0.1pt WoW) after last week's 1.2%, so the metric is still oscillating in the 1.0-1.2% band with no clear trend. No new rec experiment in prod. Shopping Assistant launch readiness is now the live lever: online scenario validation is running on self-serve traffic with positive early signal, the default-agent to Shopping-Assistant transfer architecture is confirmed, and a tech spec is drafted (pending final validation). First product-intent launch targeted June 15.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -527,9 +528,10 @@ const TEAMS = [
       { date: "2026-05-07", value: 0.25 },
       { date: "2026-05-14", value: 0.24 },
       { date: "2026-05-21", value: 0.23 },
-      { date: "2026-05-28", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-05-28", value: 0.23 },
+      { date: "2026-06-04", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Flat at 0.23% (±0 WoW), holding at the low end after the recent drift down from 0.25%. No new lever live; SPQ (Suggested Product Questions) improvements remain the bet to reverse this once shipped. SA offline eval prep underway, with Beta 3 SA launch targeted for June 15.",
+    currentDriver: "Flat at 0.23% (±0 WoW) for a third week, holding at the low end. No new lever live yet; the Shopping Assistant launch readiness work (scenario validation, transfer architecture) is the path to moving this once the first product-intent batch ships June 15. Risk: stopping the current A/B test removes a customer data source used to build test scenarios, requiring some rework.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -544,7 +546,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "Default-agent prompt A/B test (Mohamed's refactored version) launched on chat May 27; mail pending Artemis testing. Overall results look positive, with one regression on the faithful-reasoning judge for email. Dashboard delayed to end of week, and offline eval shows ~20% macro variance between runs, so the team is favoring online monitoring for the final read. Skills v3 eval (Ghiwa) flagged two issues: the default prompt over-relies on get_knowledge, and predefined skills don't align well with customer requests. C&T confirmed to get a dedicated MLA in Q3 (Dhafer); the +7pt success-rate uplift from Knowledge Opportunities was cited as a recent win.",
+    currentDriver: "Self-auth (certification flow) is showing positive offline signals since last Wednesday: global metrics stable, a small handle-rate reduction, and improved triggering on ordering violations and after empty order returns. Order-intent online eval is passing 90% of judge checks, with most failures tracing to knowledge-over-action behavior. Self-auth is ready to request online deployment (PR + prompt changes merge once execution enables). One hallucination caught (handler claimed an action it didn't perform), fix tracked. Knowledge-conflict improvements deferred post-GA.",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
@@ -561,7 +563,7 @@ const TEAMS = [
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "V3 Beta 1 validated: success rate +13.6% vs V2, latency p75 −54% (vs −40% target), feedback quality stable. Beta 2 (actions focus): +44% success on action tickets (24%→34%), +9% global; technical success rate 99.83%. GA rollout June 8 (700 clients on V3 Support); Beta 3 SA launch June 15. Cost per execution ~26¢ (up from 15¢ due to untracked chat prompt costs) — three parallel cost workstreams in flight, default-agent cache hit ~80%. Eval infra + PromptLayer migration continue.",
+    currentDriver: "V3 performing well overall, actions working despite limited traffic so far. Order degradation vs V2 was investigated and most V3 handovers confirmed legitimate; soft auth remains the one problematic support feature. Shopping Assistant intent rollout schedule set: product intent (first batch) June 15, remaining sales intents week of June 22, promotion and discount week of June 29. Blockers: order-confirmation integration on V3 is a P0 still pending, and the cost-optimization dashboard is not yet reactivated (blocking the default-agent refactor A/B read).",
     initiatives: [
       { name: "Support V3 release — eval infra for MLAs", swag: 30, squad: "MLE" },
       { name: "Support new architecture (Evoli V3)", swag: 25, squad: "MLE" },
