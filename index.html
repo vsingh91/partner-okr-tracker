@@ -482,7 +482,7 @@ const QUARTER = {
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-06-11";
+const LAST_UPDATED = "2026-06-18";
 
 const TEAMS = [
   {
@@ -504,9 +504,10 @@ const TEAMS = [
       { date: "2026-05-21", value: 1.0 },
       { date: "2026-05-28", value: 1.2 },
       { date: "2026-06-04", value: 1.1 },
-      { date: "2026-06-11", value: 1.3 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-06-11", value: 1.3 },
+      { date: "2026-06-18", value: 1.3 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Rose to 1.3% (+0.2pt WoW), a new quarter high that breaks out of the 1.0-1.2% band the metric had oscillated in since April. First reading above 1.2% this quarter. Shopping Assistant launch readiness remains the live lever (driver detail carried over from last week pending this week's notes): online scenario validation on self-serve traffic, the default-agent to Shopping-Assistant transfer architecture, and the drafted tech spec. First product-intent launch still targeted June 15.",
+    currentDriver: "Held at 1.3% (±0 WoW) for a second straight week, sustaining the quarter high after breaking out of the 1.0-1.2% band. The 140-merchant product-intent rollout is now at the greenlight decision: Adal to share the final offline eval on discount scenarios by end of week, with sign-off Monday (June 22) to proceed. Shopping Assistant is confirmed intent-whitelisted; shipping-info intent inclusion is still being verified, and product-availability and product-usage intents have been added to the online review scope. Inventory unblocked as a key dependency — the upstream Storefront API inventory check is confirmed to move earlier in the pipeline, with Shopify multi-location and market-level availability gaps being fixed.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -531,9 +532,10 @@ const TEAMS = [
       { date: "2026-05-21", value: 0.23 },
       { date: "2026-05-28", value: 0.23 },
       { date: "2026-06-04", value: 0.23 },
-      { date: "2026-06-11", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-06-11", value: 0.23 },
+      { date: "2026-06-18", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Flat at 0.23% (±0 WoW) for a fourth straight week, holding at the low end. No new lever live yet; the Shopping Assistant launch readiness work (scenario validation, transfer architecture) is the path to moving this once the first product-intent batch ships June 15. Risk: stopping the current A/B test removes a customer data source used to build test scenarios, requiring some rework. (Driver detail carried over from last week pending this week's notes.)",
+    currentDriver: "Ticked up to 0.25% (+0.02pp WoW) — the first uptick after four straight weeks flat at 0.23%, though still near the low end of the 0.4→1.0% band. The 140-merchant product-intent rollout (Monday June 22 greenlight) remains the primary lever to move this. SPQ surfaces are expanding to home and collection pages (25 pts, no new ML unless prompt changes), and ads-to-messaging has been scoped — a Meta ad click routing to a merchant PDP with chat (PDP-in-chat is merchant-preferred), starting small to validate, motivated by Google ad click-through down ~60% from AI overviews.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -548,7 +550,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "Self-auth (certification flow) is showing positive offline signals since last Wednesday: global metrics stable, a small handle-rate reduction, and improved triggering on ordering violations and after empty order returns. Order-intent online eval is passing 90% of judge checks, with most failures tracing to knowledge-over-action behavior. Self-auth is ready to request online deployment (PR + prompt changes merge once execution enables). One hallucination caught (handler claimed an action it didn't perform), fix tracked. Knowledge-conflict improvements deferred post-GA.",
+    currentDriver: "This week's signal came from ticket review: a class of failures traces to guidance quality — missing FAQ/help-center content, or guidance not written clearly enough for the AI to act on. There is no formal process yet to flag these back to CSMs; it is ad hoc today. The longer-term fix is Gaia, a self-correcting loop that pulls traces from PromptLayer and auto-proposes guidance changes, planned for next quarter with Felipe. Q3 focus is synthetic scenario generation for merchant simulation (simulate → estimate → validate). No new self-auth update surfaced this week (prior status carried over).",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
@@ -565,7 +567,7 @@ const TEAMS = [
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "V3 performing well overall, actions working despite limited traffic so far. Order degradation vs V2 was investigated and most V3 handovers confirmed legitimate; soft auth remains the one problematic support feature. Shopping Assistant intent rollout schedule set: product intent (first batch) June 15, remaining sales intents week of June 22, promotion and discount week of June 29. Blockers: order-confirmation integration on V3 is a P0 still pending, and the cost-optimization dashboard is not yet reactivated (blocking the default-agent refactor A/B read).",
+    currentDriver: "Core focus stays on shipping V3 to GA and platformizing GADK for other squads, with a cost target of 26¢ → 10¢ per automated interaction (V3 as the baseline). The Shopping Assistant rollout schedule firmed into a greenlight decision — product-intent first batch (140 merchants) pending Adal's offline eval by EOW and sign-off Monday June 22. The intent-based model router is confirmed as the Q3 quick win (intent as first routing signal, complexity signals layered in). A new risk was flagged: intent detection misclassifies overlapping intents (e.g. order-cancel vs cancel/refund), now higher-stakes since skills are locked per conversation — a 'global intention' layer above per-turn intent is proposed, with Support Orch to define the approach first. Cost-optimization work continues under Sami; a date-math bug (warranty windows, return eligibility, business vs calendar days) is pending a check on whether GPT v3 resolves it, else a Q4 fix. The order-confirmation V3 integration P0 was not revisited this week (prior blocker carried over).",
     initiatives: [
       { name: "Support V3 release — eval infra for MLAs", swag: 30, squad: "MLE" },
       { name: "Support new architecture (Evoli V3)", swag: 25, squad: "MLE" },
