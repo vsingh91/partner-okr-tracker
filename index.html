@@ -482,7 +482,7 @@ const QUARTER = {
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-06-18";
+const LAST_UPDATED = "2026-06-25";
 
 const TEAMS = [
   {
@@ -505,9 +505,10 @@ const TEAMS = [
       { date: "2026-05-28", value: 1.2 },
       { date: "2026-06-04", value: 1.1 },
       { date: "2026-06-11", value: 1.3 },
-      { date: "2026-06-18", value: 1.3 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-06-18", value: 1.3 },
+      { date: "2026-06-25", value: 1.3 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Held at 1.3% (±0 WoW) for a second straight week, sustaining the quarter high after breaking out of the 1.0-1.2% band. The 140-merchant product-intent rollout is now at the greenlight decision: Adal to share the final offline eval on discount scenarios by end of week, with sign-off Monday (June 22) to proceed. Shopping Assistant is confirmed intent-whitelisted; shipping-info intent inclusion is still being verified, and product-availability and product-usage intents have been added to the online review scope. Inventory unblocked as a key dependency — the upstream Storefront API inventory check is confirmed to move earlier in the pipeline, with Shopify multi-location and market-level availability gaps being fixed.",
+    currentDriver: "Held at 1.3% (±0 WoW) for a third straight week, sustaining the quarter high. Email-channel SA was the week's push: the last two product intents (product order, product customization) cleared Monday June 22, and the email judge was rebuilt on product URLs (replacing product cards) with no regression on the default agent. Non-regression evals ran June 24, with full SA capability — including discount-code generation — going live Thursday June 25. On v3 vs v2, SA now shares products in 65% of tickets vs 52% on v2, confirmed as relevant rather than over-recommendation. 150 merchants were added to the Shopping Assistant rollout Monday June 22 as part of the regular cadence; the discount-intent offline eval completed and merged, with gating on discount instructions added.",
     initiatives: [
       { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
       { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
@@ -533,9 +534,10 @@ const TEAMS = [
       { date: "2026-05-28", value: 0.23 },
       { date: "2026-06-04", value: 0.23 },
       { date: "2026-06-11", value: 0.23 },
-      { date: "2026-06-18", value: 0.25 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-06-18", value: 0.25 },
+      { date: "2026-06-25", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Ticked up to 0.25% (+0.02pp WoW) — the first uptick after four straight weeks flat at 0.23%, though still near the low end of the 0.4→1.0% band. The 140-merchant product-intent rollout (Monday June 22 greenlight) remains the primary lever to move this. SPQ surfaces are expanding to home and collection pages (25 pts, no new ML unless prompt changes), and ads-to-messaging has been scoped — a Meta ad click routing to a merchant PDP with chat (PDP-in-chat is merchant-preferred), starting small to validate, motivated by Google ad click-through down ~60% from AI overviews.",
+    currentDriver: "Slipped back to 0.23% (-0.02pp WoW), giving back last week's uptick and returning to the bottom of the band that held through May and June — still far from the 0.4→1.0% target. The primary near-term lever is a v3 A/B test launching Thursday June 26, testing skill-sticking via Evoli against the current get-knowledge approach; the skills release is green-lit by Felipe, with cohort prep happening this week and the release handled by Arias. Prior levers carry over: SPQ surfaces expanding to home and collection pages, and ads-to-messaging scoped (a Meta ad click routing to a merchant PDP with chat, PDP-in-chat being merchant-preferred), motivated by Google ad click-through down ~60% from AI overviews.",
     initiatives: [
       { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
     ]
@@ -550,7 +552,7 @@ const TEAMS = [
     targetDelta: 7,       // +7 percentage points
     format: "points",
     history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "This week's signal came from ticket review: a class of failures traces to guidance quality — missing FAQ/help-center content, or guidance not written clearly enough for the AI to act on. There is no formal process yet to flag these back to CSMs; it is ad hoc today. The longer-term fix is Gaia, a self-correcting loop that pulls traces from PromptLayer and auto-proposes guidance changes, planned for next quarter with Felipe. Q3 focus is synthetic scenario generation for merchant simulation (simulate → estimate → validate). No new self-auth update surfaced this week (prior status carried over).",
+    currentDriver: "This week's signal came from the Varun/Romain 1:1: ML's role in coaching & trust / self-testing is confirmed as support mode, not lead — Gaïa owns the simulator side — and no bandwidth is being blocked for skills without a confirmed need. Key risk flagged: GPT-4o mini follows guidance less reliably than v3 (raised by Firas), with mitigation being explored via prompt reinforcement. Carried over: the longer-term fix is Gaia, a self-correcting loop that pulls traces from PromptLayer and auto-proposes guidance changes, planned for next quarter with Felipe; Q3 focus is synthetic scenario generation for merchant simulation (simulate → estimate → validate).",
     initiatives: [
       { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
       { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
@@ -567,7 +569,7 @@ const TEAMS = [
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "Core focus stays on shipping V3 to GA and platformizing GADK for other squads, with a cost target of 26¢ → 10¢ per automated interaction (V3 as the baseline). The Shopping Assistant rollout schedule firmed into a greenlight decision — product-intent first batch (140 merchants) pending Adal's offline eval by EOW and sign-off Monday June 22. The intent-based model router is confirmed as the Q3 quick win (intent as first routing signal, complexity signals layered in). A new risk was flagged: intent detection misclassifies overlapping intents (e.g. order-cancel vs cancel/refund), now higher-stakes since skills are locked per conversation — a 'global intention' layer above per-turn intent is proposed, with Support Orch to define the approach first. Cost-optimization work continues under Sami; a date-math bug (warranty windows, return eligibility, business vs calendar days) is pending a check on whether GPT v3 resolves it, else a Q4 fix. The order-confirmation V3 integration P0 was not revisited this week (prior blocker carried over).",
+    currentDriver: "V3 is now on 40% of accounts (~35% of ticket volume), with support success at 29% blended (v2/v3) rising to 35% on fully-migrated beta accounts. Latency is the main blocker to GA: p50 at 12.41s and p95 at 14.25s, up ~2s WoW driven by SA (root cause unclear when products are recommended). Five engineers are focused on cost/latency until GA — Kamala & Minoche on cost/latency, Pierre & Samy finishing compaction then gating order tools, Mohamed on the email prompt (targeting Monday June 29). Compaction is live on 20% of beta-1 accounts with thresholds adjusted (trigger rate now much higher). V3 is not yet visible to merchants. Cost target stays 26¢ → 10¢ per automated interaction (V3 as baseline). The Thursday Paris demo (Gorgias Connect) was flagged as a latency risk for the SA demo at 13–15s. Carried over: intent-based model router confirmed as the Q3 quick win, and the overlapping-intent misclassification risk (e.g. order-cancel vs cancel/refund) with a proposed 'global intention' layer above per-turn intent.",
     initiatives: [
       { name: "Support V3 release — eval infra for MLAs", swag: 30, squad: "MLE" },
       { name: "Support new architecture (Evoli V3)", swag: 25, squad: "MLE" },
