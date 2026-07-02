@@ -243,6 +243,16 @@
     background: #f1f5f9;
     color: #475569;
   }
+  .impact-chip {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 10.5px;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+  .impact-chip.cost { background: #f5f3ff; color: #6d28d9; }
+  .impact-chip.latency { background: #e0f2fe; color: #0369a1; }
 
   .progress-cell {
     display: flex;
@@ -476,7 +486,7 @@
 
 <div class="table-card">
   <h2>Cost &amp; Latency — Shared Targets (Core Orchestration)</h2>
-  <div class="table-subtitle">Leadership-defined: cost ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 latency ≤ 10s (support + sales combined) by EoQ3, held · median latency ≤ 6s by EoY. ML initiatives here drive the outcome directly, so they are excluded from the completion rate below and measured on metric actuals. Nested rows = committed ML levers.</div>
+  <div class="table-subtitle">Leadership-defined: cost ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 latency ≤ 10s (support + sales combined) by EoQ3, held · median latency ≤ 6s by EoY. ML initiatives here drive the outcome directly, so they are excluded from the completion rate below and measured on metric actuals. Nested rows = committed ML levers; impact chips mark levers that move both cost and latency. SWAG is counted once, under the lever's primary target.</div>
   <div class="table-wrap">
   <table>
     <thead>
@@ -742,9 +752,9 @@ const SHARED_TARGETS = [
     ],
     currentDriver: "H2 kickoff at the V3 GA baseline of ~26¢ per automated interaction. Q3 target ≤ $0.15, EoY ≤ $0.10. Committed levers: default_agent cost reduction (history compaction, tool-output trimming, GPT 5.4-mini evaluation), the conversation_ended & QA classifiers (projected $120–180K/yr net savings at full rollout), and shipping the refactored email prompt to match chat. The post-training R&D track (fine-tuned open-source models for simpler intents) is the longer-horizon lever — Q3 is survey + ROI only.",
     initiatives: [
-      { name: "Reduce V3 default_agent cost — compaction, tool-output trimming, GPT 5.4-mini eval", swag: 40, squad: "MLA", status: "In progress" },
-      { name: "conversation_ended & QA classifiers — train, evaluate, deploy (Q2 carry-over)", swag: 15, squad: "MLE", status: "In progress" },
-      { name: "Ship refactored email prompt for V3 (matching chat)", swag: 5, squad: "MLA", status: "In progress" }
+      { name: "Reduce V3 default_agent cost — compaction, tool-output trimming, GPT 5.4-mini eval", swag: 40, squad: "MLA", status: "In progress", impacts: ["Cost", "Latency"] },
+      { name: "conversation_ended & QA classifiers — train, evaluate, deploy (Q2 carry-over)", swag: 15, squad: "MLE", status: "In progress", impacts: ["Cost", "Latency"] },
+      { name: "Ship refactored email prompt for V3 (matching chat)", swag: 5, squad: "MLA", status: "In progress", impacts: ["Cost"] }
     ]
   },
   {
@@ -756,8 +766,9 @@ const SHARED_TARGETS = [
     format: "seconds",
     lowerIsBetter: true,
     history: [],          // ← Append when baseline lands
-    currentDriver: "≤ 10s P75 on support + sales tickets combined is both the Q3 target and the EoY hold, shared with Core Orchestration. Baseline pending the first clean post-GA P75 reading (late-June references: p50 12.4s, p95 14.3s). Main ML levers run through the cost workstream (compaction, smaller models); the SA-specific latency work is tracked in the partner table above to avoid double counting.",
-    initiatives: []
+    currentDriver: "≤ 10s P75 on support + sales tickets combined is both the Q3 target and the EoY hold, shared with Core Orchestration. Baseline pending the first clean post-GA P75 reading (late-June references: p50 12.4s, p95 14.3s). Main ML levers run through the cost workstream (compaction, smaller models); the SA-specific latency work is tracked in the partner table to avoid double counting.",
+    initiatives: [],
+    sharedLeversNote: "Levers shared with the cost row above (tagged Latency): compaction, tool-output trimming, GPT 5.4-mini, in-pipeline classifiers. SWAG counted once, under cost. SA-specific latency work sits in the partner table."
   },
   {
     name: "Median chat latency",
@@ -768,7 +779,8 @@ const SHARED_TARGETS = [
     lowerIsBetter: true,
     history: [],          // ← Append when baseline lands
     currentDriver: "≤ 6s median (p50) chat latency by EoY. No Q3 waypoint defined; paced linearly across H2. Baseline pending the first clean H2 reading (late-June V3 reference: p50 12.4s). Same levers as cost and P75: history compaction, tool-output trimming, smaller models per intent.",
-    initiatives: []
+    initiatives: [],
+    sharedLeversNote: "Same shared levers as P75 above; SWAG counted once, under the cost row."
   }
 ];
 
@@ -1178,14 +1190,21 @@ function render() {
     item.initiatives.forEach((init, idx) => {
       const itr = document.createElement("tr");
       itr.className = "init-row" + (idx === item.initiatives.length - 1 ? " last-init" : "");
+      const impacts = (init.impacts || []).map(t => `<span class="impact-chip ${t.toLowerCase()}">${t}</span>`).join('');
       itr.innerHTML = `
         <td class="init-name">${init.name}</td>
-        <td colspan="2" class="right mono">${init.swag} SWAG · <span class="squad-chip">${init.squad}</span></td>
+        <td colspan="2" class="right mono">${init.swag} SWAG · <span class="squad-chip">${init.squad}</span>${impacts}</td>
         <td colspan="3"></td>
         <td class="center">${initStatusPill(init.status)}</td>
       `;
       sharedBody.appendChild(itr);
     });
+    if (item.sharedLeversNote) {
+      const ntr = document.createElement("tr");
+      ntr.className = "init-row last-init";
+      ntr.innerHTML = `<td class="init-name" colspan="7" style="font-style:italic;">${item.sharedLeversNote}</td>`;
+      sharedBody.appendChild(ntr);
+    }
   });
 
   // Drivers card (partner rows + shared targets)
