@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MLE Q2 2026 — Partner OKR Completion Tracker</title>
+<title>ML H2 2026 — OKR & Metrics Tracker</title>
 <style>
   :root {
     --bg: #f5f6fa;
@@ -55,6 +55,7 @@
     font-size: 15px;
     opacity: 0.85;
     font-weight: 400;
+    line-height: 1.5;
   }
   header .week-badge {
     display: inline-block;
@@ -130,7 +131,12 @@
   .table-card h2 {
     font-size: 16px;
     font-weight: 600;
-    padding: 20px 28px 16px;
+    padding: 20px 28px 6px;
+  }
+  .table-card .table-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 0 28px 16px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -182,7 +188,14 @@
   .metric-name {
     font-size: 13px;
     color: var(--text-secondary);
-    max-width: 220px;
+    max-width: 240px;
+  }
+  .metric-note {
+    font-size: 11px;
+    color: var(--gray);
+    max-width: 240px;
+    margin-top: 3px;
+    line-height: 1.4;
   }
   .metric-link {
     color: var(--accent);
@@ -266,6 +279,21 @@
     font-weight: 700;
     border-top: 2px solid var(--border);
   }
+
+  /* ── Guardrail strip ── */
+  .guardrail-card {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--yellow);
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+  .guardrail-card strong { color: var(--text); }
 
   /* ── Drivers Card ── */
   .drivers-card {
@@ -355,6 +383,28 @@
     white-space: nowrap;
   }
 
+  /* ── Watch list ── */
+  .watch-card {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .watch-card h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .watch-card .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+  .watch-card ul { list-style: none; }
+  .watch-card li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    padding: 7px 0 7px 18px;
+    border-left: 2px solid var(--light-gray);
+    margin-bottom: 2px;
+  }
+  .watch-card li strong { color: var(--text); }
+
   /* ── Footer ── */
   footer {
     text-align: center;
@@ -379,8 +429,11 @@
 
 <header>
   <div class="team-label">Machine Learning</div>
-  <h1>Q2 2026 — Partner OKR Completion Tracker</h1>
-  <div class="okr-statement">OKR: Deliver on ≥80% of partner team objectives, weighted by ML investment (SWAG allocation)</div>
+  <h1>H2 2026 — ML OKR &amp; Metrics Tracker</h1>
+  <div class="okr-statement">
+    OKR1: Deliver on ≥80% of partner team objectives, weighted by ML investment (SWAG allocation)<br>
+    Shared EoY targets with Core Orchestration (tracked separately below): cost per automated interaction ≤ $0.10 · P75 chat latency &lt; 10s
+  </div>
   <div class="week-badge" id="weekBadge"></div>
   <div class="week-badge" id="lastUpdatedBadge" style="margin-left:8px;"></div>
 </header>
@@ -397,12 +450,12 @@
     </div>
   </div>
   <div class="summary-card">
-    <div class="label">Total SWAG Planned</div>
-    <div class="value">450</div>
-    <div class="sub">10 engineers &times; 45 SWAG (9 productive weeks each)</div>
+    <div class="label">SWAG in Completion Scope</div>
+    <div class="value">180</div>
+    <div class="sub">of 420 sized Q3 pts — 60 pts on cost/latency targets (below) · 180 pts R&amp;D, deliberately not OKR-tracked</div>
   </div>
   <div class="summary-card">
-    <div class="label">Quarter Progress</div>
+    <div class="label">H2 Progress</div>
     <div class="value" id="quarterProgress">—</div>
     <div class="sub" id="quarterDates"></div>
     <div class="progress-bar-wrap">
@@ -413,18 +466,19 @@
 
 <div class="table-card">
   <h2>Partner OKR Breakdown</h2>
+  <div class="table-subtitle">Feeds the weighted completion rate. Initiative mix = Q3 Committed (June 19 roadmap); refreshed at each 6-week check-in.</div>
   <table>
     <thead>
       <tr>
-        <th style="width:16%">Partner Team</th>
-        <th style="width:18%">Primary Metric</th>
+        <th style="width:15%">Partner Team</th>
+        <th style="width:19%">Primary Metric</th>
         <th class="right">SWAG</th>
         <th class="right">Weight</th>
         <th class="right">Baseline</th>
-        <th class="right">Target</th>
+        <th class="right">Target (EoH2)</th>
         <th class="right">Actual (Δ WoW)</th>
         <th class="center">Trend</th>
-        <th class="center" style="width:14%">OKR Progress</th>
+        <th class="center" style="width:13%">OKR Progress</th>
         <th class="center">Status</th>
         <th class="right">Contribution</th>
       </tr>
@@ -448,6 +502,31 @@
   </table>
 </div>
 
+<div class="table-card">
+  <h2>Cost &amp; Latency — Shared EoY Targets (Core Orchestration)</h2>
+  <div class="table-subtitle">Leadership-defined targets. ML initiatives here contribute directly to the outcome, so they are excluded from the completion rate and measured on metric actuals instead.</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:26%">Target</th>
+        <th class="right">Baseline</th>
+        <th class="right">Target (EoY)</th>
+        <th class="right">Actual (Δ WoW)</th>
+        <th class="center">Trend</th>
+        <th class="center" style="width:16%">Progress to Target</th>
+        <th class="center">Status</th>
+      </tr>
+    </thead>
+    <tbody id="sharedBody"></tbody>
+  </table>
+</div>
+
+<div class="guardrail-card" id="guardrailCard">
+  <strong>Quality guardrail (OKR1):</strong> % Bad held at or below the V3 GA baseline — global, and no top intent above its floor.
+  <span class="tbd">Baseline TBD: to be set ~end-July with a frozen judge, measured over 2–3 stable weeks after 100% GA.</span><br>
+  <strong>Partner guardrails we inherit:</strong> C&amp;T — no CSAT or latency regression on skill-handled tickets · Support Orch — no merchant-satisfaction regression on tickets using skills or actions.
+</div>
+
 <div class="drivers-card">
   <h2>This Week's Drivers</h2>
   <div class="subtitle">What moved the metrics this week</div>
@@ -455,15 +534,32 @@
 </div>
 
 <div class="initiatives-card">
-  <h2>Initiative Breakdown by Partner Team</h2>
+  <h2>Initiative Breakdown</h2>
   <div id="initiativesList"></div>
+</div>
+
+<div class="watch-card">
+  <h2>Watch List — Not Committed, Could Enter the Tracker</h2>
+  <div class="subtitle">Potential ML asks surfaced in partner roadmaps or pending decisions. None carry SWAG in the completion rate today.</div>
+  <ul>
+    <li><strong>Opportunities / Gaia infra:</strong> decision (Jul 1) is to reuse the existing Gaps &amp; Conflicts infra as-is as a Gaia input, monitor, maybe sunset. No committed ML work. Possible future asks: MLA conflict-quality fixes (30% pass rate in QA) and the unsized MLE reliability/migration spec.</li>
+    <li><strong>SA V3 post-release prompt tuning (10–15 SWAG):</strong> SA flags the budget owner as unclear (squad SWE vs ML). To settle with Manu.</li>
+    <li><strong>C&amp;T copilot asks:</strong> M2 proactive optimization and Simulate (shopper-simulator quality, LLM judges) both name ML help; C&amp;T's roadmap notes "no dedicated MLA for copilot" while Evoli stabilises. Revisit at next check-in.</li>
+    <li><strong>Persist skill across changing intent (Support Orch, Sept):</strong> listed as MLA assist via C&amp;T; not in ML committed capacity.</li>
+    <li><strong>Runtime guardrails (PII / internal reasoning before send):</strong> unowned; owner candidate is C&amp;T or ML.</li>
+    <li><strong>Post-training go/no-go (end of Q3):</strong> if "go", the Q4 build would reshape MLE capacity and the Q4 tracker mix.</li>
+  </ul>
 </div>
 
 <footer>
   <div id="lastUpdated"></div>
   <div style="margin-top:6px;">
-    Dashboards:
-    <a href="https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week" target="_blank">Sales Orch OKRs</a>
+    Sources:
+    <a href="https://www.notion.so/gorgias/2026-AI-Agent-Conv-XP-Machine-Learning-Roadmap-2b61ae2178f580ab815cc4ec5e26d41a" target="_blank">ML Roadmap</a> ·
+    <a href="https://app.notion.com/p/gorgias/2026-Conv-XP-Coaching-Trust-Roadmap-2a31ae2178f580d481acd96363de8ebf#95565e6a0e7447c8b9b9744b8b0db1d2" target="_blank">C&amp;T NSM</a> ·
+    <a href="https://app.notion.com/p/gorgias/2026-Conv-XP-Shopping-Assistant-Roadmap-2af1ae2178f5802b8158ee1fab4422f8#e4d613cbe55146828d655573798f58f6" target="_blank">SA KRs</a> ·
+    <a href="https://app.notion.com/p/gorgias/2026-Conv-XP-Support-Orchestration-Roadmap-2c61ae2178f58064aff1f503697423d2#3901ae2178f58005b9d5ce1a0d79001a" target="_blank">Support Orch OKR</a> ·
+    <a href="https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week" target="_blank">SA Metabase</a>
   </div>
 </footer>
 
@@ -474,116 +570,153 @@
 // ════════════════════════════════════════════════════════════════
 
 const QUARTER = {
-  name: "Q2 2026",
-  start: new Date("2026-04-06"),  // First working week
-  end: new Date("2026-06-26"),    // Last working week
-  weeks: 12,
+  name: "H2 2026",
+  start: new Date("2026-07-01"),  // Q3 start
+  end: new Date("2026-12-18"),    // Last full working week of 2026
+  weeks: 24,
   completionTarget: 0.80
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-06-25";
+const LAST_UPDATED = "2026-07-02";
 
 const TEAMS = [
   {
-    name: "Sales Orch: Discovery→Cart",
-    color: "#3b82f6",
-    swag: 65,
-    metric: "Discovery to add-to-cart ratio",
-    baseline: 0.9,
-    target: 1.8,
-    format: "percent",
-    dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
-    history: [
-      { date: "2026-04-10", value: 1.2 },
-      { date: "2026-04-16", value: 1.2 },
-      { date: "2026-04-23", value: 1.1 },
-      { date: "2026-04-26", value: 1.2 },
-      { date: "2026-05-07", value: 1.0 },
-      { date: "2026-05-14", value: 1.0 },
-      { date: "2026-05-21", value: 1.0 },
-      { date: "2026-05-28", value: 1.2 },
-      { date: "2026-06-04", value: 1.1 },
-      { date: "2026-06-11", value: 1.3 },
-      { date: "2026-06-18", value: 1.3 },
-      { date: "2026-06-25", value: 1.3 }   // ← APPEND NEW ENTRY WEEKLY
-    ],
-    currentDriver: "Held at 1.3% (±0 WoW) for a third straight week, sustaining the quarter high. Email-channel SA was the week's push: the last two product intents (product order, product customization) cleared Monday June 22, and the email judge was rebuilt on product URLs (replacing product cards) with no regression on the default agent. Non-regression evals ran June 24, with full SA capability — including discount-code generation — going live Thursday June 25. On v3 vs v2, SA now shares products in 65% of tickets vs 52% on v2, confirmed as relevant rather than over-recommendation. 150 merchants were added to the Shopping Assistant rollout Monday June 22 as part of the regular cadence; the discount-intent offline eval completed and merged, with gating on discount instructions added.",
-    initiatives: [
-      { name: "Product rec via metadata-aware pipeline", swag: 30, squad: "MLE" },
-      { name: "Product rec improvements (post release)", swag: 35, squad: "MLE" }
-    ]
-  },
-  {
-    name: "Sales Orch: SA Engagement",
-    color: "#6366f1",
-    swag: 15,
-    metric: "Share of visitors with meaningful SA conversation",
-    baseline: 0.4,
-    target: 1.0,
-    format: "percent",
-    dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
-    history: [
-      { date: "2026-04-10", value: 0.25 },
-      { date: "2026-04-16", value: 0.26 },
-      { date: "2026-04-23", value: 0.25 },
-      { date: "2026-04-29", value: 0.25 },
-      { date: "2026-05-07", value: 0.25 },
-      { date: "2026-05-14", value: 0.24 },
-      { date: "2026-05-21", value: 0.23 },
-      { date: "2026-05-28", value: 0.23 },
-      { date: "2026-06-04", value: 0.23 },
-      { date: "2026-06-11", value: 0.23 },
-      { date: "2026-06-18", value: 0.25 },
-      { date: "2026-06-25", value: 0.23 }   // ← APPEND NEW ENTRY WEEKLY
-    ],
-    currentDriver: "Slipped back to 0.23% (-0.02pp WoW), giving back last week's uptick and returning to the bottom of the band that held through May and June — still far from the 0.4→1.0% target. The primary near-term lever is a v3 A/B test launching Thursday June 26, testing skill-sticking via Evoli against the current get-knowledge approach; the skills release is green-lit by Felipe, with cohort prep happening this week and the release handled by Arias. Prior levers carry over: SPQ surfaces expanding to home and collection pages, and ads-to-messaging scoped (a Meta ad click routing to a merchant PDP with chat, PDP-in-chat being merchant-preferred), motivated by Google ad click-through down ~60% from AI overviews.",
-    initiatives: [
-      { name: "Continuously improve conversation starters", swag: 15, squad: "MLE" }
-    ]
-  },
-  {
     name: "Coaching & Trust",
     color: "#f59e0b",
-    swag: 35,
-    metric: "Intents success rate w/ guidance (+7pts)",
-    baseline: null,       // ← UPDATE when A/B test baseline is available
-    target: null,         // ← Will be baseline + 7
-    targetDelta: 7,       // +7 percentage points
-    format: "points",
-    history: [],          // ← No data yet; append when baseline lands
-    currentDriver: "This week's signal came from the Varun/Romain 1:1: ML's role in coaching & trust / self-testing is confirmed as support mode, not lead — Gaïa owns the simulator side — and no bandwidth is being blocked for skills without a confirmed need. Key risk flagged: GPT-4o mini follows guidance less reliably than v3 (raised by Firas), with mitigation being explored via prompt reinforcement. Carried over: the longer-term fix is Gaia, a self-correcting loop that pulls traces from PromptLayer and auto-proposes guidance changes, planned for next quarter with Felipe; Q3 focus is synthetic scenario generation for merchant simulation (simulate → estimate → validate).",
+    swag: 25,
+    metric: "% of AI Agent interactions involving a Skill",
+    note: "Provisional 36% — C&T locks the final target mid-July (floor 18% · stretch 49%). End-Q3 waypoint: 15–18%.",
+    baseline: 0.07,
+    target: 36,
+    format: "percent",
+    dashboardUrl: "https://app.notion.com/p/gorgias/2026-Conv-XP-Coaching-Trust-Roadmap-2a31ae2178f580d481acd96363de8ebf#95565e6a0e7447c8b9b9744b8b0db1d2",
+    history: [
+      { date: "2026-07-01", value: 0.07 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "H2 kickoff. C&T's north star is an activation metric: skill-involved interactions ÷ all AI-handled interactions. Baseline ~0.07% (≈1.4% of traffic on Skills × ~5% involvement), ~1 week into a rollout reaching ~36 merchants. Q3 = adoption via the mandatory wizard, Q4 = depth via Gaia. ML's committed levers: V3 reasoning-quality prompt fixes against post-GA failure modes, and Skills framework iteration (knowledge-in-knowledge, skill-in-skill). Final target locks mid-July once batch 1 crosses ~30 days tenure.",
     initiatives: [
-      { name: "Opportunity generation pipeline — migration/retirement", swag: 15, squad: "MLE" },
-      { name: "Coaching Agent eval infra — simulation environment", swag: 20, squad: "MLE" }
+      { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA" },
+      { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA" }
     ]
   },
   {
-    name: "Internal / V3 Release",
+    name: "Shopping Assistant: Engagement",
+    color: "#6366f1",
+    swag: 50,
+    metric: "Share of visitors having a conversation with SA (sessions → conversation)",
+    baseline: 0.12,
+    target: 0.3,
+    format: "percent",
+    dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
+    history: [
+      { date: "2026-07-01", value: 0.12 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "H2 kickoff. SA's KR2: conversation rate 0.12% → 0.3% (~2.5×), which their own roadmap calls ambitious for a 3-month window. Thesis: grow volume so RPV uplift can be proven with stat-sig A/B tests. ML's committed levers: discovery triggers / quiz-to-skill, and product-review storage & retrieval (vector-DB decision; work starts early August, paired with the MLA review-summary spec shaping for Q4).",
+    initiatives: [
+      { name: "Discovery triggers / quiz-to-skill", swag: 20, squad: "MLA" },
+      { name: "Product-review summaries — storage & retrieval (vector DB)", swag: 30, squad: "MLE" }
+    ]
+  },
+  {
+    name: "Shopping Assistant: Latency",
+    color: "#3b82f6",
+    swag: 30,
+    metric: "SA P75 latency (V3)",
+    note: "8s = SA's EoH2 objective; their Q3 KR is −3s. ML's Q3 spec commits P75 ≤ 10s as the waypoint.",
+    baseline: null,       // ← UPDATE with first post-GA P75 reading from Metabase
+    target: 8,
+    format: "seconds",
+    lowerIsBetter: true,
+    dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
+    history: [],          // ← Append when baseline lands
+    currentDriver: "H2 kickoff. Latency is SA's #1 KR — the patience threshold is far lower for shopping than support, and P75 is still well above the 8s objective. ML's committed lever: bring the SA sub-agent to P75 ≤ 10s this quarter (per-step latency analysis with Core Orch, semantic-cache candidates). Baseline pending the first clean post-GA P75 reading.",
+    initiatives: [
+      { name: "Bring SA sub-agent latency to P75 ≤ 10s", swag: 30, squad: "MLA" }
+    ]
+  },
+  {
+    name: "Support Orchestration",
+    color: "#14b8a6",
+    swag: 20,
+    metric: "Support Success Rate",
+    baseline: 32,
+    target: 40,
+    format: "points",
+    dashboardUrl: "https://app.notion.com/p/gorgias/2026-Conv-XP-Support-Orchestration-Roadmap-2c61ae2178f58064aff1f503697423d2#3901ae2178f58005b9d5ce1a0d79001a",
+    history: [
+      { date: "2026-07-01", value: 32 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "H2 kickoff. Support Orch targets SR 32% → 40% by EoH2; their bridge assumes ~7pp from full V3 adoption and ~2pp from Skills as the structural baseline (early V3 numbers: ~38% SR on support merchants vs ~30% pre-V3). ML's committed lever: AI Vision Path 1 — GPT 5.4 native vision on damaged-item / missing-package, graduating the Q3 PoC to production if it clears the eval bar.",
+    initiatives: [
+      { name: "AI Vision Path 1 — damaged item / missing package (GPT 5.4 native vision)", swag: 20, squad: "MLA" }
+    ]
+  },
+  {
+    name: "Internal / V3 Post-GA",
     color: "#10b981",
-    swag: 335,
-    metric: "Linear progression through quarter",
+    swag: 55,
+    metric: "Linear progression through H2",
+    note: "Housekeeping to keep V3 healthy post-GA. Not tied to a partner metric; tracked as delivery progression.",
     baseline: 0,
     target: 100,
-    actual: "auto",       // Auto-computed from quarter elapsed
+    actual: "auto",       // Auto-computed from period elapsed
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "V3 is now on 40% of accounts (~35% of ticket volume), with support success at 29% blended (v2/v3) rising to 35% on fully-migrated beta accounts. Latency is the main blocker to GA: p50 at 12.41s and p95 at 14.25s, up ~2s WoW driven by SA (root cause unclear when products are recommended). Five engineers are focused on cost/latency until GA — Kamala & Minoche on cost/latency, Pierre & Samy finishing compaction then gating order tools, Mohamed on the email prompt (targeting Monday June 29). Compaction is live on 20% of beta-1 accounts with thresholds adjusted (trigger rate now much higher). V3 is not yet visible to merchants. Cost target stays 26¢ → 10¢ per automated interaction (V3 as baseline). The Thursday Paris demo (Gorgias Connect) was flagged as a latency risk for the SA demo at 13–15s. Carried over: intent-based model router confirmed as the Q3 quick win, and the overlapping-intent misclassification risk (e.g. order-cancel vs cancel/refund) with a proposed 'global intention' layer above per-turn intent.",
+    currentDriver: "H2 kickoff. Post-GA housekeeping bucket: enable the SMS use case on V3, migrate v2 offline-eval scenarios so evals keep running on V3, replace gemini-2.5-flash ahead of its October 2026 shutdown (hard deadline), make the retrain-or-monitor call on the Intent & Spam models once LLM-based monitoring is live, and run the LLM stack review & consolidation (gateway, eval framework, prompt registry) with testing of shortlisted options.",
     initiatives: [
-      { name: "Support V3 release — eval infra for MLAs", swag: 30, squad: "MLE" },
-      { name: "Support new architecture (Evoli V3)", swag: 25, squad: "MLE" },
-      { name: "Build Qualify & QA step classifiers", swag: 20, squad: "MLE" },
-      { name: "Identify and migrate to PromptLayer alternative", swag: 15, squad: "MLE" },
-      { name: "Intent system refactoring — /predict endpoint + intents table", swag: 5, squad: "MLE" },
-      { name: "Other internal (Harness migration, Structured output)", swag: 15, squad: "MLE" },
-      { name: "MLA full-time V3 release (5 MLAs)", swag: 225, squad: "MLA" }
+      { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA" },
+      { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA" },
+      { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown", swag: 10, squad: "MLA" },
+      { name: "Intent & Spam model assessment — retrain-or-monitor call", swag: 10, squad: "MLE" },
+      { name: "LLM stack review & consolidation (gateway, eval framework, prompt registry)", swag: 15, squad: "MLA" }
     ]
   }
 ];
 
+// Cost & latency: shared EoY targets with Core Orchestration.
+// Deliberately OUTSIDE the completion rate — these initiatives drive the
+// outcome directly, so we measure the metric, not delivery progress.
+const SHARED_TARGETS = [
+  {
+    name: "Cost per automated interaction",
+    color: "#8b5cf6",
+    baseline: 0.26,
+    target: 0.10,
+    format: "dollar",
+    lowerIsBetter: true,
+    history: [
+      { date: "2026-07-01", value: 0.26 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "H2 kickoff at the V3 GA baseline of ~26¢ per automated interaction, against the ≤$0.10 EoY leadership target. Committed levers: default_agent cost reduction (history compaction, tool-output trimming, GPT 5.4-mini evaluation), the conversation_ended & QA classifiers (projected $120–180K/yr net savings at full rollout), and shipping the refactored email prompt to match chat. The post-training R&D track (fine-tuned open-source models for simpler intents) is the longer-horizon lever — Q3 is survey + ROI only.",
+    initiatives: [
+      { name: "Reduce V3 default_agent cost — compaction, tool-output trimming, GPT 5.4-mini eval", swag: 40, squad: "MLA" },
+      { name: "conversation_ended & QA classifiers — train, evaluate, deploy", swag: 15, squad: "MLE" },
+      { name: "Ship refactored email prompt for V3 (matching chat)", swag: 5, squad: "MLA" }
+    ]
+  },
+  {
+    name: "P75 chat latency (Sales & Support)",
+    color: "#0ea5e9",
+    baseline: null,       // ← UPDATE with first post-GA P75 reading (late-June refs: p50 12.4s / p95 14.3s)
+    target: 10,
+    format: "seconds",
+    lowerIsBetter: true,
+    history: [],          // ← Append when baseline lands
+    currentDriver: "Sub-10s P75 is the leadership target shared with Core Orchestration. Baseline pending the first clean post-GA P75 reading (late-June references: p50 12.4s, p95 14.3s). Main ML levers run through the cost workstream (compaction, smaller models); the SA-specific latency work is tracked in the partner table above to avoid double counting.",
+    initiatives: []
+  }
+];
+
+// R&D — on the roadmap, deliberately NOT OKR-tracked (decision of Jun 22).
+const RND = [
+  { name: "Shopper Scoring Engine — lifecycle stage & buying intent (with AI Journey)", swag: 60, squad: "MLE" },
+  { name: "Post-training evaluation — move agent behaviour out of the system prompt; Q3 = SOTA survey + ROI, go/no-go for Q4 build", swag: 120, squad: "MLE" }
+];
+
 // Hydrate `actual` from latest history entry so downstream code is unchanged.
-TEAMS.forEach(team => {
+[...TEAMS, ...SHARED_TARGETS].forEach(team => {
   if (team.isInternal) return; // Internal uses "auto"
   if (team.history && team.history.length > 0) {
     team.actual = team.history[team.history.length - 1].value;
@@ -607,9 +740,11 @@ function getCurrentWeek() {
   const now = new Date();
   const elapsed = Math.max(0, now - QUARTER.start);
   const days = elapsed / (1000 * 60 * 60 * 24);
-  return Math.min(Math.ceil(days / 7), QUARTER.weeks);
+  return Math.min(Math.max(1, Math.ceil(days / 7)), QUARTER.weeks);
 }
 
+// Works for both directions: for lower-is-better metrics baseline > target,
+// so the denominator is negative and progress rises as the actual falls.
 function computeOKRProgress(team) {
   if (team.isInternal && team.actual === "auto") {
     return getQuarterElapsed() * 100;
@@ -658,28 +793,37 @@ function formatValue(value, format) {
     case "percent": return Number(value).toFixed(2) + "%";
     case "points": return Number(value).toFixed(1) + "%";
     case "percentLinear": return Number(value).toFixed(1) + "%";
+    case "seconds": return Number(value).toFixed(1) + "s";
     default: return String(value);
   }
 }
 
 function formatDelta(delta, format) {
   if (delta === null || delta === undefined) return null;
-  const sign = delta > 0 ? "+" : (delta < 0 ? "" : "±");
+  const sign = delta > 0 ? "+" : (delta < 0 ? "-" : "±");
   const abs = Math.abs(delta);
   let num;
   if (format === "percent") num = abs.toFixed(2) + "pt";
   else if (format === "points" || format === "percentLinear") num = abs.toFixed(1) + "pt";
+  else if (format === "seconds") num = abs.toFixed(1) + "s";
   else num = abs.toFixed(2);
-  return sign + (delta === 0 ? num : (delta > 0 ? num : "-" + num));
+  return sign + num;
+}
+
+// Direction-aware delta styling: for lower-is-better metrics a drop is good.
+function deltaClass(delta, team) {
+  if (delta === 0) return "flat";
+  const improving = team.lowerIsBetter ? delta < 0 : delta > 0;
+  return improving ? "positive" : "negative";
 }
 
 function getStatusInfo(progress, team) {
   if (progress === null) return { label: "TBD", cls: "gray" };
   // Internal initiatives track linearly — always on pace by design
   if (team && team.isInternal) return { label: "On Track", cls: "green" };
-  // For partner metrics, compare progress against expected pace
+  // Grace period: first ~week of the half, before pace comparison is meaningful
   const quarterElapsed = getQuarterElapsed();
-  if (quarterElapsed === 0) return { label: "Starting", cls: "gray" };
+  if (quarterElapsed < 0.04) return { label: "Starting", cls: "gray" };
   const expectedProgress = quarterElapsed * 100;
   const paceRatio = progress / expectedProgress;
   if (paceRatio >= 0.8) return { label: "On Track", cls: "green" };
@@ -744,14 +888,14 @@ function render() {
 
   // Header
   document.getElementById("weekBadge").textContent =
-    `Week ${currentWeek} of ${QUARTER.weeks} · ${(quarterElapsed * 100).toFixed(0)}% of quarter elapsed`;
+    `Week ${currentWeek} of ${QUARTER.weeks} · ${(quarterElapsed * 100).toFixed(0)}% of H2 elapsed`;
   document.getElementById("quarterProgress").textContent =
     (quarterElapsed * 100).toFixed(0) + "%";
   document.getElementById("quarterDates").textContent =
     `${QUARTER.start.toLocaleDateString('en-US', {month:'short', day:'numeric'})} — ${QUARTER.end.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'})}`;
   document.getElementById("quarterBar").style.width = (quarterElapsed * 100) + "%";
 
-  // Table
+  // Partner table
   const tbody = document.getElementById("tableBody");
   tbody.innerHTML = "";
   let totalContribution = 0;
@@ -778,21 +922,9 @@ function render() {
     const delta = getWoWDelta(team);
     let deltaHtml = "";
     if (delta !== null) {
-      const cls = delta > 0 ? "positive" : (delta < 0 ? "negative" : "flat");
-      deltaHtml = `<span class="wow-delta ${cls}">${formatDelta(delta, team.format)} WoW</span>`;
+      deltaHtml = `<span class="wow-delta ${deltaClass(delta, team)}">${formatDelta(delta, team.format)} WoW</span>`;
     } else if (!team.isInternal && team.history && team.history.length === 1) {
       deltaHtml = `<span class="wow-delta flat">first reading</span>`;
-    }
-
-    // Baseline display for Coaching (with delta)
-    let baselineDisplay = formatValue(team.baseline, team.format);
-    let targetDisplay;
-    if (team.targetDelta && team.baseline === null) {
-      targetDisplay = '<span class="tbd">TBD + 7pts</span>';
-    } else if (team.targetDelta && team.baseline !== null) {
-      targetDisplay = formatValue(team.baseline + team.targetDelta, team.format);
-    } else {
-      targetDisplay = formatValue(team.target, team.format);
     }
 
     const progressPct = progress !== null ? Math.max(0, Math.min(progress, 100)) : 0;
@@ -809,12 +941,13 @@ function render() {
       </td>
       <td>
         <div class="metric-name">${team.metric}</div>
-        ${team.dashboardUrl ? `<a class="metric-link" href="${team.dashboardUrl}" target="_blank">Dashboard ↗</a>` : ''}
+        ${team.note ? `<div class="metric-note">${team.note}</div>` : ''}
+        ${team.dashboardUrl ? `<a class="metric-link" href="${team.dashboardUrl}" target="_blank">Source ↗</a>` : ''}
       </td>
       <td class="right mono">${team.swag}</td>
       <td class="right mono">${(weight * 100).toFixed(1)}%</td>
-      <td class="right mono">${baselineDisplay}</td>
-      <td class="right mono">${targetDisplay}</td>
+      <td class="right mono">${formatValue(team.baseline, team.format)}</td>
+      <td class="right mono">${formatValue(team.target, team.format)}</td>
       <td class="right mono">
         <span class="actual-value">${actualDisplay}</span>
         ${deltaHtml}
@@ -874,10 +1007,59 @@ function render() {
     }
   }
 
-  // Drivers card
+  // Shared cost & latency table
+  const sharedBody = document.getElementById("sharedBody");
+  sharedBody.innerHTML = "";
+  SHARED_TARGETS.forEach(item => {
+    const progress = computeOKRProgress(item);
+    const status = getStatusInfo(progress, item);
+    const delta = getWoWDelta(item);
+    let deltaHtml = "";
+    if (delta !== null) {
+      deltaHtml = `<span class="wow-delta ${deltaClass(delta, item)}">${formatDelta(delta, item.format)} WoW</span>`;
+    } else if (item.history && item.history.length === 1) {
+      deltaHtml = `<span class="wow-delta flat">first reading</span>`;
+    }
+    const progressPct = progress !== null ? Math.max(0, Math.min(progress, 100)) : 0;
+    const statusToColor = { green: "var(--green)", yellow: "var(--yellow)", red: "var(--red)", gray: "var(--gray)" };
+    const progressColor = statusToColor[status.cls] || "var(--gray)";
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>
+        <div class="team-name">
+          <span class="team-dot" style="background:${item.color}"></span>
+          ${item.name}
+        </div>
+      </td>
+      <td class="right mono">${formatValue(item.baseline, item.format)}</td>
+      <td class="right mono">${formatValue(item.target, item.format)}</td>
+      <td class="right mono">
+        <span class="actual-value">${formatValue(item.actual, item.format)}</span>
+        ${deltaHtml}
+      </td>
+      <td class="sparkline-cell">${renderSparkline(item, item.color)}</td>
+      <td>
+        <div class="progress-cell">
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width:${progressPct}%; background:${progressColor}"></div>
+          </div>
+          <span class="progress-value" style="color:${progressColor}">
+            ${progress !== null ? progress.toFixed(1) + '%' : '<span class="tbd">TBD</span>'}
+          </span>
+        </div>
+      </td>
+      <td class="center">
+        <span class="status-pill ${status.cls}">${status.label}</span>
+      </td>
+    `;
+    sharedBody.appendChild(tr);
+  });
+
+  // Drivers card (partner rows + shared targets)
   const driversDiv = document.getElementById("driversList");
   driversDiv.innerHTML = "";
-  TEAMS.forEach(team => {
+  [...TEAMS, ...SHARED_TARGETS].forEach(team => {
     const item = document.createElement("div");
     item.className = "driver-item";
     const hasDriver = team.currentDriver && team.currentDriver.trim().length > 0;
@@ -893,20 +1075,21 @@ function render() {
     driversDiv.appendChild(item);
   });
 
-  // Initiatives breakdown
+  // Initiatives breakdown: partner groups, then cost/latency, then R&D
   const initDiv = document.getElementById("initiativesList");
   initDiv.innerHTML = "";
-  TEAMS.forEach(team => {
+
+  function addGroup(label, color, swagLabel, initiatives) {
     const group = document.createElement("div");
     group.className = "initiative-group";
     group.innerHTML = `
       <h3>
-        <span class="team-dot" style="background:${team.color}"></span>
-        ${team.name}
-        <span style="font-weight:400; color:var(--text-secondary); font-size:13px;">(${team.swag} SWAG)</span>
+        <span class="team-dot" style="background:${color}"></span>
+        ${label}
+        <span style="font-weight:400; color:var(--text-secondary); font-size:13px;">(${swagLabel})</span>
       </h3>
     `;
-    team.initiatives.forEach(init => {
+    initiatives.forEach(init => {
       const item = document.createElement("div");
       item.className = "initiative-item";
       item.innerHTML = `
@@ -916,7 +1099,16 @@ function render() {
       group.appendChild(item);
     });
     initDiv.appendChild(group);
+  }
+
+  TEAMS.forEach(team => addGroup(team.name, team.color, `${team.swag} SWAG · in completion rate`, team.initiatives));
+  SHARED_TARGETS.forEach(item => {
+    if (item.initiatives.length > 0) {
+      const swag = item.initiatives.reduce((s, i) => s + i.swag, 0);
+      addGroup(item.name, item.color, `${swag} SWAG · excluded from completion rate`, item.initiatives);
+    }
   });
+  addGroup("R&D — not OKR-tracked (Jun 22 decision)", "#94a3b8", `${RND.reduce((s, i) => s + i.swag, 0)} SWAG · excluded from completion rate`, RND);
 
   // Footer
   const lastUpdatedDate = new Date(LAST_UPDATED + "T00:00:00");
