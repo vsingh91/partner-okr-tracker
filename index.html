@@ -658,7 +658,7 @@ const TEAMS = [
   {
     name: "Shopping Assistant: Engagement",
     color: "#6366f1",
-    swag: 50,
+    swag: 20,
     metric: "Share of visitors having a conversation with SA (sessions → conversation)",
     baseline: 0.12,
     target: 0.3,
@@ -668,10 +668,28 @@ const TEAMS = [
     history: [
       { date: "2026-07-01", value: 0.12 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "H2 kickoff. SA's KR2: conversation rate 0.12% → 0.3% (~2.5×), which their own roadmap calls ambitious for a 3-month window. Thesis: grow volume so RPV uplift can be proven with stat-sig A/B tests. ML's committed levers: discovery triggers / quiz-to-skill, and product-review storage & retrieval (vector-DB decision; work starts early August, paired with the MLA review-summary spec shaping for Q4).",
+    currentDriver: "H2 kickoff. SA's KR2: conversation rate 0.12% → 0.3% (~2.5×), which their own roadmap calls ambitious for a 3-month window. Thesis: grow volume so RPV uplift can be proven with stat-sig A/B tests. ML's committed lever on this KR: discovery triggers / quiz-to-skill, bringing more visitors into SA conversations from that entrypoint.",
     initiatives: [
-      { name: "Product-review summaries — storage & retrieval (vector DB); starts early Aug", swag: 30, squad: "MLE", status: "Not started" },
       { name: "Discovery triggers / quiz-to-skill", swag: 20, squad: "MLA", status: "Not started" }
+    ]
+  },
+  {
+    name: "Shopping Assistant: Conversion",
+    color: "#ec4899",
+    swag: 30,
+    metric: "Conversion rate within SA meaningful conversations (conversation → order)",
+    note: "Supporting signals per SA: buy rate (purchase within 3 days) + in-ticket merchant feedback.",
+    baseline: 1.3,
+    target: 2,
+    waypoint: { value: 2, label: "SA frames 2% as the Q3 KR" },
+    format: "percent",
+    dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
+    history: [
+      { date: "2026-07-01", value: 1.3 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "H2 kickoff. SA's KR3: conversion within meaningful conversations 1.3% → 2%. ML's committed lever: product-review storage & retrieval (vector-DB decision; work starts early August, paired with the MLA review-summary spec shaping for Q4) — reviews at runtime improve product answers and social proof inside the conversation, driving conversation → order rather than new conversations.",
+    initiatives: [
+      { name: "Product-review summaries — storage & retrieval (vector DB); starts early Aug", swag: 30, squad: "MLE", status: "Not started" }
     ]
   },
   {
