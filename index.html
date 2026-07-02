@@ -468,7 +468,7 @@
   <h1>H2 2026 — ML OKR &amp; Metrics Tracker</h1>
   <div class="okr-statement">
     OKR1: Deliver on ≥80% of partner team objectives, weighted by ML investment (SWAG allocation)<br>
-    Shared targets with Core Orchestration (tracked separately below): cost per automated interaction ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 chat latency ≤ 10s (support + sales) by EoQ3, held through EoY
+    Shared targets with Core Orchestration (tracked separately below): cost per automated interaction ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 chat latency ≤ 10s (support + sales) by EoQ3, held through EoY · median chat latency ≤ 6s by EoY
   </div>
   <div class="week-badge" id="weekBadge"></div>
   <div class="week-badge" id="lastUpdatedBadge" style="margin-left:8px;"></div>
@@ -542,7 +542,7 @@
 
 <div class="table-card">
   <h2>Cost &amp; Latency — Shared Targets (Core Orchestration)</h2>
-  <div class="table-subtitle">Leadership-defined: Q3 waypoint ≤ $0.15 / ≤ 10s P75 (support + sales combined), EoY ≤ $0.10 / ≤ 10s held. ML initiatives here drive the outcome directly, so they are excluded from the completion rate and measured on metric actuals. Nested rows = committed ML levers.</div>
+  <div class="table-subtitle">Leadership-defined: cost ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 latency ≤ 10s (support + sales combined) by EoQ3, held · median latency ≤ 6s by EoY. ML initiatives here drive the outcome directly, so they are excluded from the completion rate and measured on metric actuals. Nested rows = committed ML levers.</div>
   <div class="table-wrap">
   <table>
     <thead>
@@ -757,6 +757,17 @@ const SHARED_TARGETS = [
     lowerIsBetter: true,
     history: [],          // ← Append when baseline lands
     currentDriver: "≤ 10s P75 on support + sales tickets combined is both the Q3 target and the EoY hold, shared with Core Orchestration. Baseline pending the first clean post-GA P75 reading (late-June references: p50 12.4s, p95 14.3s). Main ML levers run through the cost workstream (compaction, smaller models); the SA-specific latency work is tracked in the partner table above to avoid double counting.",
+    initiatives: []
+  },
+  {
+    name: "Median chat latency",
+    color: "#06b6d4",
+    baseline: null,       // ← UPDATE with first clean H2 p50 reading (late-June V3 reference: p50 12.4s)
+    target: 6,
+    format: "seconds",
+    lowerIsBetter: true,
+    history: [],          // ← Append when baseline lands
+    currentDriver: "≤ 6s median (p50) chat latency by EoY. No Q3 waypoint defined; paced linearly across H2. Baseline pending the first clean H2 reading (late-June V3 reference: p50 12.4s). Same levers as cost and P75: history compaction, tool-output trimming, smaller models per intent.",
     initiatives: []
   }
 ];
