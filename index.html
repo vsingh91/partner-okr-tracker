@@ -474,6 +474,27 @@
   <div class="week-badge" id="lastUpdatedBadge" style="margin-left:8px;"></div>
 </header>
 
+<div class="table-card">
+  <h2>Cost &amp; Latency — Shared Targets (Core Orchestration)</h2>
+  <div class="table-subtitle">Leadership-defined: cost ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 latency ≤ 10s (support + sales combined) by EoQ3, held · median latency ≤ 6s by EoY. ML initiatives here drive the outcome directly, so they are excluded from the completion rate below and measured on metric actuals. Nested rows = committed ML levers.</div>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:26%">Target</th>
+        <th class="right">Baseline</th>
+        <th class="right">Target</th>
+        <th class="right">Actual (Δ WoW)</th>
+        <th class="center">Trend</th>
+        <th class="center" style="width:16%">Progress to Target</th>
+        <th class="center">Status</th>
+      </tr>
+    </thead>
+    <tbody id="sharedBody"></tbody>
+  </table>
+  </div>
+</div>
+
 <div class="summary-row">
   <div class="summary-card">
     <div class="label">Weighted Completion Rate</div>
@@ -536,27 +557,6 @@
         <td class="right" id="totalContribution"></td>
       </tr>
     </tfoot>
-  </table>
-  </div>
-</div>
-
-<div class="table-card">
-  <h2>Cost &amp; Latency — Shared Targets (Core Orchestration)</h2>
-  <div class="table-subtitle">Leadership-defined: cost ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 latency ≤ 10s (support + sales combined) by EoQ3, held · median latency ≤ 6s by EoY. ML initiatives here drive the outcome directly, so they are excluded from the completion rate and measured on metric actuals. Nested rows = committed ML levers.</div>
-  <div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th style="width:26%">Target</th>
-        <th class="right">Baseline</th>
-        <th class="right">Target</th>
-        <th class="right">Actual (Δ WoW)</th>
-        <th class="center">Trend</th>
-        <th class="center" style="width:16%">Progress to Target</th>
-        <th class="center">Status</th>
-      </tr>
-    </thead>
-    <tbody id="sharedBody"></tbody>
   </table>
   </div>
 </div>
@@ -629,7 +629,7 @@ const TEAMS = [
   {
     name: "Coaching & Trust",
     color: "#f59e0b",
-    swag: 25,
+    swag: 15,
     metric: "% of AI Agent interactions involving a Skill",
     note: "Provisional 36% — C&T locks the final target mid-July (floor 18% · stretch 49%).",
     baseline: 0.07,
@@ -640,9 +640,8 @@ const TEAMS = [
     history: [
       { date: "2026-07-01", value: 0.07 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "H2 kickoff. C&T's north star is an activation metric: skill-involved interactions ÷ all AI-handled interactions. Baseline ~0.07% (≈1.4% of traffic on Skills × ~5% involvement), ~1 week into a rollout reaching ~36 merchants. Q3 = adoption via the mandatory wizard, Q4 = depth via Gaia. ML's committed levers: V3 reasoning-quality prompt fixes against post-GA failure modes, and Skills framework iteration (knowledge-in-knowledge, skill-in-skill). Final target locks mid-July once batch 1 crosses ~30 days tenure.",
+    currentDriver: "H2 kickoff. C&T's north star is an activation metric: skill-involved interactions ÷ all AI-handled interactions. Baseline ~0.07% (≈1.4% of traffic on Skills × ~5% involvement), ~1 week into a rollout reaching ~36 merchants. Q3 = adoption via the mandatory wizard, Q4 = depth via Gaia. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill). Final target locks mid-July once batch 1 crosses ~30 days tenure.",
     initiatives: [
-      { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "Not started" },
       { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA", status: "Not started" }
     ]
   },
@@ -704,7 +703,7 @@ const TEAMS = [
   {
     name: "Internal / V3 Post-GA",
     color: "#10b981",
-    swag: 55,
+    swag: 65,
     metric: "Linear progression through H2",
     note: "Housekeeping to keep V3 healthy post-GA. Not tied to a partner metric; tracked as delivery progression.",
     baseline: 0,
@@ -713,9 +712,10 @@ const TEAMS = [
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "H2 kickoff. Post-GA housekeeping bucket: enable the SMS use case on V3, migrate v2 offline-eval scenarios so evals keep running on V3, replace gemini-2.5-flash ahead of its October 2026 shutdown (hard deadline), make the retrain-or-monitor call on the Intent & Spam models once LLM-based monitoring is live, and run the LLM stack review & consolidation (gateway, eval framework, prompt registry) with testing of shortlisted options.",
+    currentDriver: "H2 kickoff. Post-GA housekeeping bucket: enable the SMS use case on V3, migrate v2 offline-eval scenarios so evals keep running on V3, replace gemini-2.5-flash ahead of its October 2026 shutdown (hard deadline), improve V3 reasoning quality with targeted prompt fixes against post-GA failure modes, make the retrain-or-monitor call on the Intent & Spam models once LLM-based monitoring is live, and run the LLM stack review & consolidation (gateway, eval framework, prompt registry) with testing of shortlisted options.",
     initiatives: [
       { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "Not started" },
+      { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "Not started" },
       { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "Not started" },
       { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown", swag: 10, squad: "MLA", status: "Not started" },
       { name: "Intent & Spam model assessment — retrain-or-monitor call", swag: 10, squad: "MLE", status: "Not started" },
