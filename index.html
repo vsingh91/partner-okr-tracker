@@ -572,9 +572,43 @@
 </div>
 
 <div class="guardrail-card" id="guardrailCard">
-  <strong>Quality guardrail (OKR1):</strong> % Bad held at or below the V3 GA baseline — global, and no top intent above its floor.
-  <span class="tbd">Baseline TBD: to be set ~end-July with a frozen judge, measured over 2–3 stable weeks after 100% GA.</span><br>
-  <strong>Partner guardrails we inherit:</strong> C&amp;T — no CSAT or latency regression on skill-handled tickets · Support Orch — no merchant-satisfaction regression on tickets using skills or actions.
+  <strong>Quality guardrail (OKR1):</strong> keep the V3 'bad' rating at or below the H2-start baseline, global, with no top intent above its floor. Reference baseline is the Jul 5 reading (85.0% quality rate, ~15% bad, 28-day rolling median across merchants with at least 5 ratings).
+  <table style="width:100%; border-collapse:collapse; margin:12px 0 6px; font-size:12.5px;">
+    <thead>
+      <tr>
+        <th style="text-align:left; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">V3 merchant feedback</th>
+        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Baseline · Jul 5</th>
+        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Last wk · Jul 6–10</th>
+        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">This wk · Jul 13–15</th>
+        <th style="text-align:center; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Quality rate (good+ok), rolling 28-day median</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">85.0%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~85.7%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">85.7–86.4%</td>
+        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small green">Flat to up</span></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Bad rate, rolling 28-day median</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~15%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~14%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~14%</td>
+        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small green">Within guardrail</span></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px; color:var(--text);">Bad rate, raw weekly aggregate</td>
+        <td class="mono" style="text-align:right; padding:7px 8px;">—</td>
+        <td class="mono" style="text-align:right; padding:7px 8px;">10.2%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px;">12.1%</td>
+        <td style="text-align:center; padding:7px 8px;"><span class="status-pill small yellow">Watch (+1.9pt)</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:11.5px; color:var(--gray); margin-bottom:10px; line-height:1.5;">The rolling median is smoothed over 28 days and merchant-level, so it moves slowly and has held in the 83–86% band all month, at or below the baseline bad rate. The raw weekly aggregate rose +1.9pt this week, but on a 3-day sample (Jul 13–15) against a 5-day week, so read it as a watch signal, not a regression. A frozen-judge baseline is still due end-July. Source: Cortex V3 merchant quality rate.</div>
+  <strong>Partner guardrails we inherit:</strong> C&amp;T, no CSAT or latency regression on skill-handled tickets. Support Orch, no merchant-satisfaction regression on tickets using skills or actions.
 </div>
 
 <div class="drivers-card">
@@ -631,7 +665,7 @@ const QUARTER = {
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-07-02";
+const LAST_UPDATED = "2026-07-16";
 
 // Initiative delivery status pills: "Not started" (gray), "In progress" (blue), "Shipped" (green)
 
@@ -648,11 +682,12 @@ const TEAMS = [
     format: "percent",
     dashboardUrl: "https://app.notion.com/p/gorgias/2026-Conv-XP-Coaching-Trust-Roadmap-2a31ae2178f580d481acd96363de8ebf#95565e6a0e7447c8b9b9744b8b0db1d2",
     history: [
-      { date: "2026-07-01", value: 0.07 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-01", value: 0.07 },
+      { date: "2026-07-10", value: 6.3 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "H2 kickoff. C&T's north star is an activation metric: skill-involved interactions ÷ all AI-handled interactions. Baseline ~0.07% (≈1.4% of traffic on Skills × ~5% involvement), ~1 week into a rollout reaching ~36 merchants. Q3 = adoption via the mandatory wizard, Q4 = depth via Gaia. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill). Final target locks mid-July once batch 1 crosses ~30 days tenure.",
+    currentDriver: "Skill involvement is climbing fast post-GA: 6.3% of AI interactions used a Skill (7-day rolling, Jul 10) vs the 36% H2 target, with merchant adoption at 14.5% (524 of 3,626 AI-enabled accounts). First V3 Skills signals are strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T kicked off the 'actions in skills' project with Support Orchestration and ran a Skills webinar (137 signups). ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
     initiatives: [
-      { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA", status: "Not started" }
+      { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA", status: "In progress" }
     ]
   },
   {
@@ -666,9 +701,10 @@ const TEAMS = [
     format: "percent",
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
     history: [
-      { date: "2026-07-01", value: 0.12 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-01", value: 0.12 },
+      { date: "2026-07-16", value: 0.14 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "H2 kickoff. SA's KR2: conversation rate 0.12% → 0.3% (~2.5×), which their own roadmap calls ambitious for a 3-month window. Thesis: grow volume so RPV uplift can be proven with stat-sig A/B tests. ML's committed lever on this KR: discovery triggers / quiz-to-skill, bringing more visitors into SA conversations from that entrypoint.",
+    currentDriver: "Conversation rate ticked up to 0.14% (from 0.12%) against the 0.3% Q3 KR, an early move in the right direction. SA's thesis is to grow conversation volume so revenue-per-visitor uplift can be proven with stat-sig A/B tests. ML's committed lever on this KR: discovery triggers / quiz-to-skill, bringing more visitors into SA conversations from that entrypoint. Build not yet started.",
     initiatives: [
       { name: "Discovery triggers / quiz-to-skill", swag: 20, squad: "MLA", status: "Not started" }
     ]
@@ -706,9 +742,9 @@ const TEAMS = [
     lowerIsBetter: true,
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
     history: [],          // ← Append when baseline lands
-    currentDriver: "H2 kickoff. Latency is SA's #1 KR — the patience threshold is far lower for shopping than support, and P75 is still well above the 8s objective. ML's committed lever: bring the SA sub-agent to P75 ≤ 10s this quarter (per-step latency analysis with Core Orch, semantic-cache candidates). Baseline pending the first clean post-GA P75 reading.",
+    currentDriver: "Latency is SA's #1 KR, with a far lower patience threshold for shopping than support. First levers are live: Core Orch now routes heavy sales-intent tickets to the Shopping Assistant first instead of the default agent, worth ~0.5s, and the SA Search feature has been migrated to V3 and goes to A/B test next week. ML's committed lever: bring the SA sub-agent to P75 ≤ 10s this quarter (per-step latency analysis with Core Orch, semantic-cache candidates). SA-specific P75 baseline still pending a clean post-GA reading.",
     initiatives: [
-      { name: "Bring SA sub-agent latency to P75 ≤ 10s", swag: 30, squad: "MLA", status: "Not started" }
+      { name: "Bring SA sub-agent latency to P75 ≤ 10s", swag: 30, squad: "MLA", status: "In progress" }
     ]
   },
   {
@@ -721,9 +757,10 @@ const TEAMS = [
     format: "points",
     dashboardUrl: "https://app.notion.com/p/gorgias/2026-Conv-XP-Support-Orchestration-Roadmap-2c61ae2178f58064aff1f503697423d2#3901ae2178f58005b9d5ce1a0d79001a",
     history: [
-      { date: "2026-07-01", value: 32 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-01", value: 32 },
+      { date: "2026-07-05", value: 37.3 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "H2 kickoff. Support Orch targets SR 32% → 40% by EoH2; their bridge assumes ~7pp from full V3 adoption and ~2pp from Skills as the structural baseline (early V3 numbers: ~38% SR on support merchants vs ~30% pre-V3). ML's committed lever: AI Vision Path 1 — GPT 5.4 native vision on damaged-item / missing-package, graduating the Q3 PoC to production if it clears the eval bar.",
+    currentDriver: "Support Success Rate came in at 37.3% (Jun 29 to Jul 5) against the 40% EoH2 target, an early jump driven by full V3 adoption in GA week. Support Orch's bridge assumes ~7pp from full V3 adoption and ~2pp from Skills as the structural baseline. ML's committed lever: AI Vision Path 1, GPT 5.4 native vision on damaged-item and missing-package, graduating the Q3 proof of concept to production if it clears the eval bar.",
     initiatives: [
       { name: "AI Vision Path 1 — damaged item / missing package (GPT 5.4 native vision)", swag: 20, squad: "MLA", status: "In progress" }
     ]
@@ -740,12 +777,12 @@ const TEAMS = [
     format: "percentLinear",
     isInternal: true,
     history: [],          // Auto-tracked, no manual history
-    currentDriver: "H2 kickoff. Post-GA housekeeping bucket: enable the SMS use case on V3, migrate v2 offline-eval scenarios so evals keep running on V3, replace gemini-2.5-flash ahead of its October 2026 shutdown (hard deadline), improve V3 reasoning quality with targeted prompt fixes against post-GA failure modes, make the retrain-or-monitor call on the Intent & Spam models once LLM-based monitoring is live, and run the LLM stack review & consolidation (gateway, eval framework, prompt registry) with testing of shortlisted options.",
+    currentDriver: "Post-GA housekeeping is now moving. Shopping Assistant evals for the SMS use case launched this week, with analysis underway. Gemini 2.5 Flash (comparable to GPT-4.5, cheaper) is next up to replace gemini-2.5-flash ahead of its October 2026 shutdown, being integrated into the automation gateway with offline eval and prompt tuning to follow. Migration of v2 offline-eval scenarios to V3 is in flight (porting prompt names and outputs). Two bugs are under investigation: the qualifier over-triggering on ~1.5% of post-flow tickets, and first messages from search-bar or campaign starts not reaching the agent. Still queued: V3 reasoning quality prompt fixes, the Intent & Spam retrain-or-monitor call, and the LLM stack review & consolidation.",
     initiatives: [
-      { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "Not started" },
+      { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "In progress" },
       { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "Not started" },
-      { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "Not started" },
-      { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown", swag: 10, squad: "MLA", status: "Not started" },
+      { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "In progress" },
+      { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown", swag: 10, squad: "MLA", status: "In progress" },
       { name: "Intent & Spam model assessment — retrain-or-monitor call", swag: 10, squad: "MLE", status: "In progress" },
       { name: "LLM stack review & consolidation (gateway, eval framework, prompt registry)", swag: 15, squad: "MLA", status: "Not started" }
     ]
@@ -766,25 +803,28 @@ const SHARED_TARGETS = [
     format: "dollar",
     lowerIsBetter: true,
     history: [
-      { date: "2026-07-01", value: 0.26 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-01", value: 0.26 },
+      { date: "2026-07-05", value: 0.271 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "H2 kickoff at the V3 GA baseline of ~26¢ per automated interaction. Q3 target ≤ $0.15, EoY ≤ $0.10. Committed levers: default_agent cost reduction (history compaction, tool-output trimming, GPT 5.4-mini evaluation), the conversation_ended & QA classifiers (projected $120–180K/yr net savings at full rollout), and shipping the refactored email prompt to match chat. The post-training R&D track (fine-tuned open-source models for simpler intents) is the longer-horizon lever — Q3 is survey + ROI only.",
+    currentDriver: "Cost read $0.271 per automated interaction over Jun 29 to Jul 5, just above the $0.26 GA baseline, against the $0.15 Q3 target and $0.10 EoY target. That reading predates a big push: three levers shipped to 100% prod (new get_order tool format, reduced default-agent email prompt, sales-intent redirect to Shopping Assistant), driving avg cost per ticket down ~21% since the start of that week, on track to land around $0.20 to $0.22. Committed levers continue: default_agent cost reduction (compaction, tool-output trimming, GPT 5.4-mini), the conversation_ended & QA classifiers (projected $120K to $180K per year net savings at full rollout), and the shipped email prompt refactor. Post-training (fine-tuned open-source models for simpler intents) is the longer-horizon lever, Q3 is survey and ROI only.",
     initiatives: [
       { name: "Reduce V3 default_agent cost — compaction, tool-output trimming, GPT 5.4-mini eval", swag: 40, squad: "MLA", status: "In progress", impacts: ["Cost", "Latency"] },
       { name: "conversation_ended & QA classifiers — train, evaluate, deploy (Q2 carry-over)", swag: 15, squad: "MLE", status: "In progress", impacts: ["Cost", "Latency"] },
-      { name: "Ship refactored email prompt for V3 (matching chat)", swag: 5, squad: "MLA", status: "In progress", impacts: ["Cost"] }
+      { name: "Ship refactored email prompt for V3 (matching chat)", swag: 5, squad: "MLA", status: "Shipped", impacts: ["Cost"] }
     ]
   },
   {
     name: "P75 chat latency (Support + Sales)",
     color: "#0ea5e9",
-    baseline: null,       // ← UPDATE with first post-GA P75 reading (late-June refs: p50 12.4s / p95 14.3s)
+    baseline: 14.52,      // First clean post-GA reading, Jun 29 - Jul 5 (Core Orch)
     target: 10,
     waypoint: { value: 10, label: "Q3 target: ≤ 10s, held through EoY" },
     format: "seconds",
     lowerIsBetter: true,
-    history: [],          // ← Append when baseline lands
-    currentDriver: "≤ 10s P75 on support + sales tickets combined is both the Q3 target and the EoY hold, shared with Core Orchestration. Baseline pending the first clean post-GA P75 reading (late-June references: p50 12.4s, p95 14.3s). Main ML levers run through the cost workstream (compaction, smaller models); the SA-specific latency work is tracked in the partner table to avoid double counting.",
+    history: [
+      { date: "2026-07-05", value: 14.52 }   // ← APPEND NEW ENTRY WEEKLY
+    ],
+    currentDriver: "First clean post-GA P75 reading landed at 14.52s combined across support and sales (Jun 29 to Jul 5), still above the ≤ 10s target that serves as both the Q3 waypoint and the EoY hold, shared with Core Orchestration. Main ML levers run through the cost workstream (compaction, smaller models, the sales-intent redirect already worth ~0.5s), and the SA-specific latency work is tracked in the partner table to avoid double counting.",
     initiatives: [],
     sharedLeversNote: "Levers shared with the cost row above (tagged Latency): compaction, tool-output trimming, GPT 5.4-mini, in-pipeline classifiers. SWAG counted once, under cost. SA-specific latency work sits in the partner table."
   },
