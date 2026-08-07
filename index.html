@@ -578,8 +578,8 @@
       <tr>
         <th style="text-align:left; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">V3 merchant feedback</th>
         <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Baseline · Jul 5</th>
-        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Last · Jul 20–26</th>
-        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Current · Jul 27–30 (4 days)</th>
+        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Last · Jul 27–Aug 2</th>
+        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Current · Aug 3–7 (5 days)</th>
         <th style="text-align:center; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Status</th>
       </tr>
     </thead>
@@ -587,27 +587,27 @@
       <tr>
         <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Quality rate (good+ok), rolling 28-day median</td>
         <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">85.0%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~82.1%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~81.7%</td>
-        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Down (~3.3pt below baseline)</span></td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">80.0%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">80.0%</td>
+        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Down (5.0pt below baseline)</span></td>
       </tr>
       <tr>
         <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Bad rate, rolling 28-day median</td>
         <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~15%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~17.9%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~18.3%</td>
-        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Breached (~3.3pt over)</span></td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">20.0%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">20.0%</td>
+        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Breached (~5pt over)</span></td>
       </tr>
       <tr>
         <td style="padding:7px 8px; color:var(--text);">Bad rate, raw weekly aggregate</td>
         <td class="mono" style="text-align:right; padding:7px 8px;">—</td>
-        <td class="mono" style="text-align:right; padding:7px 8px;">12.2%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px;">10.9%</td>
-        <td style="text-align:center; padding:7px 8px;"><span class="status-pill small green">Improved (−1.3pt)</span></td>
+        <td class="mono" style="text-align:right; padding:7px 8px;">10.4%</td>
+        <td class="mono" style="text-align:right; padding:7px 8px;">11.3%</td>
+        <td style="text-align:center; padding:7px 8px;"><span class="status-pill small yellow">Watch (+0.9pt, partial week)</span></td>
       </tr>
     </tbody>
   </table>
-  <div style="font-size:11.5px; color:var(--gray); margin-bottom:10px; line-height:1.5;"><strong style="color:var(--text);">The guardrail is breached.</strong> Bad rate is ~18.3% on the rolling 28-day median against the ~15% H2-start baseline, about 3.3pt over, and quality is ~81.7% against the 85.0% Jul 5 reference. This is the third consecutive period of deterioration (bad rate ~15.9% → ~17.9% → ~18.3%), so it is no longer an early watch signal; it is a confirmed drift that needs an owner. Note the Jul 20–26 pair restates last week's ~83.3% / ~16.7%, which was a partial Jul 20–23 cut and read better than the completed week. The raw weekly aggregate moved the other way, improving from 12.2% to 10.9% bad (quality 87.8% → 89.1%). These are different statistics rather than contradictory ones: the rolling figure is a median across merchants, so it tracks the typical merchant, while the raw weekly pools tickets and is dominated by the highest-volume merchants. Median falling while the aggregate improves is the signature of deterioration concentrated in smaller merchants while large ones improve, which is worth confirming with a per-merchant cut before it is repeated. The guardrail is defined on the rolling median, so the breach stands regardless of the aggregate. Current period is 4 days (Jul 27–30). A frozen-judge baseline is still due end-July. Source: Cortex V3 merchant quality rate.</div>
+  <div style="font-size:11.5px; color:var(--gray); margin-bottom:10px; line-height:1.5;"><strong style="color:var(--text);">The guardrail is breached, now ~5pt over.</strong> Bad rate is 20.0% on the rolling 28-day median against the ~15% H2-start baseline, and quality is 80.0% against the 85.0% Jul 5 reference. This is the fourth consecutive period of deterioration on completed cuts (bad rate ~15.9% → ~17.9% → 20.0%); note last week's ~18.3% was a partial Jul 27–30 read that once again came in optimistic vs the completed week — the fourth time a partial cut has flattered the trend. Within this refresh the median is flat week-over-week: it bottomed at 21.3% bad on Aug 4–5 and recovered to 20.0% by Aug 7, wobbling rather than improving. The raw weekly aggregate still reads far better (10.4% bad for Jul 27–Aug 2, 11.3% on the partial Aug 3–7 window): the median tracks the typical merchant while the aggregate is dominated by the highest-volume merchants, so the deterioration remains concentrated in smaller merchants. The bad-reason mix also shifted: wrong_knowledge is now the #1 reason at 22.6% of bad-rated tickets (+5.2pp WoW), while missing_knowledge fell 2.8pp and handover-related reasons declined slightly — pointing at retrieval/knowledge accuracy rather than routing. The guardrail is defined on the rolling median, so the breach stands regardless of the aggregate. Merchants in the rolling window grew from ~510 to ~560; message-history lag can backfill the last 1–2 days. Source: Cortex V3 merchant quality rate.</div>
   <strong>Partner guardrails we inherit:</strong> C&amp;T, no CSAT or latency regression on skill-handled tickets. Support Orch, no merchant-satisfaction regression on tickets using skills or actions.
 </div>
 
@@ -659,7 +659,7 @@ const QUARTER = {
 };
 
 // ← UPDATE THIS each time you refresh the data
-const LAST_UPDATED = "2026-07-30";
+const LAST_UPDATED = "2026-08-07";
 
 // Initiative delivery status pills: "Not started" (gray), "In progress" (blue), "Shipped" (green)
 
@@ -681,7 +681,7 @@ const TEAMS = [
       { date: "2026-07-23", value: 14.4 },
       { date: "2026-07-30", value: 19.25 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Skill involvement keeps climbing post-GA: 19.25% of AI Agent handled tickets now use a Skill, up from 14.4% last week as the Skills framework rolls out further. That clears the 15–18% Q3 waypoint and puts the row past its Q3 pace against the 36% H2 target. First V3 Skills signals stay strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T is running the 'actions in skills' project with Support Orchestration. Known weakness feeding into this: an intent switch mid-conversation drops the active skill entirely. The quick fix is to persist the last 2 to 3 skills across intent changes regardless of intent accuracy; the fuller path splits into deterministic controls (~4 weeks) versus retraining (~8 weeks), and leadership needs that conditional framing rather than a single number. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
+    currentDriver: "NOT REFRESHED THIS WEEK — awaiting the skills-dashboard pull (Metabase 759); figures below are the Jul 30 reading. Skill involvement keeps climbing post-GA: 19.25% of AI Agent handled tickets now use a Skill, up from 14.4% the week before as the Skills framework rolls out further. That clears the 15–18% Q3 waypoint and puts the row past its Q3 pace against the 36% H2 target. First V3 Skills signals stay strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T is running the 'actions in skills' project with Support Orchestration. Known weakness feeding into this: an intent switch mid-conversation drops the active skill entirely. The quick fix is to persist the last 2 to 3 skills across intent changes regardless of intent accuracy; the fuller path splits into deterministic controls (~4 weeks) versus retraining (~8 weeks), and leadership needs that conditional framing rather than a single number. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
     initiatives: [
       { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA", status: "In progress" }
     ]
@@ -699,9 +699,10 @@ const TEAMS = [
     history: [
       { date: "2026-07-01", value: 0.12 },
       { date: "2026-07-16", value: 0.14 },
-      { date: "2026-07-23", value: 0.14 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-23", value: 0.14 },
+      { date: "2026-08-06", value: 0.124 }  // global meaningful-conversation rate, rolling 28d as of Aug 6 — source switched to the Cortex SA OKR skill; earlier 0.14 points may be a slightly different cut
     ],
-    currentDriver: "Conversation rate is holding at 0.14% (from 0.12% at H2 start) against the 0.3% Q3 KR. SA's thesis is to grow conversation volume so revenue-per-visitor uplift can be proven with stat-sig A/B tests. Change this week: discovery triggers / quiz-to-skill has been deferred out of Q3. Tone of Voice was already built but unshipped and carries a non-negotiable external deadline (social beta launch Sep 1), while discovery triggers was a lower business priority at 4 weeks of scope, so it was the one cut to free the capacity. A prototype exists (the trigger opens a quiz whose output drives product suggestions) but the skill works with a single quiz and breaks with multiple. Consequence to note: this leaves the engagement KR with no active ML lever in Q3, so the metric is unlikely to move off 0.14% from ML work this quarter.",
+    currentDriver: "Conversation rate reads 0.124% on the Cortex SA skill's global meaningful-conversation cut (rolling 28d as of Aug 6, now the go-forward source for SA rows), up from 0.116% three weeks earlier; the median-merchant rate is up more sharply, 0.135% → 0.156%. The broader no-meaningful-filter rate is flat at ~0.17%, so the gain is deeper engagement rather than more opens. Note the earlier 0.14 points in this series may sit on a slightly different cut, so read the trend from the new source rather than across the switch. Still far below the 0.3% Q3 KR. Structural situation unchanged: discovery triggers / quiz-to-skill was deferred out of Q3 for Tone of Voice (non-negotiable Sep 1 social beta), which leaves the engagement KR with no active ML lever in Q3, so material movement from ML work is unlikely this quarter.",
     initiatives: [
       { name: "Discovery triggers / quiz-to-skill — deferred out of Q3 for Tone of Voice (social beta, Sep 1)", swag: 20, squad: "MLA", status: "Not started" }
     ]
@@ -718,9 +719,10 @@ const TEAMS = [
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
     history: [
       { date: "2026-07-01", value: 16.1 },
-      { date: "2026-07-30", value: 12.5 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-30", value: 12.5 },
+      { date: "2026-08-02", value: 13.0 }   // wk ending Aug 2 — source switched to Cortex shopping-assistant-okr-metrics skill (dashboard 127 definitions) ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Conversion within SA meaningful conversations reads 12.5%, down from 16.1% at the start of Q3. That is a 3.6pp fall and the only partner metric moving the wrong way this week; the cause is under investigation. The committed target is still pending, so the row stays TBD and excluded from the completion rate, but the trend is now visible rather than hidden behind a blank row. ML's committed lever: product-review storage & retrieval, with reviews held in a managed vector DB (vendor selection in progress) for retrieval during reply generation to improve product answers and social proof inside the conversation. MLE scoped to start RAG and storage in early August. Summarization starts as an LLM pass over a small cohort with cached, pre-generated summaries on a weekly refresh; no MLA bandwidth is budgeted in Q3, so that half is assumed end of Q3 or Q4. Build not yet started.",
+    currentDriver: "Conversion within SA meaningful conversations reads 13.0% for the week ending Aug 2 (source is now the Cortex SA OKR skill on dashboard-127 definitions, the go-forward source for this row). On that source the three-week trend is ~14.0% → 13.0%, and the conversion softening is the main driver behind engaged revenue per visitor falling ~8% to $20.81 (engaged conversion 11.4% → 10.6%, AOV $200 → $196); add-to-cart rate also slipped 2.86% → 2.72%. Offsetting signals: the meaningful-conversation rate is improving (median merchant 0.135% → 0.156% rolling 28d) and SA success rate ticked up to 53.6%, so engagement is deepening while conversion-per-conversation softens. Watch: SA-scope cost per automated interaction jumped ~16% to $0.274 over three weeks (this is SA-scope, not the global cost row below). Latest-week figures may revise as the week closes. The committed target is still pending, so the row stays TBD and excluded from the completion rate. ML's committed lever: product-review storage & retrieval, with reviews held in a managed vector DB for retrieval during reply generation; star ratings and review counts are already live in chat behind a feature flag on the SA side, and the review-ingestion pipeline is nearly ready. MLE build (RAG and storage) not yet started, scoped for early August.",
     initiatives: [
       { name: "Product-review summaries — storage & retrieval (vector DB); starts early Aug", swag: 30, squad: "MLE", status: "Not started" }
     ]
@@ -740,9 +742,10 @@ const TEAMS = [
     dashboardUrl: "https://prod.metabase.gorgias-decision-engine.com/dashboard/127-shopping-assistant-orchestration-okrs?time_period=week",
     history: [
       { date: "2026-07-19", value: 15.52 },
-      { date: "2026-07-30", value: 15.3 }   // Jul 20-26 full week (restates the 15.7 partial)
+      { date: "2026-07-30", value: 15.3 },  // Jul 20-26 full week (restates the 15.7 partial)
+      { date: "2026-08-02", value: 14.54 }  // week bucket labeled Aug 2 on dashboard 357 (now the canonical latency source)
     ],
-    currentDriver: "SA P75 read 15.3s for the full week Jul 20–26 (median 13.1s across 234,761 sales-opportunity turns), essentially flat vs 15.6s the prior week and still well above both the 8s EoH2 objective and the 12.52s Q3 waypoint (−3s from the 15.52s baseline). This restates last week's 15.7s, which was a partial cut of the same week. Latency is SA's #1 KR, with a far lower patience threshold for shopping than support. Two POC tracks are now running: product-page preloading, since about 60% of shopper conversations start on a product page, aiming to resolve in 1 to 2 messages without losing quality (kickoff done; validation script under review before it runs on production); and prompt size plus model swap, where roughly 20% of the prompt is discount instructions used in far fewer than 20% of conversations, so gating discounts and tools by intent is under discussion. Caution on the model swap: Luna and Flash both show more tool-call rounds than GPT-5, which adds latency. Top priority this week is a regression rather than latency itself: transfer to the Shopping Assistant is broken on Gemini, missing about 50% of cases vs baseline. The SA handover merge is offline-positive on email; the chat variant is blocked on a structured-output issue with the backend team. ML's committed lever: bring the SA sub-agent to P75 ≤ 10s this quarter.",
+    currentDriver: "SA P75 read 14.54s for the latest week (bucket labeled Aug 2 on the official AI Agent latency dashboard, now the canonical source for this row), an improvement of ~0.8s vs 15.3s for Jul 20–26, but still well above both the 8s EoH2 objective and the 12.52s Q3 waypoint (−3s from the 15.52s baseline). Latency is SA's #1 KR, with a far lower patience threshold for shopping than support. Progress on the levers: the SA handover merge is released to production (~200k tickets processed with no issues), the perceived-latency work now surfaces product candidates ~4–5s before the final reply, and the product-page preloading POC has halved latency on staging (offline eval dataset being prepared before a production release). The Luna migration for the SA sub-agent is in progress with p50 improving. Still open: prompt-size work (discount instructions are ~20% of the prompt but used in far fewer than 20% of conversations, so intent-gating is under discussion), and get_knowledge tool optimisation is scheduled for end of August. Caution: Luna shows more tool-call rounds than GPT-5.4, which adds latency pressure if it wins the A/B. ML's committed lever: bring the SA sub-agent to P75 ≤ 10s this quarter.",
     initiatives: [
       { name: "Bring SA sub-agent latency to P75 ≤ 10s", swag: 30, squad: "MLA", status: "In progress" }
     ]
@@ -752,18 +755,20 @@ const TEAMS = [
     color: "#14b8a6",
     swag: 20,
     metric: "Support Success Rate",
-    baseline: 32,
-    target: 40,
+    baseline: 31.9,       // wk Jun 29–Jul 5 on the restated definition (billed / covered, dim_tickets)
+    target: 40,           // ⚠ Set against the old (irreproducible) readings — needs re-anchoring, see driver
     format: "points",
     dashboardUrl: "https://metabase.gorgias-decision-engine.com/question/2794-monthly-success-rate-evolution?start_date=2026-01-01&fixed_gmv_band=",
     history: [
-      { date: "2026-07-01", value: 32 },
-      { date: "2026-07-05", value: 37.3 },
-      { date: "2026-07-12", value: 39.9 },
-      { date: "2026-07-23", value: 37.7 },
-      { date: "2026-07-30", value: 40.8 }   // ← APPEND NEW ENTRY WEEKLY
+      // SERIES RESTATED Aug 7 on the official definition (is_ai_agent_billed / is_ai_agent_related,
+      // dim_tickets, Monday-start weeks). Old points (37.3 / 39.9 / 37.7 / 40.8) were irreproducible.
+      { date: "2026-07-05", value: 31.9 },  // wk Jun 29–Jul 5
+      { date: "2026-07-12", value: 33.0 },  // wk Jul 6–12
+      { date: "2026-07-19", value: 33.4 },  // wk Jul 13–19
+      { date: "2026-07-26", value: 33.3 },  // wk Jul 20–26
+      { date: "2026-08-02", value: 33.5 }   // wk Jul 27–Aug 2 ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Support Success Rate hit 40.8%, clearing the 40% EoH2 target on the first full week at 100% V3 traffic. This is the headline result of the week. Against ~33–35% on V2, analysis attributes roughly +5.2 percentage points to V3, worth about 2.4M more automated interactions per year. It also lands ahead of schedule: the target was set for end of H2 and the row is now past its full-period pace less than a month into Q3. One caveat to carry when repeating the number: this is a single weekly reading and the series has bounced before (37.3 → 39.9 → 37.7), so the thing to confirm over the next two or three weeks is that 40%+ holds rather than proving to be one strong week. The earlier Beta 1/2/3 A/B results (March to June) had V3 at +3.1pp (+7.9%) vs V2, so the +5.2pp post-GA read is stronger than the test predicted. Support Orch's bridge assumes ~7pp from full V3 adoption and ~2pp from Skills as the structural baseline. ML's committed lever is AI Vision Path 1, GPT 5.4 native vision on damaged-item and missing-package, and it has slipped: the POC now starts in September rather than August. The cause is two dependencies on the core orchestration team, SMS hard authentication (~2 to 3 weeks remaining) and persisting Skills across intent changes in a conversation (~1 week, TBD). Interim goal is to establish whether the whole initiative can be compressed into September and to recruit more merchants in the meantime. Merchant cohort so far: two confirmed, four more in discussion. Risk to carry: Q4 spillover is likely.",
+    currentDriver: "SERIES RESTATED — definition fix, and it retracts last week's headline. The 40.8% logged last week (and the 39.9% / 37.7% before it) could not be reproduced from any weekly cut of the official success-rate definition (billed / covered tickets in dim_tickets, the basis of the monthly Metabase card): on that definition support ran 31.9 → 33.0 → 33.4 → 33.3 → 33.5 across the five completed weeks since Jun 29, and never approached 40%. The old readings most likely used a narrower denominator (automated / attempted). The restated picture is still positive but far more modest: +1.6pp since the GA week, in line with what the Beta 1–3 A/B predicted (+3.1pp, +7.9% vs V2) rather than the +5–8pp the old readings implied. Consequences: last week's 'cleared the 40% EoH2 target' claim is withdrawn, and the 40 target itself was set against the old readings, so it needs re-anchoring on this definition at the next OKR review rather than silently moving the goalposts. ML's committed lever is AI Vision Path 1, GPT 5.4 native vision on damaged-item and missing-package; the POC starts in September (slipped from August on core-orch dependencies: SMS hard auth and Skills persistence). Merchant cohort: 3 of 5–6 needed are signed and CSMs have been slow to respond, so recruitment needs a push for data collection before the September start. Risk to carry: Q4 spillover is likely.",
     initiatives: [
       { name: "AI Vision Path 1 — damaged item / missing package (GPT 5.4 native vision); POC slipped to September", swag: 20, squad: "MLA", status: "In progress" }
     ]
@@ -782,11 +787,11 @@ const TEAMS = [
     history: [],          // Auto-tracked, no manual history
     currentDriver: "SMS on V3 reached 100% of production traffic on Jul 24. Online eval is running against a 1k+ ticket target and global metrics are stable vs baseline (handover rate 60%, cost 6¢ per conversation), though outcome coherence dropped 8pp between offline and online (68.4% → 60.1%) and the team is checking whether that is real or a judge artifact. Two SMS items are open: the hard-auth offline eval is blocked with no SMS data on v3 yet and needs core-team support, expected by Jul 31, and the SMS handover merge is not enabled because of a feature-flag gap. The handover merge itself (default agent and handover collapsed into one) is released to 100% of traffic on chat and email, QA clean across 5k+ executions; the shopping-assistant variant is blocked on a structured-output issue with the backend team. Offline-eval migration to v3 is nearly done, roughly 10 of 50 scenarios left plus a final consistency check, with LLM-judge agreement at ~80–85% against manual review on the current prod model. Intent & Spam: the spam model agrees with the LLM judge 84% of the time, so no retraining is needed; the main gaps are marketing messages over-flagged as spam and some order-intent messages misflagged. Intent and spam monitoring dashboards are live in Metabase pending validation. Social-comment performance is a known gap since the spam model was not trained on short-form or emoji content, and it is being investigated this week as an enterprise deal depends on it. Intent discovery runs to ~Aug 1 with an alignment session in the week of Aug 10; a core finding is that intent predictions evaluated in isolation miss conversational context, which causes flickiness that worsens as conversations grow, and intent-list simplification (54 combinations down to ~35) is under discussion. Reasoning quality: the SPEED prompt is in review, a language-mismatch bug affecting 0.3% of tickets has a new prompt fix with escalations resolved, and handover-confirmation prompt iterations are done with offline runs launching. LLM stack: the model leaderboard is live as a single view across open and closed models. Delivery risk: ownership of the intent workstream needs a handoff before the end of August.",
     initiatives: [
-      { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "In progress" },
-      { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "Not started" },
-      { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "In progress" },
+      { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "Shipped" },
+      { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "In progress" },
+      { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "Shipped" },
       { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown", swag: 10, squad: "MLA", status: "In progress" },
-      { name: "Intent & Spam model assessment — retrain-or-monitor call (spam: no retrain needed, 84% judge agreement)", swag: 10, squad: "MLE", status: "In progress" },
+      { name: "Intent & Spam model assessment — retrain-or-monitor call (spam: no retrain needed, 84% judge agreement)", swag: 10, squad: "MLE", status: "Shipped" },
       { name: "Improve intent detection performance", swag: 40, squad: "MLE", status: "In progress" },
       { name: "LLM stack review & consolidation (gateway, eval framework, prompt registry)", swag: 15, squad: "MLA", status: "In progress" }
     ]
@@ -811,9 +816,10 @@ const SHARED_TARGETS = [
       { date: "2026-07-05", value: 0.271 },
       { date: "2026-07-12", value: 0.232 },
       { date: "2026-07-19", value: 0.204 },  // Jul 13-19, first full week post-GA
-      { date: "2026-07-30", value: 0.213 }   // Jul 20-26 full week (restates the 0.215 partial) ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-30", value: 0.213 },  // Jul 20-26 full week (restates the 0.215 partial)
+      { date: "2026-08-02", value: 0.219 }   // wk Jul 27–Aug 2 — now sourced from LLM-cost dashboard 130 via Cortex weekly pull; prior ad-hoc readings agree within ±$0.005, no restatement needed ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "Cost rose to $0.213 per automated interaction for the full week Jul 20–26, up about 5.5% from $0.204 in the first full post-GA week (Jul 13–19), while cost per V3 ticket stayed essentially flat. This restates last week's $0.215, which was a partial Jul 20–23 cut of the same week. Both readings sit well below the $0.26 GA baseline but above the $0.15 Q3 target. Projected landing zone with the cost initiatives now in flight across Orchestration and ML is $0.18–$0.20 once the initiative closes at end of August, which falls short of the $0.15 Q3 target; the Jul 28 Core & ML alignment put the same floor at roughly 18–20¢. Levers this week: the handover merge into the default agent released to 100% of traffic on chat and email, with no direct cost or latency win yet but it unlocks removing the QS step (~0.5s); compaction on email returned only ~1% after 24h and is likely not worth keeping; tool gating by auth state is in test on chat, targeting ~5%. Model strategy narrowed to a two-model shortlist: GPT-5.6 Luna (~40% cheaper at 4.3¢ vs 7¢ per conversation, quality better than 5.4 on knowledge coherence and outcome accuracy, but a 3pp higher handover rate under investigation) and Gemini 3.5 Flash Lite (~66% cheaper at 2.4¢, offline knowledge-coherence gap ~9pp that manual review puts closer to 2pp). These two are the strongest candidates after offline evals and prompt iteration. The goal of going online is to check whether the cost gains hold on live traffic at the same or better quality than GPT 5.4, the prod baseline. Online A/B at 10% traffic each against an 80% baseline targets w/c Aug 3 across ~500 merchants, gated on the chat offline check and on the cross-provider transfer fix (PR in review). Ruled out: 5.6 Tera (no cost saving), 5.4 Mini (quality gap), 5.6 Flash (more handovers). Cost-model caveat: GPT-5.6 prompt caching and Gemini cached-data storage are not yet reflected, so offline estimates may not match the invoice. On the open-weight track feeding post-training: most candidates tested so far are meaningfully cheaper, but on the v2 email dataset none has outperformed current prod, and several offline results were distorted by missing tool calls, blank messages and reasoning inconsistencies. OSS 120B is the strongest so far at ~2.5¢ per conversation, with quality gaps remaining. Next steps are to fix and rerun the offline evals on the v3 email dataset, estimate self-hosting economics, and run a small-batch test on a larger model to find the quality ceiling and judge whether fine-tuning is worth pursuing. Post-training to move agent behaviour out of the system prompt stays committed (survey and ROI in Q3, potential Q4 build).",
+    currentDriver: "Cost read $0.219 per automated interaction for the completed week Jul 27–Aug 2, up from $0.208 the prior week on the now-canonical source (the official LLM-cost dashboard, pulled weekly via Cortex; its readings agree with the old ad-hoc cuts within ±$0.005, so the series stands without restatement). The uptick is volume-driven rather than a unit-cost spike: LLM spend held roughly flat ($71.6k → $72.4k) while automated interactions fell ~4% to 330k. Trend since GA: $0.264 in the GA week to ~$0.22, a ~17% cut from prompt refactors and orchestration changes before any model switch. Still well above the $0.15 Q3 target, and the in-flight initiatives floor out at $0.18–0.20 (Jul 28 Core & ML alignment), so the model switch is the lever that matters. GPT-5.6 Luna went live Aug 4 on 10% of a ~500-merchant cohort (email + chat) against the GPT-5.4 baseline; OpenAI's 80% Luna price cut (Jul 30) ended the Gemini 3.5 Flash Lite track, which was also sending empty messages on ~10–15% of chat conversations and missing about half of transfers to the Shopping Assistant. Offline estimate for Luna is under 5¢ per automated interaction; the first online days read noisy (more handovers, higher latency, confounded by the 72-hour automation-marking window), with the decision point around Aug 24. Parallel tracks: fine-tuning go/no-go ~Aug 14 (GPT OSS 120B is deployed on a dedicated endpoint in staging at ~2¢/ticket, stress-test underway; if go, 2 MLEs for 8–9 weeks), and post-training to move agent behaviour out of the system prompt stays committed (survey and ROI in Q3, potential Q4 build). Dashboard caveats to carry: numerator aggregates by execution date while the denominator uses ticket-creation date, AI Journey is excluded, ~4% of cost is unattributable to tickets, and the last 5 days are excluded for billing lag.",
     initiatives: [
       { name: "Reduce V3 default_agent cost — compaction, tool-output trimming, GPT 5.4-mini eval", swag: 40, squad: "MLA", status: "In progress", impacts: ["Cost", "Latency"] },
       { name: "Gemini vs OpenAI benchmark across V3 agents — model strategy", swag: 15, squad: "MLA", status: "In progress", impacts: ["Cost"] },
@@ -833,9 +839,10 @@ const SHARED_TARGETS = [
       { date: "2026-07-05", value: 14.52 },
       { date: "2026-07-12", value: 14.03 },
       { date: "2026-07-19", value: 14.51 },
-      { date: "2026-07-23", value: 14.57 }   // Jul 20-26 partial
+      { date: "2026-07-23", value: 14.57 },  // Jul 20-26 partial
+      { date: "2026-08-02", value: 13.46 }   // week bucket labeled Aug 2 on dashboard 357 — new canonical source; supersedes the scope-under-review hold
     ],
-    currentDriver: "NOT REFRESHED THIS WEEK — scope under review. The Jul 20–26 support+sales cut returned a P75 of 10.7s and a median of 1.3s on 1.32M turns, against 14.5s / 12.0s on 493k turns the prior week. A 2.7x volume jump and a 10x median drop in one week are not credible against levers worth 0.5 to 1.5s, and the sales slice was stable over the same period, so the change is isolated to the support population and looks like a turn-definition or filter change rather than a real improvement. Figures below are last week's reading, held pending a rerun on matching scope. If the wider definition turns out to be the correct one, the 14.52s and 12.04s baselines need rebasing too rather than letting the series straddle two definitions. Prior reading: P75 14.57s combined across support and sales (P50 12.03s), essentially flat vs 14.51s the week before (Jul 13–19) and still well above the ≤ 10s target that serves as both the Q3 waypoint and the EoY hold, shared with Core Orchestration. Biggest near-term unlock: if the handover-merge A/B tests go well, dropping DQA is worth an estimated 1.2 to 1.5s. Main ML levers run through the cost workstream (compaction, smaller models, the sales-intent redirect already worth ~0.5s), and the SA-specific latency work is tracked in the partner table to avoid double counting.",
+    currentDriver: "REFRESHED AGAIN, on a new canonical source. The row is now read from the official AI Agent latency dashboard (support+sales chat turns), which replaces the ad-hoc cuts; the broken Jul 20–26 rerun (10.7s P75 / 1.3s median on an inflated turn population) is superseded rather than resolved, and the scope question dies with the source switch. Latest week (bucket labeled Aug 2): P75 13.46s combined, down ~1.1s vs 14.57s. The improvement is consistent with the levers that landed: the handover merge released to 100% on chat and email (drops a full agent hop, ~1–2s), the QA step retired on chat (~0.5s), and the refactored email prompt. Still 3.5s above the ≤ 10s target that serves as both the Q3 waypoint and the EoY hold, shared with Core Orchestration. Watch for next week: GPT-5.6 Luna has been live on 10% of a ~500-merchant cohort since Aug 4 and runs slower than prod (11s P75 offline, roughly 2x average latency in the first, noisy days online), so a Luna win on cost would put renewed pressure on this row. Main ML levers continue to run through the cost workstream (tool-output trimming, smaller models, get_knowledge optimisation), and SA-specific latency work is tracked in the partner table to avoid double counting.",
     initiatives: [],
     sharedLeversNote: "Levers shared with the cost row above (tagged Latency): compaction, tool-output trimming, GPT 5.4-mini, in-pipeline classifiers. SWAG counted once, under cost. SA-specific latency work sits in the partner table."
   },
@@ -848,9 +855,10 @@ const SHARED_TARGETS = [
     lowerIsBetter: true,
     history: [
       { date: "2026-07-19", value: 12.04 },
-      { date: "2026-07-23", value: 12.03 }   // Jul 20-26 partial
+      { date: "2026-07-23", value: 12.03 },  // Jul 20-26 partial
+      { date: "2026-08-02", value: 11.21 }   // week bucket labeled Aug 2 on dashboard 357 — new canonical source
     ],
-    currentDriver: "NOT REFRESHED THIS WEEK — scope under review, same issue as the P75 row above. The Jul 20–26 cut returned a median of 1.3s, which is not credible for a turn that calls an LLM and usually a tool; the figure below is last week's reading, held pending a rerun on matching scope. Target is ≤ 6s median (p50) chat latency by EoY. No Q3 waypoint defined; paced linearly across H2. Prior readings: p50 12.04s for Jul 13–19, holding at 12.03s in the partial Jul 20–26 week, so baseline is set at 12.04s. Same levers as cost and P75: history compaction, tool-output trimming, smaller models per intent.",
+    currentDriver: "Refreshed from the official AI Agent latency dashboard, same source switch as the P75 row above. Median (p50) chat latency read 11.21s combined support+sales for the latest week (bucket labeled Aug 2), down ~0.8s from 12.03s, with the handover merge and QA-step removal the likely drivers. Target is ≤ 6s median by EoY; no Q3 waypoint defined, paced linearly across H2. Same levers as cost and P75: tool-output trimming, smaller models per intent, and the model-switch decision.",
     initiatives: [],
     sharedLeversNote: "Same shared levers as P75 above; SWAG counted once, under the cost row."
   }
