@@ -684,7 +684,8 @@ const TEAMS = [
     ],
     currentDriver: "Skill involvement keeps climbing post-GA: 24.4% of AI Agent handled tickets now use a Skill, up from 19.25% the week before as the Skills framework rolls out further. That clears the 15–18% Q3 waypoint and puts the row past its Q3 pace against the 36% H2 target. First V3 Skills signals stay strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T is running the 'actions in skills' project with Support Orchestration. Known weakness feeding into this: an intent switch mid-conversation drops the active skill entirely. The quick fix is to persist the last 2 to 3 skills across intent changes regardless of intent accuracy; the fuller path splits into deterministic controls (~4 weeks) versus retraining (~8 weeks), and leadership needs that conditional framing rather than a single number. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
     initiatives: [
-      { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA", status: "In progress" }
+      { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 10, squad: "MLA", status: "In progress" },
+      { name: "Skills persistence — reasoning update to keep skills across intent switches (fixes the mid-conversation skill drop)", swag: 5, squad: "MLA", status: "In progress" }
     ]
   },
   {
@@ -705,7 +706,8 @@ const TEAMS = [
     ],
     currentDriver: "Conversation rate reads 0.124% on the Cortex SA skill's global meaningful-conversation cut (rolling 28d as of Aug 6, now the go-forward source for SA rows), up from 0.116% three weeks earlier; the median-merchant rate is up more sharply, 0.135% → 0.156%. The broader no-meaningful-filter rate is flat at ~0.17%, so the gain is deeper engagement rather than more opens. Note the earlier 0.14 points in this series may sit on a slightly different cut, so read the trend from the new source rather than across the switch. Still far below the 0.3% Q3 KR. Structural situation unchanged: discovery triggers / quiz-to-skill was deferred out of Q3 for Tone of Voice (non-negotiable Sep 1 social beta), which leaves the engagement KR with no active ML lever in Q3, so material movement from ML work is unlikely this quarter.",
     initiatives: [
-      { name: "Discovery triggers / quiz-to-skill — deferred out of Q3 for Tone of Voice (social beta, Sep 1)", swag: 20, squad: "MLA", status: "Not started" }
+      { name: "Tone of Voice migration to v3 — the non-negotiable Sep 1 social-beta commitment this squad's Q3 capacity went to", swag: 20, squad: "MLA", status: "Not started" },
+      { name: "Discovery triggers / quiz-to-skill — deferred out of Q3 for Tone of Voice", swag: 0, squad: "MLA", status: "Not started" }
     ]
   },
   {
@@ -791,7 +793,7 @@ const TEAMS = [
       { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "Shipped" },
       { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "In progress" },
       { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "Shipped" },
-      { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown", swag: 10, squad: "MLA", status: "In progress" },
+      { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown — separate initiative, not yet started (needs capacity allocated)", swag: 10, squad: "MLA", status: "Not started" },
       { name: "Intent & Spam model assessment — retrain-or-monitor call (spam: no retrain needed, 84% judge agreement)", swag: 10, squad: "MLE", status: "Shipped" },
       { name: "Improve intent detection performance", swag: 40, squad: "MLE", status: "In progress" },
       { name: "LLM stack review & consolidation (gateway, eval framework, prompt registry)", swag: 15, squad: "MLA", status: "In progress" }
