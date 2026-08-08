@@ -679,9 +679,10 @@ const TEAMS = [
       { date: "2026-07-01", value: 0.07 },
       { date: "2026-07-10", value: 6.3 },
       { date: "2026-07-23", value: 14.4 },
-      { date: "2026-07-30", value: 19.25 }   // ← APPEND NEW ENTRY WEEKLY
+      { date: "2026-07-30", value: 19.25 },
+      { date: "2026-08-07", value: 24.4 }   // ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "NOT REFRESHED THIS WEEK — awaiting the skills-dashboard pull (Metabase 759); figures below are the Jul 30 reading. Skill involvement keeps climbing post-GA: 19.25% of AI Agent handled tickets now use a Skill, up from 14.4% the week before as the Skills framework rolls out further. That clears the 15–18% Q3 waypoint and puts the row past its Q3 pace against the 36% H2 target. First V3 Skills signals stay strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T is running the 'actions in skills' project with Support Orchestration. Known weakness feeding into this: an intent switch mid-conversation drops the active skill entirely. The quick fix is to persist the last 2 to 3 skills across intent changes regardless of intent accuracy; the fuller path splits into deterministic controls (~4 weeks) versus retraining (~8 weeks), and leadership needs that conditional framing rather than a single number. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
+    currentDriver: "Skill involvement keeps climbing post-GA: 24.4% of AI Agent handled tickets now use a Skill, up from 19.25% the week before as the Skills framework rolls out further. That clears the 15–18% Q3 waypoint and puts the row past its Q3 pace against the 36% H2 target. First V3 Skills signals stay strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T is running the 'actions in skills' project with Support Orchestration. Known weakness feeding into this: an intent switch mid-conversation drops the active skill entirely. The quick fix is to persist the last 2 to 3 skills across intent changes regardless of intent accuracy; the fuller path splits into deterministic controls (~4 weeks) versus retraining (~8 weeks), and leadership needs that conditional framing rather than a single number. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
     initiatives: [
       { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 15, squad: "MLA", status: "In progress" }
     ]
