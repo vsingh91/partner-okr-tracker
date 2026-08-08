@@ -6,311 +6,512 @@
 <title>ML H2 2026 — OKR & Metrics Tracker</title>
 <style>
   :root {
-    --bg: #f5f6fa;
+    --ground: #f2f4f2;
     --card: #ffffff;
-    --primary: #1e293b;
-    --accent: #3b82f6;
-    --green: #10b981;
-    --yellow: #f59e0b;
-    --red: #ef4444;
-    --gray: #94a3b8;
-    --light-gray: #e2e8f0;
-    --text: #1e293b;
-    --text-secondary: #64748b;
-    --border: #e2e8f0;
+    --ink: #1b2228;
+    --ink-2: #5d6870;
+    --ink-3: #8b959d;
+    --line: #e3e7e6;
+    --accent: #0e7490;
+    --good: #15803d;
+    --good-bg: #e7f3ea;
+    --warn: #b45309;
+    --warn-bg: #fdf3e3;
+    --bad: #b91c1c;
+    --bad-bg: #fceaea;
+    --idle: #64748b;
+    --idle-bg: #eef1f4;
+    /* Aliases so legacy detail markup works in both themes */
+    --text: var(--ink);
+    --text-secondary: var(--ink-2);
+    --border: var(--line);
+    --gray: var(--ink-3);
+    --light-gray: var(--line);
+    --green: var(--good);
+    --yellow: var(--warn);
+    --red: var(--bad);
+    --primary: var(--ink);
+    --bg: var(--ground);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #12161a;
+      --card: #1b2127;
+      --ink: #e8eaec;
+      --ink-2: #9aa4ac;
+      --ink-3: #6b757d;
+      --line: #2a3239;
+      --accent: #38bdd8;
+      --good: #4ade80;
+      --good-bg: #14301f;
+      --warn: #fbbf24;
+      --warn-bg: #33270e;
+      --bad: #f87171;
+      --bad-bg: #391818;
+      --idle: #94a3b8;
+      --idle-bg: #232b33;
+    }
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    padding: 32px;
-    max-width: 1500px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--ground);
+    color: var(--ink);
+    padding: 40px 32px 56px;
+    max-width: 1160px;
     margin: 0 auto;
+    line-height: 1.45;
+  }
+  .display { font-family: "Avenir Next", -apple-system, sans-serif; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero .eyebrow {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--ink-2);
+    margin-bottom: 10px;
+  }
+  .hero .big {
+    font-size: 76px;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -1.5px;
+  }
+  .hero .big .delta {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    vertical-align: 18px;
+    margin-left: 10px;
+  }
+  .delta.up { color: var(--good); }
+  .delta.down { color: var(--bad); }
+  .delta.flat { color: var(--ink-3); }
+  .hero .caption {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-top: 10px;
+    max-width: 560px;
+  }
+  .hero-side { text-align: right; font-size: 13px; color: var(--ink-2); }
+  .hero-side .row { margin-bottom: 6px; white-space: nowrap; }
+  .hero-side strong { color: var(--ink); font-weight: 600; }
+  .pace-track {
+    width: 240px; height: 6px; background: var(--line); border-radius: 3px;
+    margin-top: 8px; position: relative; overflow: visible;
+  }
+  .pace-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+  .pace-mark {
+    position: absolute; top: -4px; width: 2px; height: 14px;
+    background: var(--ink); border-radius: 1px;
+  }
+  .pace-mark.expected { background: var(--accent); height: 10px; top: -2px; }
+  .pace-meta {
+    display: flex; gap: 14px; justify-content: flex-end;
+    font-size: 12px; color: var(--ink-3); margin-top: 8px;
+  }
+  .pace-meta strong { color: var(--ink); }
+  .pace-verdict {
+    font-size: 12px; font-weight: 700;
+    margin-top: 5px; text-transform: uppercase; letter-spacing: 0.6px;
+  }
+  .pace-verdict.good { color: var(--good); }
+  .pace-verdict.warn { color: var(--warn); }
+
+  /* ── Sections ── */
+  section h2 {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 4px;
+  }
+  section .sub {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-bottom: 16px;
   }
 
-  /* ── Header ── */
-  header {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    color: white;
-    padding: 32px 40px;
-    border-radius: 16px;
-    margin-bottom: 24px;
+  /* ── What moved / Attribution ── */
+  .moved {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 20px;
+    margin-bottom: 36px;
   }
-  header .team-label {
+  @media (max-width: 900px) { .moved { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+  }
+  .panel h3 {
     font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    opacity: 0.7;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    color: var(--ink-2);
+  }
+  .move-item {
+    display: flex;
+    gap: 14px;
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    align-items: baseline;
+  }
+  .move-item:first-of-type { border-top: none; padding-top: 2px; }
+  .move-badge {
+    flex-shrink: 0;
+    min-width: 74px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .move-badge.up { color: var(--good); }
+  .move-badge.down { color: var(--bad); }
+  .move-badge.flat { color: var(--ink-3); }
+  .move-text { color: var(--ink-2); }
+  .move-text strong { color: var(--ink); font-weight: 600; }
+
+  .cred-group { margin-bottom: 18px; }
+  .cred-group:last-of-type { margin-bottom: 0; }
+  .cred-head {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .cred-head .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .cred-list { list-style: none; }
+  .cred-list li {
+    font-size: 13px;
+    color: var(--ink-2);
+    padding: 6px 0 6px 16px;
+    border-left: 2px solid var(--line);
+    margin-bottom: 2px;
+  }
+  .cred-list li strong { color: var(--ink); font-weight: 600; }
+  .cred-note { font-size: 12px; color: var(--ink-3); margin-top: 12px; font-style: italic; }
+
+  /* ── Quality panel ── */
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 900px) { .quality-grid { grid-template-columns: 1fr; } }
+  .q-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--ink-2);
+    margin-bottom: 10px;
+  }
+  .q-caption {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 8px;
+  }
+  .q-caption strong { color: var(--ink-2); }
+  .qchart svg { width: 100%; max-width: 460px; height: auto; display: block; }
+  .q-reason {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .q-reason:last-of-type { border-bottom: none; }
+  .q-reason .r-name { font-weight: 600; color: var(--ink); }
+  .q-reason .r-delta { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; flex-shrink: 0; }
+  .r-delta.worse { color: var(--bad); }
+  .r-delta.better { color: var(--good); }
+
+  /* ── Metric cards ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .mcard {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .mcard .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .mcard .name {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    line-height: 1.35;
+  }
+  .mcard .name .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .pill {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    flex-shrink: 0;
+  }
+  .pill.good { background: var(--good-bg); color: var(--good); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn); }
+  .pill.bad  { background: var(--bad-bg);  color: var(--bad); }
+  .pill.idle { background: var(--idle-bg); color: var(--idle); }
+
+  .mcard .reading-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .mcard .value {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .mcard .value .unit { font-size: 18px; color: var(--ink-3); font-weight: 600; }
+  .mcard .value .delta {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-top: 5px;
+  }
+  .spark { flex-shrink: 0; opacity: 0.9; }
+
+  .mcard .strip {
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
     margin-bottom: 8px;
   }
-  header h1 {
-    font-size: 26px;
+  .t-bar {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 7px;
+  }
+  .t-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+  .strip-text {
+    font-size: 12px;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .mcard .strip strong { color: var(--ink-2); font-weight: 600; }
+  .mcard .takeaway {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  /* ── ML work on each card ── */
+  .levers {
+    border-top: 1px solid var(--line);
+    padding-top: 9px;
+    margin-top: auto;
+  }
+  .levers .levers-label {
+    font-size: 11px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ink-3);
     margin-bottom: 6px;
   }
-  header .okr-statement {
-    font-size: 15px;
-    opacity: 0.85;
-    font-weight: 400;
-    line-height: 1.5;
+  .lever {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    padding: 2.5px 0;
+    line-height: 1.4;
   }
-  header .week-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-top: 14px;
-    font-weight: 500;
+  .lever[hidden] { display: none; }
+  .lever .st {
+    flex-shrink: 0; align-self: center;
+    width: 13px; text-align: center;
+    font-weight: 700; line-height: 1;
   }
-
-  /* ── Summary Cards ── */
-  .summary-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 24px;
+  .st.shipped::before { content: "✓"; color: var(--good); font-size: 12px; }
+  .st.progress::before { content: "●"; color: var(--accent); font-size: 8px; }
+  .st.notstarted::before { content: "○"; color: var(--ink-3); font-size: 10px; font-weight: 400; }
+  .lever .pts {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+    flex-shrink: 0;
+    font-size: 11.5px;
   }
-  .summary-card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 24px 28px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-  }
-  .summary-card .label {
-    font-size: 13px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-  .summary-card .value {
-    font-size: 36px;
-    font-weight: 700;
-  }
-  .summary-card .sub {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-  }
-  .summary-card .progress-bar-wrap {
-    height: 8px;
-    background: var(--light-gray);
-    border-radius: 4px;
-    margin-top: 14px;
-    overflow: hidden;
-    position: relative;
-  }
-  .summary-card .progress-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.6s ease;
-  }
-  .summary-card .progress-bar-target {
-    position: absolute;
-    top: -4px;
-    width: 2px;
-    height: 16px;
-    background: var(--primary);
-    border-radius: 1px;
-  }
-
-  /* ── Table Section ── */
-  .table-card {
-    background: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-  .table-card h2 {
-    font-size: 16px;
+  .levers-toggle {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--accent);
+    font: inherit;
+    font-size: 12px;
     font-weight: 600;
-    padding: 20px 28px 6px;
+    padding: 6px 0 0;
+    cursor: pointer;
+    text-align: left;
   }
-  .table-card .table-subtitle {
-    font-size: 13px;
-    color: var(--text-secondary);
-    padding: 0 28px 16px;
-    border-bottom: 1px solid var(--border);
+  .levers-toggle:hover { text-decoration: underline; }
+  .levers-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  /* ── Details ── */
+  details {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 12px;
   }
+  details summary {
+    cursor: pointer;
+    padding: 15px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: "＋"; color: var(--ink-3); font-weight: 400; }
+  details[open] summary::after { content: "−"; }
+  details summary .hint { font-size: 12px; font-weight: 400; color: var(--ink-3); margin-left: 12px; }
+  details .body {
+    padding: 16px 22px 20px;
+    font-size: 13px;
+    color: var(--ink-2);
+    border-top: 1px solid var(--line);
+  }
+  .detail-note { font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; line-height: 1.5; }
+
+  /* ── Legacy detail tables ── */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table {
     width: 100%;
     min-width: 1080px;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 13.5px;
   }
   thead th {
-    background: #f8fafc;
     padding: 10px 12px;
     text-align: left;
     font-weight: 600;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border);
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--line);
     white-space: nowrap;
   }
   thead th.right { text-align: right; }
   thead th.center { text-align: center; }
-
   tbody td {
-    padding: 13px 12px;
-    border-bottom: 1px solid var(--border);
+    padding: 12px;
+    border-bottom: 1px solid var(--line);
     vertical-align: middle;
   }
   tbody tr:last-child td { border-bottom: none; }
-  tbody tr.main-row:hover { background: #f8fafc; }
-
   td.right { text-align: right; font-variant-numeric: tabular-nums; }
   td.center { text-align: center; }
-  td.mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; }
-
-  .team-name {
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .team-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .metric-name {
-    font-size: 13px;
-    color: var(--text-secondary);
-    max-width: 240px;
-  }
-  .metric-note {
-    font-size: 11px;
-    color: var(--gray);
-    max-width: 240px;
-    margin-top: 3px;
-    line-height: 1.4;
-  }
-  .waypoint-note {
-    display: block;
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-    font-weight: 500;
-  }
-  .metric-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 12px;
-  }
+  td.mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12.5px; }
+  .team-name { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .team-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .metric-name { font-size: 13px; color: var(--ink-2); max-width: 240px; }
+  .metric-note { font-size: 11.5px; color: var(--ink-3); max-width: 240px; margin-top: 3px; line-height: 1.4; }
+  .waypoint-note { display: block; font-size: 11.5px; color: var(--ink-2); margin-top: 3px; font-weight: 500; }
+  .metric-link { color: var(--accent); text-decoration: none; font-size: 12px; }
   .metric-link:hover { text-decoration: underline; }
-
-  /* ── Initiative sub-rows nested under each team row ── */
   tr.init-row td {
-    background: #fbfcfe;
     padding: 7px 12px;
     font-size: 12.5px;
-    color: var(--text-secondary);
-    border-bottom: 1px solid #f1f5f9;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--line);
   }
-  tr.init-row td.init-name {
-    padding-left: 34px;
-  }
-  tr.init-row td.init-name::before {
-    content: "↳ ";
-    color: var(--gray);
-  }
-  tr.init-row.last-init td {
-    border-bottom: 1px solid var(--border);
-  }
+  tr.init-row td.init-name { padding-left: 34px; }
+  tr.init-row td.init-name::before { content: "↳ "; color: var(--ink-3); }
   .squad-chip {
     display: inline-block;
     padding: 1px 8px;
     border-radius: 10px;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 600;
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--idle-bg);
+    color: var(--idle);
   }
   .impact-chip {
     display: inline-block;
     padding: 1px 7px;
     border-radius: 10px;
-    font-size: 10.5px;
+    font-size: 11px;
     font-weight: 600;
     margin-left: 4px;
+    background: var(--idle-bg);
+    color: var(--accent);
   }
-  .impact-chip.cost { background: #f5f3ff; color: #6d28d9; }
-  .impact-chip.latency { background: #e0f2fe; color: #0369a1; }
-
-  .progress-cell {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .mini-bar {
-    width: 60px;
-    height: 6px;
-    background: var(--light-gray);
-    border-radius: 3px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .mini-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
-  .progress-value {
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    min-width: 48px;
-    text-align: right;
-  }
-
-  .contribution-value {
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ── Actual cell with WoW delta ── */
+  .progress-cell { display: flex; align-items: center; gap: 10px; }
+  .mini-bar { width: 60px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+  .mini-bar-fill { height: 100%; border-radius: 3px; }
+  .progress-value { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 48px; text-align: right; }
+  .contribution-value { font-weight: 700; font-variant-numeric: tabular-nums; }
   .actual-value { font-weight: 600; }
-  .wow-delta {
-    display: block;
-    font-size: 11px;
-    font-weight: 500;
-    margin-top: 2px;
-    font-variant-numeric: tabular-nums;
-  }
-  .wow-delta.positive { color: var(--green); }
-  .wow-delta.negative { color: var(--red); }
-  .wow-delta.flat { color: var(--text-secondary); }
-
-  /* ── Sparkline ── */
-  .sparkline-cell {
-    text-align: center;
-  }
-  .sparkline {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .sparkline-empty {
-    color: var(--gray);
-    font-size: 12px;
-  }
-
-  /* ── Status Pill ── */
+  .wow-delta { display: block; font-size: 11.5px; font-weight: 500; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .wow-delta.positive { color: var(--good); }
+  .wow-delta.negative { color: var(--bad); }
+  .wow-delta.flat { color: var(--ink-2); }
+  .sparkline-cell { text-align: center; }
+  .sparkline { display: inline-block; vertical-align: middle; }
+  .sparkline-empty { color: var(--ink-3); font-size: 12px; }
   .status-pill {
     display: inline-block;
     padding: 3px 10px;
@@ -319,59 +520,21 @@
     font-weight: 600;
     white-space: nowrap;
   }
-  .status-pill.green { background: #dcfce7; color: #166534; }
-  .status-pill.yellow { background: #fef9c3; color: #854d0e; }
-  .status-pill.red { background: #fee2e2; color: #991b1b; }
-  .status-pill.gray { background: #f1f5f9; color: #475569; }
-  .status-pill.blue { background: #dbeafe; color: #1e40af; }
-  .status-pill.small { padding: 2px 8px; font-size: 11px; }
+  .status-pill.green { background: var(--good-bg); color: var(--good); }
+  .status-pill.yellow { background: var(--warn-bg); color: var(--warn); }
+  .status-pill.red { background: var(--bad-bg); color: var(--bad); }
+  .status-pill.gray { background: var(--idle-bg); color: var(--idle); }
+  .status-pill.blue { background: var(--idle-bg); color: var(--accent); }
+  .status-pill.small { padding: 2px 8px; font-size: 11.5px; }
+  .totals-row td { font-weight: 700; border-top: 2px solid var(--line); }
+  .tbd { color: var(--warn); font-style: italic; font-size: 12px; }
 
-  /* ── Totals Row ── */
-  .totals-row td {
-    background: #f8fafc;
-    font-weight: 700;
-    border-top: 2px solid var(--border);
-  }
-
-  /* ── Guardrail strip ── */
-  .guardrail-card {
-    background: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--yellow);
-    padding: 18px 24px;
-    margin-bottom: 24px;
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-secondary);
-  }
-  .guardrail-card strong { color: var(--text); }
-
-  /* ── Drivers Card ── */
-  .drivers-card {
-    background: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-    padding: 24px 28px;
-    margin-bottom: 24px;
-  }
-  .drivers-card h2 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .drivers-card .subtitle {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-  }
+  /* ── Detail: drivers & watch list ── */
   .driver-item {
     display: flex;
     gap: 16px;
     padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--line);
     align-items: flex-start;
   }
   .driver-item:last-child { border-bottom: none; }
@@ -381,254 +544,252 @@
     gap: 8px;
     min-width: 260px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13.5px;
     flex-shrink: 0;
+    color: var(--ink);
   }
-  .driver-text {
-    flex: 1;
+  .driver-text { flex: 1; font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+  .driver-text.muted { font-style: italic; opacity: 0.7; }
+  .watch-list { list-style: none; }
+  .watch-list li {
     font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.55;
-  }
-  .driver-text.muted {
-    font-style: italic;
-    opacity: 0.7;
-  }
-
-  /* ── R&D Card ── */
-  .rnd-card {
-    background: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-    padding: 24px 28px;
-    margin-bottom: 24px;
-  }
-  .rnd-card h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .rnd-card .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
-  .rnd-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 0 10px 18px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    border-left: 2px solid var(--light-gray);
-    margin-bottom: 4px;
-  }
-  .rnd-item .rnd-name { flex: 1; line-height: 1.5; }
-  .rnd-item .rnd-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    font-weight: 600;
-    color: var(--text);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-
-  /* ── Watch list ── */
-  .watch-card {
-    background: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-    padding: 24px 28px;
-    margin-bottom: 24px;
-  }
-  .watch-card h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .watch-card .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
-  .watch-card ul { list-style: none; }
-  .watch-card li {
-    font-size: 13px;
-    color: var(--text-secondary);
+    color: var(--ink-2);
     line-height: 1.55;
     padding: 7px 0 7px 18px;
-    border-left: 2px solid var(--light-gray);
+    border-left: 2px solid var(--line);
     margin-bottom: 2px;
   }
-  .watch-card li strong { color: var(--text); }
+  .watch-list li strong { color: var(--ink); }
+  .guardrail-card { font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+  .guardrail-card strong { color: var(--ink); }
+  .guardrail-card table { min-width: 0; }
 
-  /* ── Footer ── */
   footer {
     text-align: center;
-    font-size: 13px;
-    color: var(--text-secondary);
-    padding: 16px;
-  }
-  footer a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  /* ── TBD styling ── */
-  .tbd {
-    color: var(--yellow);
-    font-style: italic;
     font-size: 12px;
+    color: var(--ink-3);
+    padding-top: 28px;
   }
+  footer a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="team-label">Machine Learning</div>
-  <h1>H2 2026 — ML OKR &amp; Metrics Tracker</h1>
-  <div class="okr-statement">
-    OKR1: Deliver on ≥80% of partner team objectives, weighted by ML investment (SWAG allocation)<br>
-    Shared targets with Core Orchestration (tracked separately below): cost per automated interaction ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 chat latency ≤ 10s (support + sales) by EoQ3, held through EoY · median chat latency ≤ 6s by EoY
+<!-- ═══ 1 · HERO ═══ -->
+<div class="hero">
+  <div>
+    <div class="eyebrow">Machine Learning · Second half of 2026</div>
+    <div class="big display num"><span id="completionRate">—</span><span class="delta flat" id="completionDelta"></span></div>
+    <div class="caption">How much of the partner teams' goals ML work has delivered so far, weighted by the effort behind each one (<span id="scopePoints" class="num">—</span> points in scope). Target: <strong>80%</strong> by December.</div>
   </div>
-  <div class="week-badge" id="weekBadge"></div>
-  <div class="week-badge" id="lastUpdatedBadge" style="margin-left:8px;"></div>
-</header>
-
-<div class="table-card">
-  <h2>Cost &amp; Latency — Shared Targets (Core Orchestration)</h2>
-  <div class="table-subtitle">Leadership-defined: cost ≤ $0.15 by EoQ3 → ≤ $0.10 EoY · P75 latency ≤ 10s (support + sales combined) by EoQ3, held · median latency ≤ 6s by EoY. ML initiatives here drive the outcome directly, so they are excluded from the completion rate below and measured on metric actuals. Nested rows = committed ML levers; impact chips mark levers that move both cost and latency. SWAG is counted once, under the lever's primary target.</div>
-  <div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th style="width:26%">Target</th>
-        <th class="right">Baseline</th>
-        <th class="right">Target</th>
-        <th class="right">Actual (Δ WoW)</th>
-        <th class="center">Trend</th>
-        <th class="center" style="width:16%">Progress to Target</th>
-        <th class="center">Status</th>
-      </tr>
-    </thead>
-    <tbody id="sharedBody"></tbody>
-  </table>
+  <div class="hero-side">
+    <div class="row" id="weekBadge"></div>
+    <div class="row" id="lastUpdatedBadge"></div>
+    <div class="pace-track">
+      <div class="pace-fill" id="paceFill"></div>
+      <div class="pace-mark expected" id="paceExpected" title="Expected progress by now, pacing evenly toward 80% by December"></div>
+      <div class="pace-mark" style="left:80%" title="Target: 80%"></div>
+    </div>
+    <div class="pace-meta num" id="paceMeta"></div>
+    <div class="pace-verdict" id="paceVerdict"></div>
   </div>
 </div>
 
-<div class="summary-row">
-  <div class="summary-card">
-    <div class="label">Weighted Completion Rate</div>
-    <div class="value" id="completionRate" style="color: var(--accent);">—</div>
-    <div id="completionDelta" class="wow-delta flat" style="margin-top:4px;"></div>
-    <div class="sub">Target: 80%</div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="completionBar" style="width:0%; background: var(--accent);"></div>
-      <div class="progress-bar-target" style="left: 80%;"></div>
+<!-- ═══ 2 · WHAT MOVED ═══ -->
+<section>
+  <h2>What moved this period</h2>
+  <div class="sub" id="recapPeriod"></div>
+</section>
+<div class="moved">
+  <div class="panel">
+    <h3>The movements</h3>
+    <div id="recapMovements"></div>
+  </div>
+  <div class="panel">
+    <h3>Attribution</h3>
+    <div class="cred-group">
+      <div class="cred-head" style="color:var(--good)"><span class="dot" style="background:var(--good)"></span>Shipped &amp; credited</div>
+      <ul class="cred-list" id="recapCredited"></ul>
+    </div>
+    <div class="cred-group">
+      <div class="cred-head" style="color:var(--idle)"><span class="dot" style="background:var(--idle)"></span>In flight — no impact claimed</div>
+      <ul class="cred-list" id="recapInFlight"></ul>
+    </div>
+    <div class="cred-note">Rule: only work that is deployed, completed, and live long enough to show up gets credited with moving a metric.</div>
+  </div>
+</div>
+
+<!-- ═══ 3 · MERCHANT QUALITY ═══ -->
+<section>
+  <h2 id="qualityHeading">Merchant quality</h2>
+  <div class="sub">How merchants rate AI Agent answers, tracked as a rolling 28-day median (the typical merchant's rate over the past 4 weeks) · quality rate = share of rated tickets marked good or ok</div>
+</section>
+<div class="panel" style="margin-bottom:36px">
+  <div class="quality-grid">
+    <div class="qchart">
+      <div class="q-title">Bad rate</div>
+      <div id="qualityChart"></div>
+      <div class="q-caption" id="qualityCaption"></div>
+    </div>
+    <div>
+      <div class="q-title">Top bad reasons — change vs last week</div>
+      <div id="qualityReasons"></div>
+      <div class="q-caption" id="qualityReasonsCaption"></div>
     </div>
   </div>
-  <div class="summary-card">
-    <div class="label">SWAG in Completion Scope</div>
-    <div class="value">220</div>
-    <div class="sub">of 400 sized Q3 pts — 180 pts on cost/latency targets (below). R&amp;D section retired: Shopper Scoring dropped (AI Journey pursuing an LLM approach independently), post-training folded into the cost target.</div>
-  </div>
-  <div class="summary-card">
-    <div class="label">H2 Progress</div>
-    <div class="value" id="quarterProgress">—</div>
-    <div class="sub" id="quarterDates"></div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="quarterBar" style="width:0%; background: var(--green);"></div>
+</div>
+
+<!-- ═══ 4 · PARTNER METRICS ═══ -->
+<section>
+  <h2>Partner metrics</h2>
+  <div class="sub">These feed the completion rate, weighted by effort points · under each metric: the ML work driving it (<span style="color:var(--good); font-weight:700">✓</span> shipped · <span style="color:var(--accent)">●</span> in progress · <span style="color:var(--ink-3)">○</span> not started)</div>
+</section>
+<div class="grid" id="partnerGrid"></div>
+
+<!-- ═══ 5 · SHARED TARGETS ═══ -->
+<section>
+  <h2>Shared targets — cost &amp; latency</h2>
+  <div class="sub">Set by leadership, shared with the Core Orchestration team · measured on the metric itself, not counted in the completion rate · "P75" = the time three out of four replies come in under</div>
+</section>
+<div class="grid" id="sharedGrid"></div>
+
+<!-- ═══ 6 · DETAIL ═══ -->
+<section>
+  <h2>Detail</h2>
+  <div class="sub">Everything behind the story, collapsed. Expand when a question comes up.</div>
+</section>
+
+<details>
+  <summary>Partner OKR breakdown — full table <span class="hint">effort points, weights, contributions, initiative rows</span></summary>
+  <div class="body">
+    <div class="detail-note">Metric targets are the end-of-half partner commitments; status is paced against the September checkpoint where one exists, else evenly across the half. Nested rows are the ML initiatives driving each metric (official Linear names).</div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:15%">Partner Team</th>
+          <th style="width:19%">Primary Metric</th>
+          <th class="right">Points</th>
+          <th class="right">Weight</th>
+          <th class="right">Baseline</th>
+          <th class="right">Target</th>
+          <th class="right">Actual (Δ week)</th>
+          <th class="center">Trend</th>
+          <th class="center" style="width:13%">Progress</th>
+          <th class="center">Status</th>
+          <th class="right">Contrib.</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+      <tfoot>
+        <tr class="totals-row">
+          <td><strong>Total</strong></td>
+          <td></td>
+          <td class="right" id="totalSwag"></td>
+          <td class="right">100%</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="right" id="totalContribution"></td>
+        </tr>
+      </tfoot>
+    </table>
     </div>
   </div>
-</div>
+</details>
 
-<div class="table-card">
-  <h2>Partner OKR Breakdown</h2>
-  <div class="table-subtitle">Feeds the weighted completion rate. Metric targets = EoH2 partner commitments; status is paced against the Q3 waypoint where one exists, else linearly. Nested rows = the exact ML initiatives driving each metric (Q3 Committed, June 19 roadmap; refreshed at each 6-week check-in — Q4 additions re-weight these rows).</div>
-  <div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th style="width:15%">Partner Team</th>
-        <th style="width:19%">Primary Metric</th>
-        <th class="right">SWAG</th>
-        <th class="right">Weight</th>
-        <th class="right">Baseline</th>
-        <th class="right">Target (EoH2)</th>
-        <th class="right">Actual (Δ WoW)</th>
-        <th class="center">Trend</th>
-        <th class="center" style="width:13%">OKR Progress</th>
-        <th class="center">Status</th>
-        <th class="right">Contrib.</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
-    <tfoot>
-      <tr class="totals-row">
-        <td><strong>Total</strong></td>
-        <td></td>
-        <td class="right" id="totalSwag"></td>
-        <td class="right">100%</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="right" id="totalContribution"></td>
-      </tr>
-    </tfoot>
-  </table>
+<details>
+  <summary>Cost &amp; latency — full table <span class="hint">baselines, checkpoints, shared work</span></summary>
+  <div class="body">
+    <div class="detail-note">Leadership-defined targets: cost ≤ $0.15 by end of September, then ≤ $0.10 by December · P75 latency ≤ 10s by September, held through December · median ≤ 6s by December. These initiatives drive the outcome directly, so they sit outside the completion rate and are measured on the metric itself. Effort points are counted once, under the work's primary target.</div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:26%">Target</th>
+          <th class="right">Baseline</th>
+          <th class="right">Target</th>
+          <th class="right">Actual (Δ week)</th>
+          <th class="center">Trend</th>
+          <th class="center" style="width:16%">Progress to Target</th>
+          <th class="center">Status</th>
+        </tr>
+      </thead>
+      <tbody id="sharedBody"></tbody>
+    </table>
+    </div>
   </div>
-</div>
+</details>
 
-<div class="guardrail-card" id="guardrailCard">
-  <strong>Quality guardrail (OKR1):</strong> keep the V3 'bad' rating at or below the H2-start baseline, global, with no top intent above its floor. Reference baseline is the Jul 5 reading (85.0% quality rate, ~15% bad, 28-day rolling median across merchants with at least 5 ratings).
-  <table style="width:100%; border-collapse:collapse; margin:12px 0 6px; font-size:12.5px;">
-    <thead>
-      <tr>
-        <th style="text-align:left; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">V3 merchant feedback</th>
-        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Baseline · Jul 5</th>
-        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Last · Jul 27–Aug 2</th>
-        <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Current · Aug 3–7 (5 days)</th>
-        <th style="text-align:center; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Quality rate (good+ok), rolling 28-day median</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">85.0%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">80.0%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">80.0%</td>
-        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Down (5.0pt below baseline)</span></td>
-      </tr>
-      <tr>
-        <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Bad rate, rolling 28-day median</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~15%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">20.0%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">20.0%</td>
-        <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Breached (~5pt over)</span></td>
-      </tr>
-      <tr>
-        <td style="padding:7px 8px; color:var(--text);">Bad rate, raw weekly aggregate</td>
-        <td class="mono" style="text-align:right; padding:7px 8px;">—</td>
-        <td class="mono" style="text-align:right; padding:7px 8px;">10.4%</td>
-        <td class="mono" style="text-align:right; padding:7px 8px;">11.3%</td>
-        <td style="text-align:center; padding:7px 8px;"><span class="status-pill small yellow">Watch (+0.9pt, partial week)</span></td>
-      </tr>
-    </tbody>
-  </table>
-  <div style="font-size:11.5px; color:var(--gray); margin-bottom:10px; line-height:1.5;"><strong style="color:var(--text);">The guardrail is breached, now ~5pt over.</strong> Bad rate is 20.0% on the rolling 28-day median against the ~15% H2-start baseline, and quality is 80.0% against the 85.0% Jul 5 reference. This is the fourth consecutive period of deterioration on completed cuts (bad rate ~15.9% → ~17.9% → 20.0%); note last week's ~18.3% was a partial Jul 27–30 read that once again came in optimistic vs the completed week — the fourth time a partial cut has flattered the trend. Within this refresh the median is flat week-over-week: it bottomed at 21.3% bad on Aug 4–5 and recovered to 20.0% by Aug 7, wobbling rather than improving. The raw weekly aggregate still reads far better (10.4% bad for Jul 27–Aug 2, 11.3% on the partial Aug 3–7 window): the median tracks the typical merchant while the aggregate is dominated by the highest-volume merchants, so the deterioration remains concentrated in smaller merchants. The bad-reason mix also shifted: wrong_knowledge is now the #1 reason at 22.6% of bad-rated tickets (+5.2pp WoW), while missing_knowledge fell 2.8pp and handover-related reasons declined slightly — pointing at retrieval/knowledge accuracy rather than routing. The guardrail is defined on the rolling median, so the breach stands regardless of the aggregate. Merchants in the rolling window grew from ~510 to ~560; message-history lag can backfill the last 1–2 days. Source: Cortex V3 merchant quality rate.</div>
-  <strong>Partner guardrails we inherit:</strong> C&amp;T, no CSAT or latency regression on skill-handled tickets. Support Orch, no merchant-satisfaction regression on tickets using skills or actions.
-</div>
+<details>
+  <summary>Driver notes — full commentary <span class="hint">the complete weekly narrative per row</span></summary>
+  <div class="body">
+    <div id="driversList"></div>
+  </div>
+</details>
 
-<div class="drivers-card">
-  <h2>This Week's Drivers</h2>
-  <div class="subtitle">What moved the metrics this week</div>
-  <div id="driversList"></div>
-</div>
+<details>
+  <summary>Quality guardrail — full breakdown <span class="hint">baseline table, median vs aggregate, reason mix</span></summary>
+  <div class="body">
+    <div class="guardrail-card" id="guardrailCard">
+      <strong>Quality guardrail (OKR1):</strong> keep the V3 'bad' rating at or below the H2-start baseline, global, with no top intent above its floor. Reference baseline is the Jul 5 reading (85.0% quality rate, ~15% bad, 28-day rolling median across merchants with at least 5 ratings).
+      <table style="width:100%; border-collapse:collapse; margin:12px 0 6px; font-size:12.5px;">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">V3 merchant feedback</th>
+            <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Baseline · Jul 5</th>
+            <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Last · Jul 27–Aug 2</th>
+            <th style="text-align:right; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Current · Aug 3–7 (5 days)</th>
+            <th style="text-align:center; padding:6px 8px; color:var(--text-secondary); font-weight:600; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:0.5px; font-size:11px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Quality rate (good+ok), rolling 28-day median</td>
+            <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">85.0%</td>
+            <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">80.0%</td>
+            <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">80.0%</td>
+            <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Down (5.0pt below baseline)</span></td>
+          </tr>
+          <tr>
+            <td style="padding:7px 8px; color:var(--text); border-bottom:1px solid var(--border);">Bad rate, rolling 28-day median</td>
+            <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">~15%</td>
+            <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">20.0%</td>
+            <td class="mono" style="text-align:right; padding:7px 8px; border-bottom:1px solid var(--border);">20.0%</td>
+            <td style="text-align:center; padding:7px 8px; border-bottom:1px solid var(--border);"><span class="status-pill small red">Breached (~5pt over)</span></td>
+          </tr>
+          <tr>
+            <td style="padding:7px 8px; color:var(--text);">Bad rate, raw weekly aggregate</td>
+            <td class="mono" style="text-align:right; padding:7px 8px;">—</td>
+            <td class="mono" style="text-align:right; padding:7px 8px;">10.4%</td>
+            <td class="mono" style="text-align:right; padding:7px 8px;">11.3%</td>
+            <td style="text-align:center; padding:7px 8px;"><span class="status-pill small yellow">Watch (+0.9pt, partial week)</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:11.5px; color:var(--gray); margin-bottom:10px; line-height:1.5;"><strong style="color:var(--text);">The guardrail is breached, now ~5pt over.</strong> Bad rate is 20.0% on the rolling 28-day median against the ~15% H2-start baseline, and quality is 80.0% against the 85.0% Jul 5 reference. This is the fourth consecutive period of deterioration on completed cuts (bad rate ~15.9% → ~17.9% → 20.0%); note last week's ~18.3% was a partial Jul 27–30 read that once again came in optimistic vs the completed week — the fourth time a partial cut has flattered the trend. Within this refresh the median is flat week-over-week: it bottomed at 21.3% bad on Aug 4–5 and recovered to 20.0% by Aug 7, wobbling rather than improving. The raw weekly aggregate still reads far better (10.4% bad for Jul 27–Aug 2, 11.3% on the partial Aug 3–7 window): the median tracks the typical merchant while the aggregate is dominated by the highest-volume merchants, so the deterioration remains concentrated in smaller merchants. The bad-reason mix also shifted: wrong_knowledge is now the #1 reason at 22.6% of bad-rated tickets (+5.2pp WoW), while missing_knowledge fell 2.8pp and handover-related reasons declined slightly — pointing at retrieval/knowledge accuracy rather than routing. The guardrail is defined on the rolling median, so the breach stands regardless of the aggregate. Merchants in the rolling window grew from ~510 to ~560; message-history lag can backfill the last 1–2 days. Source: Cortex V3 merchant quality rate.</div>
+      <strong>Partner guardrails we inherit:</strong> C&amp;T, no CSAT or latency regression on skill-handled tickets. Support Orch, no merchant-satisfaction regression on tickets using skills or actions.
+    </div>
+  </div>
+</details>
 
-<div class="watch-card">
-  <h2>Watch List — Not Committed, Could Enter the Tracker</h2>
-  <div class="subtitle">Potential ML asks surfaced in partner roadmaps or pending decisions. None carry SWAG in the completion rate today.</div>
-  <ul>
-    <li><strong>Opportunities / Gaia infra:</strong> decision (Jul 1) is to reuse the existing Gaps &amp; Conflicts infra as-is as a Gaia input, monitor, maybe sunset. No committed ML work. Possible future asks: MLA conflict-quality fixes (30% pass rate in QA) and the unsized MLE reliability/migration spec.</li>
-    <li><strong>SA V3 post-release prompt tuning (10–15 SWAG):</strong> SA flags the budget owner as unclear (squad SWE vs ML). To settle with Manu.</li>
-    <li><strong>C&amp;T copilot asks:</strong> M2 proactive optimization and Simulate (shopper-simulator quality, LLM judges) both name ML help; C&amp;T's roadmap notes "no dedicated MLA for copilot" while Evoli stabilises. Revisit at next check-in.</li>
-    <li><strong>Persist skill across changing intent (Support Orch, Sept):</strong> listed as MLA assist via C&amp;T; not in ML committed capacity.</li>
-    <li><strong>Runtime guardrails (PII / internal reasoning before send):</strong> unowned; owner candidate is C&amp;T or ML.</li>
-    <li><strong>Post-training go/no-go (end of Q3):</strong> if "go", the Q4 build would reshape MLE capacity and the Q4 tracker mix.</li>
-  </ul>
-</div>
+<details>
+  <summary>Watch list &amp; scope notes <span class="hint">not committed, could enter the tracker</span></summary>
+  <div class="body">
+    <div class="detail-note"><strong>Points in completion scope:</strong> <span id="scopePointsDetail" class="num">—</span> of 400 sized Q3 points — 180 points sit on the cost/latency targets above. R&amp;D section retired: Shopper Scoring dropped (AI Journey pursuing an LLM approach independently), post-training folded into the cost target.</div>
+    <ul class="watch-list">
+      <li><strong>Opportunities / Gaia infra:</strong> decision (Jul 1) is to reuse the existing Gaps &amp; Conflicts infra as-is as a Gaia input, monitor, maybe sunset. No committed ML work. Possible future asks: MLA conflict-quality fixes (30% pass rate in QA) and the unsized MLE reliability/migration spec.</li>
+      <li><strong>SA V3 post-release prompt tuning (10–15 points):</strong> SA flags the budget owner as unclear (squad SWE vs ML). To settle with product leadership.</li>
+      <li><strong>C&amp;T copilot asks:</strong> M2 proactive optimization and Simulate (shopper-simulator quality, LLM judges) both name ML help; C&amp;T's roadmap notes "no dedicated MLA for copilot" while Evoli stabilises. Revisit at next check-in.</li>
+      <li><strong>Persist skill across changing intent (Support Orch, Sept):</strong> listed as MLA assist via C&amp;T; not in ML committed capacity.</li>
+      <li><strong>Runtime guardrails (PII / internal reasoning before send):</strong> unowned; owner candidate is C&amp;T or ML.</li>
+      <li><strong>Post-training go/no-go (end of Q3):</strong> if "go", the Q4 build would reshape MLE capacity and the Q4 tracker mix.</li>
+    </ul>
+  </div>
+</details>
 
 <footer>
   <div id="lastUpdated"></div>
@@ -647,6 +808,9 @@
 //  DATA CONFIG — Update this section weekly
 //  Each week: append a new entry to `history`, update `currentDriver`,
 //  and bump initiative `status` (Not started / In progress / Shipped) as work moves.
+//  ALSO refresh: RECAP (the what-moved story panels), QUALITY (guardrail
+//  readings + bad reasons), and each row's `takeaway` one-liner.
+//  Initiative names must match the official Linear project names.
 // ════════════════════════════════════════════════════════════════
 
 const QUARTER = {
@@ -661,13 +825,58 @@ const QUARTER = {
 // ← UPDATE THIS each time you refresh the data
 const LAST_UPDATED = "2026-08-07";
 
+// ── The what-moved recap (the All Hands story) — rewrite weekly ──
+const RECAP = {
+  period: "Week of Jul 27 – Aug 2 (completed) · the recap for the ML All Hands",
+  movements: [
+    { badge: "+1.1 pts", dir: "up", html: "<strong>Completion rate, all from Coaching & Trust.</strong> Skill involvement jumped 19.25% → 24.4% as their Skills launch rolls out — not ML's in-flight work — clearing the September checkpoint. Every other metric was roughly flat." },
+    { badge: "−1.1s", dir: "up", html: "<strong>Latency improved across the board</strong> (support + sales 13.46s, Shopping Assistant 14.54s), driven by work that shipped: the handover merge and the refactored email prompt." },
+    { badge: "+$0.011", dir: "down", html: "<strong>Cost ticked up to $0.219</strong> per automated interaction. Spend held flat while volume fell 4%, so unit cost didn't actually rise. The model switch is still the lever that matters." },
+    { badge: "20.0%", dir: "flat", html: "<strong>Merchant quality still below baseline.</strong> Bad-rating rate flat vs last week at 20% against the ~15% starting point; wrong knowledge is now the #1 reason." }
+  ],
+  credited: [
+    "<strong>Refactored email prompt</strong> → part of this week's latency drop",
+    "<strong>SMS on V3</strong> (100% of traffic since Jul 24) · <strong>offline evaluation migration</strong> → internal delivery, 20 of 105 points shipped"
+  ],
+  inFlight: [
+    "Skills framework iteration + persisted Skills (the 24.4% climb is the Skills launch rolling out, not this work)",
+    "Shopping Assistant latency · cost reduction · intent detection · intent & spam assessment (spam decision made, intent still open)",
+    "New-model test 'Luna' (decision ~Aug 24) · fine-tuning go/no-go ~Aug 14 · image recognition proof of concept (Sept)"
+  ]
+};
+
+// ── Merchant quality guardrail (28-day rolling median, completed cuts) ──
+const QUALITY = {
+  breached: true,
+  baselineValue: 15,
+  baselineLabel: "~15%",
+  readings: [
+    { date: "2026-07-05", value: 15.0 },  // H2-start baseline reading
+    { date: "2026-07-19", value: 15.9 },  // approximate, from driver notes
+    { date: "2026-07-26", value: 17.9 },  // approximate, from driver notes
+    { date: "2026-08-02", value: 20.0 },
+    { date: "2026-08-07", value: 20.0 }   // ← APPEND WEEKLY (bad rate, %)
+  ],
+  caption: "~15.9 → ~17.9 → 20.0 → 20.0 on completed weeks; flat vs last week, wobbling rather than improving — the fourth consecutive decline since the Jul 5 baseline. <strong>Quality rate (good + ok): 80.0%</strong>, vs 85.0% at baseline.",
+  reasons: [
+    { name: "Wrong knowledge", share: "22.6%", delta: "▲ 5.2 pts", dir: "worse" },
+    { name: "Missing knowledge", delta: "▼ 2.8 pts", dir: "better" },
+    { name: "Handover-related", delta: "▼ slight", dir: "better" }
+  ],
+  reasonsCaption: "Share of bad-rated tickets. The mix points at <strong>retrieval / knowledge accuracy</strong>, not routing."
+};
+
 // Initiative delivery status pills: "Not started" (gray), "In progress" (blue), "Shipped" (green)
 
 const TEAMS = [
   {
     name: "Coaching & Trust",
     color: "#f59e0b",
-    swag: 15,
+    swag: 10,
+    cardTitle: "Coaching & Trust · Skill involvement",
+    takeaway: "Skills rollout keeps climbing; September checkpoint already cleared, ahead of pace on the December target.",
+    targetText: "Target: <strong>36% by Dec</strong>",
+    stripNote: "Sep checkpoint 15–18% ✓",
     metric: "% of AI Agent interactions involving a Skill",
     note: "Provisional 36% — C&T locks the final target mid-July (floor 18% · stretch 49%).",
     baseline: 0.07,
@@ -684,14 +893,17 @@ const TEAMS = [
     ],
     currentDriver: "Skill involvement keeps climbing post-GA: 24.4% of AI Agent handled tickets now use a Skill, up from 19.25% the week before as the Skills framework rolls out further. That clears the 15–18% Q3 waypoint and puts the row past its Q3 pace against the 36% H2 target. First V3 Skills signals stay strong: instruction retrieval is far more consistent than guidance and adherence is ~93%. C&T is running the 'actions in skills' project with Support Orchestration. Known weakness feeding into this: an intent switch mid-conversation drops the active skill entirely. The quick fix is to persist the last 2 to 3 skills across intent changes regardless of intent accuracy; the fuller path splits into deterministic controls (~4 weeks) versus retraining (~8 weeks), and leadership needs that conditional framing rather than a single number. ML's committed lever: Skills framework iteration (knowledge-in-knowledge, skill-in-skill).",
     initiatives: [
-      { name: "Skills framework iteration — knowledge-in-knowledge, skill-in-skill", swag: 10, squad: "MLA", status: "In progress" },
-      { name: "Skills persistence — reasoning update to keep skills across intent switches (fixes the mid-conversation skill drop)", swag: 5, squad: "MLA", status: "In progress" }
+      { name: "Skills framework iteration & knowledge-in-knowledge", swag: 10, squad: "MLA", status: "In progress" }
     ]
   },
   {
     name: "Shopping Assistant: Engagement",
     color: "#6366f1",
     swag: 20,
+    cardTitle: "Shopping Assistant · Engagement",
+    takeaway: "Capacity went first to Tone of Voice; quiz-to-skill starts in the coming weeks, so little movement expected before it lands.",
+    targetText: "Target: <strong>0.3% by Sep</strong>",
+    stripNote: "started at 0.12%",
     metric: "Share of visitors having a conversation with SA (sessions → conversation)",
     baseline: 0.12,
     target: 0.3,
@@ -704,16 +916,20 @@ const TEAMS = [
       { date: "2026-07-23", value: 0.14 },
       { date: "2026-08-06", value: 0.124 }  // global meaningful-conversation rate, rolling 28d as of Aug 6 — source switched to the Cortex SA OKR skill; earlier 0.14 points may be a slightly different cut
     ],
-    currentDriver: "Conversation rate reads 0.124% on the Cortex SA skill's global meaningful-conversation cut (rolling 28d as of Aug 6, now the go-forward source for SA rows), up from 0.116% three weeks earlier; the median-merchant rate is up more sharply, 0.135% → 0.156%. The broader no-meaningful-filter rate is flat at ~0.17%, so the gain is deeper engagement rather than more opens. Note the earlier 0.14 points in this series may sit on a slightly different cut, so read the trend from the new source rather than across the switch. Still far below the 0.3% Q3 KR. Structural situation unchanged: discovery triggers / quiz-to-skill was deferred out of Q3 for Tone of Voice (non-negotiable Sep 1 social beta), which leaves the engagement KR with no active ML lever in Q3, so material movement from ML work is unlikely this quarter.",
+    currentDriver: "Conversation rate reads 0.124% on the Cortex SA skill's global meaningful-conversation cut (rolling 28d as of Aug 6, now the go-forward source for SA rows), up from 0.116% three weeks earlier; the median-merchant rate is up more sharply, 0.135% → 0.156%. The broader no-meaningful-filter rate is flat at ~0.17%, so the gain is deeper engagement rather than more opens. Note the earlier 0.14 points in this series may sit on a slightly different cut, so read the trend from the new source rather than across the switch. Still far below the 0.3% Q3 KR. Structural situation: this squad's capacity went first to Tone of Voice (non-negotiable Sep 1 social beta); discovery triggers / quiz-to-skill is still in Q3 scope and expected to start in the coming weeks, though it may spill into Q4, so material movement from ML work is unlikely before it lands.",
     initiatives: [
-      { name: "Tone of Voice migration to v3 — the non-negotiable Sep 1 social-beta commitment this squad's Q3 capacity went to", swag: 20, squad: "MLA", status: "Not started" },
-      { name: "Discovery triggers / quiz-to-skill — deferred out of Q3 for Tone of Voice", swag: 0, squad: "MLA", status: "Not started" }
+      { name: "More granular tone of voice migration to v3 — the non-negotiable Sep 1 social-beta commitment this squad's Q3 capacity went to", swag: 20, squad: "MLA", status: "Not started" },
+      { name: "Discovery triggers / Quiz-to-skill — expected to start in the coming weeks, may spill into Q4", swag: 0, squad: "MLA", status: "Not started" }
     ]
   },
   {
     name: "Shopping Assistant: Conversion",
     color: "#ec4899",
     swag: 30,
+    cardTitle: "Shopping Assistant · Conversion",
+    takeaway: "Committed target still pending; not counted in the completion rate until it lands.",
+    targetText: "Target: <strong>not committed yet</strong>",
+    stripNote: "started at 16.1%",
     metric: "Conversion rate within SA meaningful conversations (conversation → order)",
     note: "Supporting signals per SA: buy rate (purchase within 3 days) + in-ticket merchant feedback.",
     baseline: 16.1,       // Q3-start reading
@@ -727,13 +943,19 @@ const TEAMS = [
     ],
     currentDriver: "Conversion within SA meaningful conversations reads 13.0% for the week ending Aug 2 (source is now the Cortex SA OKR skill on dashboard-127 definitions, the go-forward source for this row). On that source the three-week trend is ~14.0% → 13.0%, and the conversion softening is the main driver behind engaged revenue per visitor falling ~8% to $20.81 (engaged conversion 11.4% → 10.6%, AOV $200 → $196); add-to-cart rate also slipped 2.86% → 2.72%. Offsetting signals: the meaningful-conversation rate is improving (median merchant 0.135% → 0.156% rolling 28d) and SA success rate ticked up to 53.6%, so engagement is deepening while conversion-per-conversation softens. Watch: SA-scope cost per automated interaction jumped ~16% to $0.274 over three weeks (this is SA-scope, not the global cost row below). Latest-week figures may revise as the week closes. The committed target is still pending, so the row stays TBD and excluded from the completion rate. ML's committed lever: product-review storage & retrieval, with reviews held in a managed vector DB for retrieval during reply generation; star ratings and review counts are already live in chat behind a feature flag on the SA side, and the review-ingestion pipeline is nearly ready. MLE build (RAG and storage) not yet started, scoped for early August.",
     initiatives: [
-      { name: "Product-review summaries — storage & retrieval (vector DB); starts early Aug", swag: 30, squad: "MLE", status: "Not started" }
+      { name: "Shopper confirmation before handover (v3) — fewer interrupted shopping journeys; also lifts AI Agent success rate (more end-to-end resolved tickets → higher billable volume). Unsized; Linear target Aug 12", swag: 0, squad: "MLA", status: "In progress" },
+      { name: "Product review summary storage & retrieval (vector DB); starts early Aug", swag: 30, squad: "MLE", status: "Not started" },
+      { name: 'Review AI-summary generation & QA — MLA side of product reviews (<a class="metric-link" href="https://app.notion.com/p/gorgias/Shopping-Assistant-MLA-Review-AI-summary-generation-QA-potentially-Q4-3801ae2178f581f0b2ddd2ca007f70fc" target="_blank">spec ↗</a>; potentially Q4, unsized)', swag: 0, squad: "MLA", status: "Not started" }
     ]
   },
   {
     name: "Shopping Assistant: Latency",
     color: "#3b82f6",
     swag: 30,
+    cardTitle: "Shopping Assistant · Latency",
+    takeaway: "Handover merge is live in production; a page-preloading test halved latency in staging.",
+    targetText: "Target: <strong>8s by Dec</strong>",
+    stripNote: "Sep checkpoint 12.52s",
     metric: "SA P75 latency (V3)",
     note: "8s = SA's EoH2 objective; their Q3 KR is −3s vs baseline. ML's Q3 spec commits P75 ≤ 10s as the waypoint.",
     baseline: 15.52,      // First clean post-GA P75 reading, Jul 13-19
@@ -750,13 +972,19 @@ const TEAMS = [
     ],
     currentDriver: "SA P75 read 14.54s for the latest week (bucket labeled Aug 2 on the official AI Agent latency dashboard, now the canonical source for this row), an improvement of ~0.8s vs 15.3s for Jul 20–26, but still well above both the 8s EoH2 objective and the 12.52s Q3 waypoint (−3s from the 15.52s baseline). Latency is SA's #1 KR, with a far lower patience threshold for shopping than support. Progress on the levers: the SA handover merge is released to production (~200k tickets processed with no issues), the perceived-latency work now surfaces product candidates ~4–5s before the final reply, and the product-page preloading POC has halved latency on staging (offline eval dataset being prepared before a production release). The Luna migration for the SA sub-agent is in progress with p50 improving. Still open: prompt-size work (discount instructions are ~20% of the prompt but used in far fewer than 20% of conversations, so intent-gating is under discussion), and get_knowledge tool optimisation is scheduled for end of August. Caution: Luna shows more tool-call rounds than GPT-5.4, which adds latency pressure if it wins the A/B. ML's committed lever: bring the SA sub-agent to P75 ≤ 10s this quarter.",
     initiatives: [
-      { name: "Bring SA sub-agent latency to P75 ≤ 10s", swag: 30, squad: "MLA", status: "In progress" }
+      { name: "Target latency P75 ≤ 10s for the SA sub-agent", swag: 30, squad: "MLA", status: "In progress" }
     ]
   },
   {
     name: "Support Orchestration",
     color: "#14b8a6",
-    swag: 20,
+    swag: 30,
+    cardTitle: "Support · Success rate",
+    targetStatus: "Needs rebaseline",
+    statusTitle: "The 40% target was set on retracted readings; on/off-track is suspended until it is re-anchored at the next OKR review",
+    takeaway: "⚠️ Series was restated after a definition fix; the 40% target was set on the old readings and needs re-anchoring at the next OKR review.",
+    targetText: "Target: <strong>40% by Dec</strong> (needs re-anchoring)",
+    stripNote: "+1.6 pts since launch",
     metric: "Support Success Rate",
     baseline: 31.9,       // wk Jun 29–Jul 5 on the restated definition (billed / covered, dim_tickets)
     target: 40,           // ⚠ Set against the old (irreproducible) readings — needs re-anchoring, see driver
@@ -771,15 +999,20 @@ const TEAMS = [
       { date: "2026-07-26", value: 33.3 },  // wk Jul 20–26
       { date: "2026-08-02", value: 33.5 }   // wk Jul 27–Aug 2 ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "SERIES RESTATED — definition fix, and it retracts last week's headline. The 40.8% logged last week (and the 39.9% / 37.7% before it) could not be reproduced from any weekly cut of the official success-rate definition (billed / covered tickets in dim_tickets, the basis of the monthly Metabase card): on that definition support ran 31.9 → 33.0 → 33.4 → 33.3 → 33.5 across the five completed weeks since Jun 29, and never approached 40%. The old readings most likely used a narrower denominator (automated / attempted). The restated picture is still positive but far more modest: +1.6pp since the GA week, in line with what the Beta 1–3 A/B predicted (+3.1pp, +7.9% vs V2) rather than the +5–8pp the old readings implied. Consequences: last week's 'cleared the 40% EoH2 target' claim is withdrawn, and the 40 target itself was set against the old readings, so it needs re-anchoring on this definition at the next OKR review rather than silently moving the goalposts. ML's committed lever is AI Vision Path 1, GPT 5.4 native vision on damaged-item and missing-package; the POC starts in September (slipped from August on core-orch dependencies: SMS hard auth and Skills persistence). Merchant cohort: 3 of 5–6 needed are signed and CSMs have been slow to respond, so recruitment needs a push for data collection before the September start. Risk to carry: Q4 spillover is likely.",
+    currentDriver: "SERIES RESTATED — definition fix, and it retracts last week's headline. The 40.8% logged last week (and the 39.9% / 37.7% before it) could not be reproduced from any weekly cut of the official success-rate definition (billed / covered tickets in dim_tickets, the basis of the monthly Metabase card): on that definition support ran 31.9 → 33.0 → 33.4 → 33.3 → 33.5 across the five completed weeks since Jun 29, and never approached 40%. The old readings most likely used a narrower denominator (automated / attempted). The restated picture is still positive but far more modest: +1.6pp since the GA week, in line with what the Beta 1–3 A/B predicted (+3.1pp, +7.9% vs V2) rather than the +5–8pp the old readings implied. Consequences: last week's 'cleared the 40% EoH2 target' claim is withdrawn, and the 40 target itself was set against the old readings, so it needs re-anchoring on this definition at the next OKR review rather than silently moving the goalposts. ML's committed lever is improving image recognition capabilities on v3, focused on the damaged-item workflow (GPT 5.4 native vision); the POC starts in September (slipped from August on core-orch dependencies: SMS hard auth and Skills persistence). Re-sized to 25 SWAG (~5 weeks) on Aug 8. Merchant cohort: 3 of 5–6 needed are signed and CSMs have been slow to respond, so recruitment needs a push for data collection before the September start. Risk to carry: Q4 spillover is likely.",
     initiatives: [
-      { name: "AI Vision Path 1 — damaged item / missing package (GPT 5.4 native vision); POC slipped to September", swag: 20, squad: "MLA", status: "In progress" }
+      { name: "Update AI Agent reasoning for persisted Skills (fixes the mid-conversation skill drop)", swag: 5, squad: "MLA", status: "In progress" },
+      { name: "Improve image recognition on AI Agent V3 — damaged-item workflow focus (GPT 5.4 native vision); POC starts September", swag: 25, squad: "MLA", status: "In progress" }
     ]
   },
   {
     name: "Internal / V3 Post-GA",
     color: "#10b981",
     swag: 105,
+    cardTitle: "Internal · V3 after launch",
+    takeaway: "Intent work needs a new owner by the end of August.",
+    targetText: "Target: <strong>all 105 points by Dec</strong>",
+    stripNote: "paced against time",
     metric: "Linear progression through H2",
     note: "Housekeeping to keep V3 healthy post-GA. Not tied to a partner metric; tracked as delivery progression.",
     baseline: 0,
@@ -790,11 +1023,11 @@ const TEAMS = [
     history: [],          // Auto-tracked, no manual history
     currentDriver: "SMS on V3 reached 100% of production traffic on Jul 24. Online eval is running against a 1k+ ticket target and global metrics are stable vs baseline (handover rate 60%, cost 6¢ per conversation), though outcome coherence dropped 8pp between offline and online (68.4% → 60.1%) and the team is checking whether that is real or a judge artifact. Two SMS items are open: the hard-auth offline eval is blocked with no SMS data on v3 yet and needs core-team support, expected by Jul 31, and the SMS handover merge is not enabled because of a feature-flag gap. The handover merge itself (default agent and handover collapsed into one) is released to 100% of traffic on chat and email, QA clean across 5k+ executions; the shopping-assistant variant is blocked on a structured-output issue with the backend team. Offline-eval migration to v3 is nearly done, roughly 10 of 50 scenarios left plus a final consistency check, with LLM-judge agreement at ~80–85% against manual review on the current prod model. Intent & Spam: the spam model agrees with the LLM judge 84% of the time, so no retraining is needed; the main gaps are marketing messages over-flagged as spam and some order-intent messages misflagged. Intent and spam monitoring dashboards are live in Metabase pending validation. Social-comment performance is a known gap since the spam model was not trained on short-form or emoji content, and it is being investigated this week as an enterprise deal depends on it. Intent discovery runs to ~Aug 1 with an alignment session in the week of Aug 10; a core finding is that intent predictions evaluated in isolation miss conversational context, which causes flickiness that worsens as conversations grow, and intent-list simplification (54 combinations down to ~35) is under discussion. Reasoning quality: the SPEED prompt is in review, a language-mismatch bug affecting 0.3% of tickets has a new prompt fix with escalations resolved, and handover-confirmation prompt iterations are done with offline runs launching. LLM stack: the model leaderboard is live as a single view across open and closed models. Delivery risk: ownership of the intent workstream needs a handoff before the end of August.",
     initiatives: [
-      { name: "Enable the SMS use case on V3", swag: 5, squad: "MLA", status: "Shipped" },
+      { name: "SMS Use case enablement for V3", swag: 5, squad: "MLA", status: "Shipped" },
       { name: "V3 reasoning quality improvement — targeted prompt fixes vs post-GA failure modes", swag: 10, squad: "MLA", status: "In progress" },
-      { name: "Migrate v2 offline-eval scenarios to v3", swag: 15, squad: "MLA", status: "Shipped" },
+      { name: "Scenario migration V2 → V3", swag: 15, squad: "MLA", status: "Shipped" },
       { name: "Replace gemini-2.5-flash before its Oct 2026 shutdown — separate initiative, not yet started (needs capacity allocated)", swag: 10, squad: "MLA", status: "Not started" },
-      { name: "Intent & Spam model assessment — retrain-or-monitor call (spam: no retrain needed, 84% judge agreement)", swag: 10, squad: "MLE", status: "Shipped" },
+      { name: "Intent & Spam model assessment — retrain-or-monitor call (spam: no retrain needed, 84% judge agreement; intent side still open)", swag: 10, squad: "MLE", status: "In progress" },
       { name: "Improve intent detection performance", swag: 40, squad: "MLE", status: "In progress" },
       { name: "LLM stack review & consolidation (gateway, eval framework, prompt registry)", swag: 15, squad: "MLA", status: "In progress" }
     ]
@@ -809,6 +1042,10 @@ const SHARED_TARGETS = [
   {
     name: "Cost per automated interaction",
     color: "#8b5cf6",
+    cardTitle: "Cost per automated interaction",
+    takeaway: "Uptick came from lower volume, not higher unit cost; current work bottoms out at ~$0.18–0.20, so the model switch ('Luna' test) is the lever that matters.",
+    targetText: "Targets: <strong>$0.15 by Sep</strong>, then $0.10 by Dec",
+    stripNote: "started at $0.26",
     baseline: 0.26,
     target: 0.10,
     waypoint: { value: 0.15, label: "Q3 target: ≤ $0.15" },
@@ -824,15 +1061,22 @@ const SHARED_TARGETS = [
     ],
     currentDriver: "Cost read $0.219 per automated interaction for the completed week Jul 27–Aug 2, up from $0.208 the prior week on the now-canonical source (the official LLM-cost dashboard, pulled weekly via Cortex; its readings agree with the old ad-hoc cuts within ±$0.005, so the series stands without restatement). The uptick is volume-driven rather than a unit-cost spike: LLM spend held roughly flat ($71.6k → $72.4k) while automated interactions fell ~4% to 330k. Trend since GA: $0.264 in the GA week to ~$0.22, a ~17% cut from prompt refactors and orchestration changes before any model switch. Still well above the $0.15 Q3 target, and the in-flight initiatives floor out at $0.18–0.20 (Jul 28 Core & ML alignment), so the model switch is the lever that matters. GPT-5.6 Luna went live Aug 4 on 10% of a ~500-merchant cohort (email + chat) against the GPT-5.4 baseline; OpenAI's 80% Luna price cut (Jul 30) ended the Gemini 3.5 Flash Lite track, which was also sending empty messages on ~10–15% of chat conversations and missing about half of transfers to the Shopping Assistant. Offline estimate for Luna is under 5¢ per automated interaction; the first online days read noisy (more handovers, higher latency, confounded by the 72-hour automation-marking window), with the decision point around Aug 24. Parallel tracks: fine-tuning go/no-go ~Aug 14 (GPT OSS 120B is deployed on a dedicated endpoint in staging at ~2¢/ticket, stress-test underway; if go, 2 MLEs for 8–9 weeks), and post-training to move agent behaviour out of the system prompt stays committed (survey and ROI in Q3, potential Q4 build). Dashboard caveats to carry: numerator aggregates by execution date while the denominator uses ticket-creation date, AI Journey is excluded, ~4% of cost is unattributable to tickets, and the last 5 days are excluded for billing lag.",
     initiatives: [
-      { name: "Reduce V3 default_agent cost — compaction, tool-output trimming, GPT 5.4-mini eval", swag: 40, squad: "MLA", status: "In progress", impacts: ["Cost", "Latency"] },
-      { name: "Gemini vs OpenAI benchmark across V3 agents — model strategy", swag: 15, squad: "MLA", status: "In progress", impacts: ["Cost"] },
-      { name: "Post-training to move agent behaviour out of the system prompt — cut cost per turn (moved from R&D)", swag: 120, squad: "MLE", status: "In progress", impacts: ["Cost"] },
+      { name: "V3 cost reduction: smaller-model eval (GPT 5.4-mini) — compaction, tool-output trimming", swag: 40, squad: "MLA", status: "In progress", impacts: ["Cost", "Latency"] },
+      { name: "V3 model strategy: Gemini vs OpenAI benchmark", swag: 15, squad: "MLA", status: "In progress", impacts: ["Cost"] },
+      { name: "Evaluate post-training to move agent behaviour out of the system prompt — cut cost per turn (moved from R&D)", swag: 120, squad: "MLE", status: "In progress", impacts: ["Cost"] },
       { name: "Ship refactored email prompt for V3 (matching chat)", swag: 5, squad: "MLA", status: "Shipped", impacts: ["Cost"] }
     ]
   },
   {
     name: "P75 chat latency (Support + Sales)",
     color: "#0ea5e9",
+    cardTitle: "Chat latency (support + sales)",
+    takeaway: "Handover merge and QA-step removal improved both; P75 is still 3.5s above the September target. The Luna model runs slower today and would add pressure.",
+    targetText: "Targets: <strong>P75 10s by Sep</strong> (held to Dec) · <strong>median 6s by Dec</strong>",
+    leverNotes: [
+      "Shared with the cost card: shorter prompts, trimmed output, smaller models — counted once",
+      "Shopping Assistant work sits on its own card above"
+    ],
     baseline: 14.52,      // First clean post-GA reading, Jun 29 - Jul 5 (Core Orch)
     target: 10,
     waypoint: { value: 10, label: "Q3 target: ≤ 10s, held through EoY" },
@@ -952,8 +1196,12 @@ function formatValue(value, format) {
   if (value === null || value === undefined) return '<span class="tbd">TBD</span>';
   if (value === "auto") return "Auto";
   switch (format) {
-    case "dollar": return "$" + Number(value).toFixed(2);
-    case "percent": return Number(value).toFixed(2) + "%";
+    case "dollar": return "$" + Number(value).toFixed(3).replace(/0$/, "");
+    case "percent": {
+      const n = Number(value);
+      // Trim trailing zeros; keep 3 decimals for sub-1% metrics (e.g. 0.124%)
+      return parseFloat(n.toFixed(Math.abs(n) < 1 ? 3 : 2)) + "%";
+    }
     case "points": return Number(value).toFixed(1) + "%";
     case "percentLinear": return Number(value).toFixed(1) + "%";
     case "seconds": return Number(value).toFixed(1) + "s";
@@ -1062,24 +1310,145 @@ function sparkSvg(values, color, w, h, pad) {
 }
 
 // ════════════════════════════════════════════════════════════════
-//  RENDER
+//  RENDER — presentation layer (story surface + detail tables)
 // ════════════════════════════════════════════════════════════════
+
+const STATUS_ORDER = { "Shipped": 0, "In progress": 1, "Not started": 2 };
+const ST_CLASS = { "Shipped": "shipped", "In progress": "progress", "Not started": "notstarted" };
+const PILL_CLASS = { green: "good", yellow: "warn", red: "bad", gray: "idle" };
+const PLAIN_LABEL = { "On Track": "On track", "At Risk": "At risk", "Off Track": "Off track", "Regressing": "Regressing", "Starting": "Starting", "TBD": "No target yet" };
+const MAX_VISIBLE_LEVERS = 2;
+
+function fmtShortDate(iso) {
+  return new Date(iso + "T00:00:00").toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// Card status pill. A target-validity state (e.g. "Needs rebaseline")
+// supersedes the normal on/off-track state — a card must never say
+// "on track" against a target that is not currently trustworthy.
+function cardPill(team, progress) {
+  if (team.targetStatus) {
+    return `<span class="pill warn" title="${team.statusTitle || ''}">⚠️ ${team.targetStatus}</span>`;
+  }
+  const s = getStatusInfo(progress, team);
+  return `<span class="pill ${PILL_CLASS[s.cls] || 'idle'}">${PLAIN_LABEL[s.label] || s.label}</span>`;
+}
+
+function fmtDeltaAbs(abs, format) {
+  if (format === "seconds") return abs.toFixed(1) + "s";
+  if (format === "dollar") return "$" + abs.toFixed(3).replace(/0$/, "");
+  if (abs < 0.1) return abs.toFixed(3) + " pts";
+  if (abs < 1) return abs.toFixed(2) + " pts";
+  return abs.toFixed(1) + " pts";
+}
+
+function cardDeltaHtml(team, suffix) {
+  const d = getWoWDelta(team);
+  if (d === null) return "";
+  const dc = deltaClass(d, team);
+  const cls = dc === "positive" ? "up" : (dc === "negative" ? "down" : "flat");
+  const arrow = d > 0 ? "▲" : (d < 0 ? "▼" : "＝");
+  return `<span class="delta ${cls}">${arrow} ${fmtDeltaAbs(Math.abs(d), team.format)}${suffix || " vs last week"}</span>`;
+}
+
+function buildLevers(team) {
+  const inits = (team.initiatives || []).slice()
+    .sort((a, b) => (STATUS_ORDER[a.status] ?? 3) - (STATUS_ORDER[b.status] ?? 3));
+  const notes = team.leverNotes || [];
+  if (!inits.length && !notes.length) return "";
+  let rows = "";
+  inits.forEach((init, i) => {
+    const extra = i >= MAX_VISIBLE_LEVERS;
+    const pts = (init.swag && init.swag > 0) ? `${init.squad} · ${init.swag}` : `${init.squad} · not sized`;
+    rows += `<div class="lever${extra ? ' extra' : ''}"${extra ? ' hidden' : ''}><span class="st ${ST_CLASS[init.status] || 'notstarted'}"></span>${init.name}<span class="pts">${pts}</span></div>`;
+  });
+  notes.forEach(note => {
+    rows += `<div class="lever"><span class="st progress"></span>${note}<span class="pts"></span></div>`;
+  });
+  const hiddenCount = Math.max(0, inits.length - MAX_VISIBLE_LEVERS);
+  const toggle = hiddenCount > 0
+    ? `<button class="levers-toggle" type="button" aria-expanded="false" data-more="+ ${hiddenCount} more" data-less="Show less">+ ${hiddenCount} more</button>`
+    : "";
+  return `<div class="levers"><div class="levers-label">ML work</div>${rows}${toggle}</div>`;
+}
+
+function buildCard(team) {
+  const progress = computeOKRProgress(team);
+  let valueHtml, fillPct;
+  if (team.isInternal) {
+    const shipped = team.initiatives.filter(i => i.status === "Shipped");
+    const shippedPts = shipped.reduce((s, i) => s + i.swag, 0);
+    valueHtml = `${shippedPts}<span class="unit">/${team.swag} pts</span><span class="delta up">${shipped.length} of ${team.initiatives.length} shipped</span>`;
+    fillPct = team.swag ? (shippedPts / team.swag) * 100 : 0;
+  } else {
+    valueHtml = `${formatValue(team.actual, team.format)}${cardDeltaHtml(team)}`;
+    fillPct = progress !== null ? Math.max(0, Math.min(progress, 100)) : 0;
+  }
+  return `<div class="mcard">
+    <div class="top">
+      <span class="name"><span class="dot" style="background:${team.color}"></span>${team.cardTitle || team.name}</span>
+      ${cardPill(team, progress)}
+    </div>
+    <div class="reading-row">
+      <div class="value num">${valueHtml}</div>
+      ${renderSparkline(team, team.color)}
+    </div>
+    <div class="strip num"><div class="t-bar"><div class="t-fill" style="width:${fillPct.toFixed(1)}%"></div></div><div class="strip-text"><span>${team.targetText || ""}</span><span>${team.stripNote || ""}</span></div></div>
+    ${team.takeaway ? `<div class="takeaway">${team.takeaway}</div>` : ""}
+    ${buildLevers(team)}
+  </div>`;
+}
+
+// P75 + median chat latency share the same levers and narrative,
+// so they render as one card with two readings. Both stay separate
+// rows in the detail table below.
+function buildLatencyCard(p75, median) {
+  const progress = computeOKRProgress(p75);
+  const fillPct = progress !== null ? Math.max(0, Math.min(progress, 100)) : 0;
+  return `<div class="mcard">
+    <div class="top">
+      <span class="name"><span class="dot" style="background:${p75.color}"></span>${p75.cardTitle || p75.name}</span>
+      ${cardPill(p75, progress)}
+    </div>
+    <div class="reading-row" style="justify-content:flex-start; gap:24px;">
+      <div class="value num" style="font-size:28px;">${formatValue(p75.actual, "seconds")}${cardDeltaHtml(p75, " · P75")}</div>
+      <div class="value num" style="font-size:28px;">${formatValue(median.actual, "seconds")}${cardDeltaHtml(median, " · median")}</div>
+      <span style="margin-left:auto;">${renderSparkline(p75, p75.color)}</span>
+    </div>
+    <div class="strip num"><div class="t-bar"><div class="t-fill" style="width:${fillPct.toFixed(1)}%"></div></div><div class="strip-text"><span>${p75.targetText || ""}</span></div></div>
+    ${p75.takeaway ? `<div class="takeaway">${p75.takeaway}</div>` : ""}
+    ${buildLevers(p75)}
+  </div>`;
+}
+
+function buildQualityChart(q) {
+  const values = q.readings.map(r => r.value);
+  const lo = Math.min(...values, q.baselineValue) - 1;
+  const hi = Math.max(...values, q.baselineValue) + 1;
+  const W = 460, H = 150, padX = 12, padTop = 18, padBottom = 22;
+  const innerW = W - padX * 2, innerH = H - padTop - padBottom;
+  const x = i => padX + (values.length === 1 ? innerW / 2 : (i / (values.length - 1)) * innerW);
+  const y = v => padTop + innerH - ((v - lo) / (hi - lo)) * innerH;
+  const pts = values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const by = y(q.baselineValue).toFixed(1);
+  const last = q.readings[q.readings.length - 1];
+  const first = q.readings[0];
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bad rate trend">
+    <line x1="${padX}" y1="${by}" x2="${W - padX}" y2="${by}" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+    <text x="${W - padX}" y="${(+by + 14).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--ink-3)">baseline ${q.baselineLabel}</text>
+    <polyline points="${pts}" fill="none" stroke="var(--bad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${x(values.length - 1).toFixed(1)}" cy="${y(last.value).toFixed(1)}" r="3.5" fill="var(--bad)"/>
+    <text x="${padX}" y="${H - 6}" font-size="11" fill="var(--ink-3)">${fmtShortDate(first.date)} · ${first.value % 1 ? first.value.toFixed(1) : "~" + first.value}%</text>
+    <text x="${W - padX}" y="${(y(last.value) - 8).toFixed(1)}" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">${last.value.toFixed(1)}%</text>
+  </svg>`;
+}
 
 function render() {
   const totalSwag = TEAMS.reduce((s, t) => s + t.swag, 0);
   const quarterElapsed = getQuarterElapsed();
   const currentWeek = getCurrentWeek();
 
-  // Header
-  document.getElementById("weekBadge").textContent =
-    `Week ${currentWeek} of ${QUARTER.weeks} · ${(quarterElapsed * 100).toFixed(0)}% of H2 elapsed`;
-  document.getElementById("quarterProgress").textContent =
-    (quarterElapsed * 100).toFixed(0) + "%";
-  document.getElementById("quarterDates").textContent =
-    `${QUARTER.start.toLocaleDateString('en-US', {month:'short', day:'numeric'})} — ${QUARTER.end.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'})}`;
-  document.getElementById("quarterBar").style.width = (quarterElapsed * 100) + "%";
-
-  // Partner table
+  // ── Partner detail table + completion totals ──
   const tbody = document.getElementById("tableBody");
   tbody.innerHTML = "";
   let totalContribution = 0;
@@ -1094,7 +1463,6 @@ function render() {
     priorTotalContribution += priorProgress !== null ? weight * priorProgress : 0;
     const status = getStatusInfo(progress, team);
 
-    // Compute actual display value for Internal
     let actualDisplay;
     if (team.isInternal && team.actual === "auto") {
       actualDisplay = formatValue(quarterElapsed * 100, "percentLinear");
@@ -1102,23 +1470,21 @@ function render() {
       actualDisplay = formatValue(team.actual, team.format);
     }
 
-    // WoW delta
     const delta = getWoWDelta(team);
     let deltaHtml = "";
     if (delta !== null) {
-      deltaHtml = `<span class="wow-delta ${deltaClass(delta, team)}">${formatDelta(delta, team.format)} WoW</span>`;
+      deltaHtml = `<span class="wow-delta ${deltaClass(delta, team) === 'positive' ? 'positive' : (deltaClass(delta, team) === 'negative' ? 'negative' : 'flat')}">${formatDelta(delta, team.format)} vs last wk</span>`;
     } else if (!team.isInternal && team.history && team.history.length === 1) {
       deltaHtml = `<span class="wow-delta flat">first reading</span>`;
     }
 
-    // Target cell: final target + Q3 waypoint underneath
     const wp = getWaypoint(team);
     const wpHtml = wp ? `<span class="waypoint-note">${wp.label}</span>`
       : (team.waypointDelta !== undefined ? `<span class="waypoint-note">${team.waypointLabel} <span class="tbd">(baseline TBD)</span></span>` : '');
 
     const progressPct = progress !== null ? Math.max(0, Math.min(progress, 100)) : 0;
-    const statusToColor = { green: "var(--green)", yellow: "var(--yellow)", red: "var(--red)", gray: "var(--gray)" };
-    const progressColor = statusToColor[status.cls] || "var(--gray)";
+    const statusToColor = { green: "var(--good)", yellow: "var(--warn)", red: "var(--bad)", gray: "var(--ink-3)" };
+    const progressColor = statusToColor[status.cls] || "var(--ink-3)";
 
     const tr = document.createElement("tr");
     tr.className = "main-row";
@@ -1154,15 +1520,14 @@ function render() {
         </div>
       </td>
       <td class="center">
-        <span class="status-pill ${status.cls}">${status.label}</span>
+        <span class="status-pill ${status.cls}">${team.targetStatus ? '⚠️ ' + team.targetStatus : status.label}</span>
       </td>
-      <td class="right mono contribution-value" style="color:${progress !== null && contribution < 0 ? 'var(--red)' : 'var(--text)'}">
+      <td class="right mono contribution-value" style="color:${progress !== null && contribution < 0 ? 'var(--bad)' : 'var(--ink)'}">
         ${progress !== null ? contribution.toFixed(1) + '%' : '—'}
       </td>
     `;
     tbody.appendChild(tr);
 
-    // Nested initiative sub-rows: the exact ML work driving this partner metric
     team.initiatives.forEach((init, idx) => {
       const itr = document.createElement("tr");
       itr.className = "init-row" + (idx === team.initiatives.length - 1 ? " last-init" : "");
@@ -1178,41 +1543,78 @@ function render() {
     });
   });
 
-  // Totals
   document.getElementById("totalSwag").textContent = totalSwag;
-  const completionEl = document.getElementById("totalContribution");
-  completionEl.innerHTML = `<strong>${totalContribution.toFixed(1)}%</strong>`;
+  document.getElementById("totalContribution").innerHTML = `<strong>${totalContribution.toFixed(1)}%</strong>`;
 
-  // Summary card
-  const compRate = document.getElementById("completionRate");
-  compRate.textContent = totalContribution.toFixed(1) + "%";
-  const completionColor = totalContribution >= 60 ? "var(--green)"
-    : totalContribution >= 30 ? "var(--yellow)"
-    : "var(--accent)";
-  compRate.style.color = completionColor;
+  // ── Hero ──
+  document.getElementById("completionRate").textContent = totalContribution.toFixed(1) + "%";
+  document.getElementById("scopePoints").textContent = totalSwag;
+  const scopeDetail = document.getElementById("scopePointsDetail");
+  if (scopeDetail) scopeDetail.textContent = totalSwag;
 
-  const bar = document.getElementById("completionBar");
-  bar.style.width = Math.min(totalContribution, 100) + "%";
-  bar.style.background = completionColor;
-
-  // WoW delta on weighted completion rate
   const completionDeltaEl = document.getElementById("completionDelta");
-  if (completionDeltaEl) {
-    const deltaPp = totalContribution - priorTotalContribution;
-    const absPp = Math.abs(deltaPp);
-    if (absPp < 0.05) {
-      completionDeltaEl.className = "wow-delta flat";
-      completionDeltaEl.textContent = "No change vs last week";
-    } else if (deltaPp > 0) {
-      completionDeltaEl.className = "wow-delta positive";
-      completionDeltaEl.textContent = `▲ ${absPp.toFixed(1)}pp vs last week`;
-    } else {
-      completionDeltaEl.className = "wow-delta negative";
-      completionDeltaEl.textContent = `▼ ${absPp.toFixed(1)}pp vs last week`;
-    }
+  const deltaPp = totalContribution - priorTotalContribution;
+  const absPp = Math.abs(deltaPp);
+  if (absPp < 0.05) {
+    completionDeltaEl.className = "delta flat";
+    completionDeltaEl.textContent = "no change vs last week";
+  } else {
+    completionDeltaEl.className = "delta " + (deltaPp > 0 ? "up" : "down");
+    completionDeltaEl.textContent = `${deltaPp > 0 ? "▲" : "▼"} ${absPp.toFixed(1)} pts`;
   }
 
-  // Shared cost & latency table
+  document.getElementById("weekBadge").innerHTML =
+    `Week <strong>${currentWeek} of ${QUARTER.weeks}</strong> · ${(quarterElapsed * 100).toFixed(0)}% of the half elapsed`;
+
+  const lastUpdatedDate = new Date(LAST_UPDATED + "T00:00:00");
+  document.getElementById("lastUpdatedBadge").innerHTML =
+    `Last updated <strong>${lastUpdatedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</strong>`;
+  document.getElementById("lastUpdated").textContent =
+    `Last updated: ${lastUpdatedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+  // Pace: expected = even pacing toward 80% by the end of the half.
+  const expected = quarterElapsed * QUARTER.completionTarget * 100;
+  document.getElementById("paceFill").style.width = Math.min(totalContribution, 100) + "%";
+  document.getElementById("paceExpected").style.left = expected.toFixed(1) + "%";
+  document.getElementById("paceMeta").innerHTML =
+    `<span><strong>${totalContribution.toFixed(1)}%</strong> actual</span>` +
+    `<span><strong>${expected.toFixed(1)}%</strong> expected by now</span>` +
+    `<span><strong>80%</strong> target · Dec</span>`;
+  const verdictEl = document.getElementById("paceVerdict");
+  const diff = totalContribution - expected;
+  if (diff >= 2) { verdictEl.textContent = "Ahead of pace"; verdictEl.className = "pace-verdict good"; }
+  else if (diff <= -2) { verdictEl.textContent = "Behind pace"; verdictEl.className = "pace-verdict warn"; }
+  else if (Math.abs(diff) < 0.3) { verdictEl.textContent = "On pace"; verdictEl.className = "pace-verdict good"; }
+  else if (diff > 0) { verdictEl.textContent = "On pace, slightly ahead"; verdictEl.className = "pace-verdict good"; }
+  else { verdictEl.textContent = "On pace, slightly behind"; verdictEl.className = "pace-verdict good"; }
+
+  // ── What moved / Attribution ──
+  document.getElementById("recapPeriod").textContent = RECAP.period;
+  document.getElementById("recapMovements").innerHTML = RECAP.movements.map(m =>
+    `<div class="move-item"><span class="move-badge ${m.dir} num">${m.badge}</span><span class="move-text">${m.html}</span></div>`
+  ).join("");
+  document.getElementById("recapCredited").innerHTML = RECAP.credited.map(c => `<li>${c}</li>`).join("");
+  document.getElementById("recapInFlight").innerHTML = RECAP.inFlight.map(c => `<li>${c}</li>`).join("");
+
+  // ── Merchant quality ──
+  document.getElementById("qualityHeading").textContent =
+    QUALITY.breached ? "⚠️ Merchant quality — below baseline" : "Merchant quality";
+  document.getElementById("qualityChart").innerHTML = buildQualityChart(QUALITY);
+  document.getElementById("qualityCaption").innerHTML = QUALITY.caption;
+  document.getElementById("qualityReasons").innerHTML = QUALITY.reasons.map(r =>
+    `<div class="q-reason"><span class="r-name">${r.name}</span>${r.share ? " " + r.share : ""}<span class="r-delta ${r.dir === "worse" ? "worse" : "better"} num">${r.delta}</span></div>`
+  ).join("");
+  document.getElementById("qualityReasonsCaption").innerHTML = QUALITY.reasonsCaption;
+
+  // ── Metric cards ──
+  document.getElementById("partnerGrid").innerHTML = TEAMS.map(buildCard).join("");
+  const costItem = SHARED_TARGETS.find(s => s.format === "dollar");
+  const p75Item = SHARED_TARGETS.find(s => s.name.indexOf("P75") !== -1);
+  const medianItem = SHARED_TARGETS.find(s => s.name.indexOf("Median") !== -1);
+  document.getElementById("sharedGrid").innerHTML =
+    buildCard(costItem) + buildLatencyCard(p75Item, medianItem);
+
+  // ── Shared detail table ──
   const sharedBody = document.getElementById("sharedBody");
   sharedBody.innerHTML = "";
   SHARED_TARGETS.forEach(item => {
@@ -1221,15 +1623,15 @@ function render() {
     const delta = getWoWDelta(item);
     let deltaHtml = "";
     if (delta !== null) {
-      deltaHtml = `<span class="wow-delta ${deltaClass(delta, item)}">${formatDelta(delta, item.format)} WoW</span>`;
+      deltaHtml = `<span class="wow-delta ${deltaClass(delta, item) === 'positive' ? 'positive' : (deltaClass(delta, item) === 'negative' ? 'negative' : 'flat')}">${formatDelta(delta, item.format)} vs last wk</span>`;
     } else if (item.history && item.history.length === 1) {
       deltaHtml = `<span class="wow-delta flat">first reading</span>`;
     }
     const wp = getWaypoint(item);
     const wpHtml = wp ? `<span class="waypoint-note">${wp.label}</span>` : '';
     const progressPct = progress !== null ? Math.max(0, Math.min(progress, 100)) : 0;
-    const statusToColor = { green: "var(--green)", yellow: "var(--yellow)", red: "var(--red)", gray: "var(--gray)" };
-    const progressColor = statusToColor[status.cls] || "var(--gray)";
+    const statusToColor = { green: "var(--good)", yellow: "var(--warn)", red: "var(--bad)", gray: "var(--ink-3)" };
+    const progressColor = statusToColor[status.cls] || "var(--ink-3)";
 
     const tr = document.createElement("tr");
     tr.className = "main-row";
@@ -1269,7 +1671,7 @@ function render() {
       const impacts = (init.impacts || []).map(t => `<span class="impact-chip ${t.toLowerCase()}">${t}</span>`).join('');
       itr.innerHTML = `
         <td class="init-name">${init.name}</td>
-        <td colspan="2" class="right mono">${init.swag} SWAG · <span class="squad-chip">${init.squad}</span>${impacts}</td>
+        <td colspan="2" class="right mono">${init.swag} pts · <span class="squad-chip">${init.squad}</span>${impacts}</td>
         <td colspan="3"></td>
         <td class="center">${initStatusPill(init.status)}</td>
       `;
@@ -1283,7 +1685,7 @@ function render() {
     }
   });
 
-  // Drivers card (partner rows + shared targets)
+  // ── Driver notes (full commentary) ──
   const driversDiv = document.getElementById("driversList");
   driversDiv.innerHTML = "";
   [...TEAMS, ...SHARED_TARGETS].forEach(team => {
@@ -1301,14 +1703,20 @@ function render() {
     `;
     driversDiv.appendChild(item);
   });
-
-  // Footer
-  const lastUpdatedDate = new Date(LAST_UPDATED + "T00:00:00");
-  const lastUpdatedStr = lastUpdatedDate.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-  document.getElementById("lastUpdated").textContent = `Last updated: ${lastUpdatedStr}`;
-  document.getElementById("lastUpdatedBadge").textContent =
-    `Last updated: ${lastUpdatedDate.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}`;
 }
+
+// "+N more" disclosure on card ML-work lists (in-flow, keyboard accessible).
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".levers-toggle");
+  if (!btn) return;
+  const expanded = btn.getAttribute("aria-expanded") === "true";
+  btn.parentElement.querySelectorAll(".lever.extra").forEach(el => {
+    if (expanded) el.setAttribute("hidden", "");
+    else el.removeAttribute("hidden");
+  });
+  btn.setAttribute("aria-expanded", String(!expanded));
+  btn.textContent = expanded ? btn.dataset.more : btn.dataset.less;
+});
 
 render();
 </script>
