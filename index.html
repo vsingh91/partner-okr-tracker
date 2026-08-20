@@ -836,21 +836,21 @@ const LAST_UPDATED = "2026-08-20";
 const RECAP = {
   period: "Week of Aug 10 – 16 (completed) · covers two weeks since the Aug 7 refresh · the recap for the ML All Hands",
   movements: [
-    { badge: "22.9%", dir: "up", html: "<strong>Completion rate 22.9%, up ~3.7 pts since the Aug 7 refresh</strong> (two weeks): mostly the steady clock on internal delivery plus real gains on SA latency, skill involvement and support success rate; SA engagement slipped slightly negative. Two initiatives also shipped — the reasoning quality improvement (A/B winner live for all traffic Aug 18) and the intent & spam assessment (spam model stays; conclusions feed the intent work)." },
-    { badge: "−$0.031", dir: "up", html: "<strong>Cost fell to $0.1825</strong> per automated interaction, the biggest weekly drop since launch (−14.6%). It's a real efficiency gain: daily spend stepped down 17% at flat volume, timed with two cheaper-model tests going live on part of traffic. Still A/B tests, so no initiative gets the credit yet. Watch: the last few days rebounded to ~$0.174." },
-    { badge: "−17%", dir: "up", html: "<strong>Latency improved for the fourth straight week</strong> (P75 12.93s support + sales, 13.65s Shopping Assistant, down from July peaks of ~14.5s / 16.4s). Shipped help: the omit-eligible-tools prompt (live Aug 14, ~200ms at P75) on top of the earlier handover merge." },
-    { badge: "17.9%", dir: "up", html: "<strong>Quality guardrail easing but still breached.</strong> Completed-week bad rate 17.9%, down from 20.0% — the first improvement in five completed weeks, still ~3 pts over the ~15% baseline. The rosier partial read (15.8%) is mostly merchant mix, not real improvement." },
-    { badge: "33.6%", dir: "flat", html: "<strong>Support success rate holding</strong> at 33.57% (provisional — ticket volume in the cut is still settling), inside the 32.6–35.0% band it has run since the restatement. Skill involvement reached 24.85% on the completed week, trending ~27% daily." }
+    { badge: "22.9%", dir: "up", html: "<strong>Completion 22.9%</strong>, up ~3.7 pts since Aug 7. Two initiatives shipped: the reasoning quality improvement and the intent & spam assessment." },
+    { badge: "−$0.031", dir: "up", html: "<strong>Cost fell to $0.1825</strong>, the biggest weekly drop since launch. Real spend-side efficiency (spend −17% at flat volume) from two cheaper-model tests; no initiative credited yet. Watch: the last days rebounded to ~$0.174." },
+    { badge: "−17%", dir: "up", html: "<strong>Latency improved a fourth straight week</strong> (P75 12.93s support + sales, 13.65s SA), driven by shipped work: the omit-eligible-tools prompt and the handover merge." },
+    { badge: "17.9%", dir: "up", html: "<strong>Quality easing but still breached.</strong> Bad rate 17.9% on the completed week, first improvement in five weeks, ~3 pts over baseline. The 15.8% partial read is merchant mix, not real improvement." },
+    { badge: "33.6%", dir: "flat", html: "<strong>Support success rate steady</strong> at 33.57% (provisional). Skill involvement 24.85% on the completed week, trending ~27% daily." }
   ],
   credited: [
     "<strong>V3 reasoning quality improvement</strong> → shipped Aug 17; the winning A/B prompt is live for all traffic",
-    "<strong>Intent & spam model assessment</strong> → completed Aug 3; retrain-or-monitor call closed, conclusions handed to the intent initiative",
-    "<strong>Omit-eligible-tools prompt</strong> (part of cost reduction, live Aug 14) → ~200ms P75 and ~1¢ per interaction online"
+    "<strong>Intent & spam model assessment</strong> → completed Aug 3; spam model kept, conclusions feed the intent work",
+    "<strong>Omit-eligible-tools prompt</strong> (live Aug 14) → ~200ms P75 and ~1¢ per interaction"
   ],
   inFlight: [
-    "Cheaper-model tests behind the cost drop: the qualify step on Luna (beta segments) continues; the flash-lite A/B was stopped Aug 20 — it held quality on email at −61% cost, but +1.7s P75 makes it unusable on chat — credit still waits until something ships",
-    "Main-model switch: all efforts now concentrate on Luna, expanded to 50% of pre-GA traffic (email + chat) on Aug 20 — its handover, close-rate and knowledge gaps look addressable and the cost advantage is significant · Terra paused (no clear cost advantage, quality not clearly better) · Gemini out for now on both tracks: 3.7 Flash failed offline eval on quality + latency, 3.5 Flash Lite stopped on chat latency · fine-tuning moved to first experiments (dataset + pipeline ready)",
-    "Tool-overuse latency fix (~25% of the remaining issue) rolling out ~Aug 21–25 · persisted-Skills fix in final bug-fixing · intent detection groundwork live on 1% of traffic, but its committed engineer leaves this week — handoff urgent · image recognition still in merchant scoping (POC Sept)"
+    "All model efforts now on <strong>Luna</strong>, at 50% of pre-GA traffic since Aug 20 · Terra paused · both Gemini tracks out",
+    "Qualify-step-on-Luna A/B · tool-overuse latency fix (rolling out ~Aug 21–25) · fine-tuning first experiments",
+    "Persisted-Skills fix in final bug-fixing · intent detection groundwork (engineer handoff urgent) · image recognition in merchant scoping (POC Sept)"
   ]
 };
 
@@ -1000,10 +1000,8 @@ const TEAMS = [
     color: "#14b8a6",
     swag: 30,
     cardTitle: "Support · Success rate",
-    targetStatus: "Needs rebaseline",
-    statusTitle: "The 40% target was set on retracted readings; on/off-track is suspended until it is re-anchored at the next OKR review",
-    takeaway: "⚠️ Holding in a 32.6–35% band since the restatement (33.57% latest, provisional); the 40% target still needs re-anchoring at the next OKR review.",
-    targetText: "Target: <strong>40% by Dec</strong> (needs re-anchoring)",
+    takeaway: "Holding in a 32.6–35% band since the restatement (33.57% latest, provisional), +1.7 pts over the late-June baseline.",
+    targetText: "Target: <strong>40% by Dec</strong>",
     stripNote: "+1.6 pts since launch",
     metric: "Support Success Rate",
     periodLabel: "week Aug 9–15 · provisional, volume still settling",
