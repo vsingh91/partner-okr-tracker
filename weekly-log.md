@@ -11,7 +11,7 @@ One entry per weekly refresh, newest first. This file is the raw material for th
 **Completion 22.9%** (+3.7 vs Aug 7 refresh) · on pace, slightly behind (23.7% expected)
 
 - **Cost is the story of the week:** $0.1825 per automated interaction, biggest drop since launch (−14.6%). Real spend-side efficiency (daily spend −17% at flat volume), timed with two cheaper-model tests going live. No initiative credited yet, both were A/Bs. Tail of the week rebounded to ~$0.174.
-- **Latency improved a fourth straight week:** P75 12.93s support+sales, 13.65s SA, median 10.53s. Drivers: the handover merge (shipped) + the tool-omission A/B (conclusive; relaunched Aug 14, full-prod rollout in progress, credited once live).
+- **Latency improved a fourth straight week:** P75 12.93s support+sales, 13.65s SA, median 10.53s. Traces to the earlier shipped work (handover merge, QA-step removal). Queued upside: tool-omission prompt A/B conclusive, full-prod rollout in progress.
 - **Quality guardrail easing but breached:** completed-week bad rate 17.9% (from 20.0%), first improvement in five completed weeks, ~3pt over baseline. Partial 15.8% read is merchant mix, not real. Watch: tone-of-voice complaints doubled (small sample). Reason shares switched to multi-select basis this week.
 - **Shipped:** V3 Reasoning quality improvement (A/B winner live for all traffic Aug 18) · Intent & Spam model assessment (spam model kept, no retrain).
 - **Skill involvement 24.85%** (complete week), ~27% daily; merchant adoption best week since mid-July (35.3%). Skills quality flat at 86%, below launch level.
