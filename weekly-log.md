@@ -6,6 +6,21 @@ One entry per weekly refresh, newest first. This file is the raw material for th
 
 ---
 
+## Sep 3, 2026 (data: weeks Aug 17–23 and Aug 24–30 · August month-close)
+
+**Completion 30.8%** (+7.9 pts since Aug 20; page's own WoW chip says +6.0 by its prior-entry arithmetic)
+
+- **Latency was August's win, now giving some back:** best week on record Aug 16–22 (P75 12.00s support+sales, median 9.66s, SA P75 12.53s, SA fastest quarter of turns 5.7s). Partial Aug 30 week rebounds to 13.10s / 10.66s / SA 13.63s. Likely cause: Luna at 50% of pre-GA chat from Aug 20 (1.5–2s slower); Luna pulled from chat Sep 1.
+- **Cost: the $0.18 dip did not hold.** Aug 17–23 settled at $0.2158 (first read on Aug 27 was $0.274, lagged denominator); Aug 24–30 first read $0.2358, expected to settle down. August ran ~$0.21–0.24, flat vs July. Like-for-like channel check (Cortex, Sep 3): the dip was CHAT ONLY (chat $0.23 → $0.14 → $0.23 for weeks Aug 3/10/17 at flat volume; email $0.14–0.15 and contact form $0.15–0.17 flat), so the flash-lite test (email-only) is ruled out as the cause; cause unknown, probe open. Paying-accounts view reads $0.19 / $0.15 / $0.18 for the same weeks, ~$0.03 below the series with the same shape; series stays on the broader definition. Digest runs restate the same week by $0.01–0.06 in either direction; series is read on settled weeks.
+- **Model decision landed:** benchmark completed Aug 21; Aug 28 recommendation approved (Luna on email for winning intents, est. −22% → ~$0.16; Terra optimized for chat; GPT-5.4 retired later). First Luna intent (`Other`) live on email since Sep 1; intent-by-intent expansion decided Sep 7. Cortex estimate $0.21 → $0.15 selective, $0.12 full. Luna latency work paused; Terra (−0.69s P75, −9.3% cost in A/B) + open-weight fine-tuned candidates are the chat path.
+- **Shipped:** qualify step on GPT-5.4-nano, Aug 24 (A/B −89% qualify cost, −8.9% per-ticket LLM cost, +4.5pp success rate, quality/latency flat). Not yet credited on the cost row.
+- **Quality guardrail:** bad rate 16.7% on both completed weeks (Aug 16–22, Aug 23–29), from 20.0% at the start of August; quality rate 83.3% vs 85.0% baseline; raw weekly bad rate 9.3%, flat. Reason mix now share of mentions (basis changed again, not comparable to Aug 20): wrong knowledge 18.8% (−1.8), ignored 15.8%, missing 14.1% (+1.8, fastest riser); sample review says stale content is the main theme. Tone-of-voice spike did not persist. Aug 27 digest run read the same period at ~7.8% on half the merchants; treated as a bad run.
+- **Support SR 34.4% for August** on the official monthly card (Jul 33.1, up every month since Jan 23.3). Digest carried no weekly SR section this period; weekly cuts Aug 16–29 pending. Overall AI Agent SR 39.1%, SA 50.7% (from 53.4% in July).
+- **Skills:** usage 26.6% (wk Aug 10–16), merchant adoption 40.0%, skill-ticket success rate 37.0% (plateau), skill merchant quality 85.7%. Order-status/tracking/cancellation skills underperform as a class; subscription-cancellation skills strongest.
+- **SA:** conversation rate 0.129% rolling 28d to Sep 2 (up 6% over 3 weeks, first rise since July); conversion 14.29% wk Aug 17–23, partial Aug 31 week 12.97%; SA success rate 49.5% on complete 28-day windows (from 52.0%).
+- **Linear hygiene flags:** intent detection, LLM stack review, image recognition still Backlog; Skills framework iteration (started Aug 25) and persisted Skills show Paused; tone of voice In Progress since Aug 28 with its Aug 25 target passed; shopper confirmation target moved to Sep 14; quiz-to-skill target Sep 23.
+- **Open flags:** cost source instability (run-to-run restatements) on top of the Jul 27 reconciliation · SA success rate decline (real, 3 complete windows) · late-August latency rebound attribution to Luna is likely, not proven · Skills-row weekly reading not refreshed past Aug 16 (digest gave no newer weekly usage figure).
+
 ## Aug 20, 2026 (data: weeks Aug 3–9 and Aug 10–16)
 
 **Completion 22.9%** (+3.7 vs Aug 7 refresh) · on pace, slightly behind (23.7% expected)
