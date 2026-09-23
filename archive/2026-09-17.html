@@ -853,7 +853,7 @@ const RECAP = {
   inFlight: [
     "<strong>Luna</strong>: Shipping and Subscription fixes next (~20% of email); a full email rollout would land at ~12¢. Whether to go further or redirect effort to chat is decided at the Sep 24 R&D alignment. A 50% cheaper Luna model (GPT-6 Luna, released Sep 22) is next to test on the released intents",
     "<strong>Chat model</strong>: Gemini 3.8 Flash no-go (Sep 15), Sonnet 5 no-go (Sep 18), both on latency. Default-tier A/B (Sep 8–18) result pending. Post-training: a Q4 pilot only if the fine-tuned 120B model matches GPT-5.4 on quality, beats it on latency on usable hosting, and costs are acceptable by Sep 30; a pause is the likely outcome",
-    "Tone of voice in rollout (134 merchants, target Sep 28) · shopper confirmation in rollout (target Sep 21) · discovery triggers in discovery (target Sep 23) · product reviews still Backlog (target Sep 30) · image recognition start moved to Sep 28 · the missed hand-off prompt fix was published Sep 22",
+    "Tone of voice in rollout (134 merchants, target Sep 28) · shopper confirmation in rollout (target Sep 21) · discovery triggers in discovery (target Sep 23) · product reviews still Backlog (target Sep 30) · image recognition PoC likely starts Oct 5 · the missed hand-off prompt fix was published Sep 22",
     "⚠️ Linear: LLM stack review canceled Sep 16 · SA latency paused since Sep 11 · intent detection still Backlog (target Oct 30) · six Q4 Shopping Assistant projects created Sep 18",
     "⚠️ Open probes: email success-rate break (Sep 11) · SA conversion softening · the quality rolling-median read · SA cost drift (paused at ~$0.23)"
   ]
@@ -1026,7 +1026,7 @@ const TEAMS = [
     color: "#14b8a6",
     swag: 30,
     cardTitle: "Support · Success rate",
-    takeaway: "Still August's 34.4% on the official monthly card, no weekly read for five weeks. ⚠️ Email success rate fell from 33–35% to 24–26% from Sep 11, cause being checked. The 40% target still needs re-anchoring.",
+    takeaway: "Still August's 34.4% on the official monthly card, no weekly read for five weeks. ⚠️ Email success rate fell from 33–35% to 24–26% from Sep 11, cause being checked. Image recognition PoC now likely to start Oct 5. The 40% target still needs re-anchoring.",
     targetText: "Target: <strong>40% by Dec</strong>",
     stripNote: "+2.5 pts since launch",
     metric: "Support Success Rate",
@@ -1047,11 +1047,11 @@ const TEAMS = [
       { date: "2026-08-15", value: 33.57 }, // wk Aug 9–15 — provisional cut, never re-read; the August monthly reading below supersedes it
       { date: "2026-08-31", value: 34.4 }   // AUGUST MONTHLY, official card 2794 (same billed/covered definition); the digest carried no weekly SR section this period ← APPEND NEW ENTRY WEEKLY
     ],
-    currentDriver: "August's 34.4% on the official monthly card stands; the digest has carried no weekly success-rate section for five weeks. ⚠️ Per the OKR1 channel, email and contact-form success rate fell from 33–35% to 24–26% from the night of Sep 11 through the weekend, affecting Support and the Shopping Assistant while chat stayed flat; the cause is being checked with engineering. If it persisted into the week of Sep 14 it will show in the September monthly. The 40% target was set against the old, retracted readings and still needs re-anchoring. Levers: persisted Skills released Sep 10 (one week of data, nothing to credit yet); image recognition start moved Sep 21 → Sep 28 in Linear, target Nov 1, so Q4 spillover stands.",
+    currentDriver: "August's 34.4% on the official monthly card stands; the digest has carried no weekly success-rate section for five weeks. ⚠️ Per the OKR1 channel, email and contact-form success rate fell from 33–35% to 24–26% from the night of Sep 11 through the weekend, affecting Support and the Shopping Assistant while chat stayed flat; the cause is being checked with engineering. If it persisted into the week of Sep 14 it will show in the September monthly. The 40% target was set against the old, retracted readings and still needs re-anchoring. Levers: persisted Skills released Sep 10 (one week of data, nothing to credit yet); image recognition PoC now likely to start Oct 5 per the latest info (Linear still shows Sep 28, target Nov 1), so it is Q4 work.",
 
     initiatives: [
       { name: "Update AI Agent reasoning for persisted Skills (fixes the mid-conversation skill drop) — released Sep 10: online QA validated 11 of 12 cases, offline eval found persistence-damaged reasoning in 1 of 60 tickets", swag: 5, squad: "MLA", status: "Shipped" },
-      { name: "Improve image recognition on AI Agent V3 — damaged-item workflow focus (GPT 5.4 native vision); still Backlog in Linear, start moved Sep 21 → Sep 28, target Nov 1; custom vision fine-tuning deferred to Q1 2027 pending the POC result", swag: 25, squad: "MLA", status: "In progress" }
+      { name: "Improve image recognition on AI Agent V3 — damaged-item workflow focus (GPT 5.4 native vision); still Backlog in Linear; PoC likely to start Oct 5 (Linear shows Sep 28), target Nov 1; custom vision fine-tuning deferred to Q1 2027 pending the POC result", swag: 25, squad: "MLA", status: "In progress" }
     ]
   },
   {
