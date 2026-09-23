@@ -6,6 +6,23 @@ One entry per weekly refresh, newest first. This file is the raw material for th
 
 ---
 
+## Sep 17, 2026 (refreshed Sep 23 · data: Skills, cost, quality for Sep 7–13 · chat latency settled Sep 6–12 · no settled SA P75)
+
+**Completion 34.7%** at the Sep 17 cut (+2.4 pts since Sep 10; the live chip moves with the calendar)
+
+- **Linear caught up the same day:** Sep 3 and Sep 10 backfills plus the Sep 17 update posted Sep 23 (drafts in `Linear Projects updates ML/`). Sources: the three Cortex digests, the Aug 27 / Sep 10 / Sep 17 All Hands, a 14-channel Slack sweep (model-evals first).
+- **Luna on email is the story:** on the clean Sep 7–15 window Luna matched GPT-5.4 on merchant feedback (+0.05) and beat it on success rate (+0.9) and handover (−3.0), both sig. Other: SR +7.2, handover −18.9. Order / Product / Return (~60% of email) passed the release bar and went live Sep 22 → ~66% of email on Luna; expected blended cost ~$0.19 → $0.14–0.15 (Q3 target). Shipping (feedback −6.8 sig) and Subscription not ready. Full email rollout ≈ $0.12. A bigger fix round shipped Sep 16 hurt feedback and was reverted Sep 18. GPT-6 Luna (50% cheaper) released Sep 22, to test. Decision on going further vs redirecting to chat due at the Sep 24 R&D alignment.
+- **Chat model:** Gemini 3.8 Flash no-go Sep 15 (−21% cost, P75 +89%, close rate −9, action coherence −14.6). Sonnet 5 no-go Sep 18 (+33% cost, +120% latency). Default-tier A/B ran Sep 8–18, result pending. Post-training (Sep 11 readout): one candidate (GPT-OSS 120B, 7 pts below GPT-5.4), fine-tuning proven on Qwen 4B (+9 pts), pipeline cannot yet handle 120B, fastest host not commercially workable; Q4 pilot only if quality + latency + cost pass by Sep 30, pause likely. Sep 18 bake-off round 2: Luna still strongest.
+- **Cost:** Aug 31 week settled $0.167 (Aug 17 $0.187, Aug 24 restated $0.173), three weeks down. Sep 7 week $0.196 provisional: total spend −5.8% to $58.6k, interactions −19.6% (billing lag), not logged. Consistent with qualify-on-nano (Aug 24), not attributed.
+- **Latency:** chat P75 12.86 / P50 10.43 settled Sep 6–12 (Sep 10 partial 12.57 / 10.16 replaced); last three full weeks ~12.9 / 10.4–10.5; partial Sep 13 week 13.28 / 10.73. SA: P50 10.70, P90 16.34 settled, partial 11.05 / 17.19; **no settled SA P75 in the digest**, row carries 13.06 partial (flagged).
+- **Quality:** raw weekly bad rate 10.5–10.6% → 8.5% on ~16.7k ratings (real). Rolling median read 8.7% / 91.5%: impossible one week after 16.7% on a 28-day window → treated as a bad run (second time after Aug 27), no point logged, last trusted 16.7%. Reasons on yet another basis (wrong 20.9 +2.1, ignored 15.8 +1.1, missing 14.0 +1.2, other 7.2 −4.2). Re-run the quality skill for Sep 6–12.
+- **Skills:** usage 35.5% (Sep 7–13, +2.2; prior week 33.3), adoption 55.8%, skill SR 36.0% (−1.3, ten-week plateau), skill quality 84.3% (−0.4, ~−1 pt/month). Order-status Skills 1–5% success at some merchants. Skills framework back to In Progress (target Oct 1). Prompt update on Skill snippets shipped Sep 17 on all agents. C&T forced Skill migration batch 1 (~90 accounts) Sep 22.
+- **Support SR:** August 34.4% stands, no weekly cut (fifth week). ⚠️ OKR1 channel (Sep 19): email/contact-form SR broke 33–35% → 24–26% from the night of Sep 11 through the weekend, Support + SA, chat flat; cause with engineering.
+- **SA:** conversation rate 0.126% (28d to Sep 16, no-filter 0.184), flat. Conversion ~14.1% (Aug 31 wk) → ~12.8% (Sep 7 wk), ATC 1.43% (−25% / 3 wks); merchant quality 91.2% (3-wk high), SA SR 51.5% (+1.5). SA cost flat ~$0.233 (drift paused). Missed hand-off prompt fix published Sep 22.
+- **Linear:** stack review CANCELED Sep 16 · SA latency PAUSED Sep 11 · shopper confirmation In Rollout target Sep 21 (prod week of Sep 15) · tone of voice In Rollout target Sep 28 · image recognition start Sep 28 / target Nov 1 · intent detection Backlog target Oct 30 · product reviews Backlog Sep 30 · six Q4 SA projects created Sep 18 (Backlog, Oct 1) · catalog trust canceled.
+- **Format:** driver text cut to a few sentences per card at Varun's request (too wordy before).
+- **Open flags:** email SR break · SA conversion softening · quality median read · no settled SA P75 · SR 40% re-anchoring · SA conversion target TBD · pre-Aug-3 cost points still estimated · guardrail probe still open.
+
 ## Sep 10, 2026 (data: week Aug 24–30 complete for Skills and cost · quality week Aug 30–Sep 5 · latency and SA reads partial Sep 6–9)
 
 **Completion 32.3%** (+1.5 pts since Sep 3; page chip +3.2 by its prior-entry arithmetic)
